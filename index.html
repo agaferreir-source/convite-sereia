@@ -3,9 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Um convite especial 💜</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Um convite especial</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,113 +18,106 @@
 
     <main id="convite">
 
-        <!-- ==================================================
-             PRIMEIRA TELA — ABERTURA
+        <!-- =================================================
+             ABERTURA
         ================================================== -->
 
-        <section id="abertura" class="tela ativa">
+        <section id="abertura">
 
             <img
                 src="imagens/file_00000000a768820e94da58a218e48e11.png"
-                alt="Convite especial"
+                alt="Convite"
                 class="imagem-abertura"
             >
 
-            <!--
-                Área invisível posicionada sobre o lacre.
-                A pessoa toca no próprio lacre da imagem.
-            -->
+            <!-- Área invisível sobre o lacre -->
 
             <button
                 id="abrirConvite"
                 class="area-lacre"
-                aria-label="Toque no lacre para abrir o convite">
-            </button>
+                aria-label="Toque no lacre para abrir"
+            ></button>
 
         </section>
 
 
-        <!-- ==================================================
-             TRANSIÇÃO — FUNDO DO MAR
+        <!-- =================================================
+             CENA DO FUNDO DO MAR
         ================================================== -->
 
-        <div id="transicaoMar" class="transicao-mar">
+        <section
+            id="cenaMar"
+            class="cena-mar"
+        >
 
-            <!-- Luz entrando pela superfície -->
-            <div class="luz-mar"></div>
+            <!-- Imagem principal -->
 
-
-            <!-- =========================
-                 BOLHAS
-            ========================== -->
-
-            <div class="bolha b1"></div>
-            <div class="bolha b2"></div>
-            <div class="bolha b3"></div>
-            <div class="bolha b4"></div>
-            <div class="bolha b5"></div>
-            <div class="bolha b6"></div>
-            <div class="bolha b7"></div>
-            <div class="bolha b8"></div>
-            <div class="bolha b9"></div>
-            <div class="bolha b10"></div>
-            <div class="bolha b11"></div>
-            <div class="bolha b12"></div>
-            <div class="bolha b13"></div>
-            <div class="bolha b14"></div>
-            <div class="bolha b15"></div>
+            <img
+                src="imagens/file_000000005348820e88dc88e2d0c1234c.png"
+                alt="Fundo do mar"
+                class="imagem-mar"
+            >
 
 
-            <!-- =========================
+            <!-- =================================================
+                 EFEITO DE LUZ
+            ================================================== -->
+
+            <div class="luz-agua"></div>
+
+
+            <!-- =================================================
                  PEIXINHOS
-            ========================== -->
+            ================================================== -->
 
-            <div class="peixe peixe1">🐠</div>
-            <div class="peixe peixe2">🐟</div>
-            <div class="peixe peixe3">🐠</div>
-            <div class="peixe peixe4">🐟</div>
-            <div class="peixe peixe5">🐠</div>
-
-
-            <!-- =========================
-                 VEGETAÇÃO DO FUNDO
-            ========================== -->
-
-            <div class="vegetacao vegetacao1"></div>
-            <div class="vegetacao vegetacao2"></div>
-            <div class="vegetacao vegetacao3"></div>
-            <div class="vegetacao vegetacao4"></div>
-
-
-            <!-- Areia no fundo -->
-            <div class="areia"></div>
-
-        </div>
-
-
-        <!-- ==================================================
-             SEGUNDA TELA — MENINA
-        ================================================== -->
-
-        <section id="mensagem" class="tela segunda-tela">
-
-            <div class="conteudo-mensagem">
-
-                <h1>Olá! 💜</h1>
-
-                <p>
-                    Uma mensagem muito especial
-                    está chegando...
-                </p>
-
+            <div class="peixe peixe-1">
+                <span class="corpo-peixe"></span>
+                <span class="cauda-peixe"></span>
+                <span class="olho-peixe"></span>
             </div>
+
+            <div class="peixe peixe-2">
+                <span class="corpo-peixe"></span>
+                <span class="cauda-peixe"></span>
+                <span class="olho-peixe"></span>
+            </div>
+
+            <div class="peixe peixe-3">
+                <span class="corpo-peixe"></span>
+                <span class="cauda-peixe"></span>
+                <span class="olho-peixe"></span>
+            </div>
+
+
+            <!-- =================================================
+                 BOLHAS
+            ================================================== -->
+
+            <div class="bolha bolha-1"></div>
+            <div class="bolha bolha-2"></div>
+            <div class="bolha bolha-3"></div>
+            <div class="bolha bolha-4"></div>
+            <div class="bolha bolha-5"></div>
+            <div class="bolha bolha-6"></div>
+            <div class="bolha bolha-7"></div>
+            <div class="bolha bolha-8"></div>
+            <div class="bolha bolha-9"></div>
+            <div class="bolha bolha-10"></div>
+
+
+            <!-- =================================================
+                 BRILHOS DA ÁGUA
+            ================================================== -->
+
+            <div class="brilho brilho-1"></div>
+            <div class="brilho brilho-2"></div>
+            <div class="brilho brilho-3"></div>
 
         </section>
 
     </main>
 
 
-    <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
