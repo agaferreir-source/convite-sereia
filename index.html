@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,20 +10,38 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="theme-color"
+        content="#07547a"
+    >
+
     <title>Um convite especial</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
+    <!-- =====================================================
+         CONVITE
+    ====================================================== -->
+
     <main id="convite">
 
+
         <!-- =================================================
-             ABERTURA
+             PRIMEIRA TELA
         ================================================== -->
 
-        <section id="abertura">
+        <section
+            id="abertura"
+            class="tela-abertura"
+        >
 
             <img
                 src="imagens/file_00000000a768820e94da58a218e48e11.png"
@@ -30,15 +49,23 @@
                 class="imagem-abertura"
             >
 
-            <!-- Área invisível sobre o lacre -->
+
+            <!--
+                Área invisível sobre o lacre.
+
+                A pessoa toca aqui para abrir
+                o convite.
+            -->
 
             <button
                 id="abrirConvite"
                 class="area-lacre"
-                aria-label="Toque no lacre para abrir"
+                type="button"
+                aria-label="Abrir convite"
             ></button>
 
         </section>
+
 
 
         <!-- =================================================
@@ -48,75 +75,88 @@
         <section
             id="cenaMar"
             class="cena-mar"
+            aria-hidden="true"
         >
 
-            <!-- Imagem principal -->
+
+            <!-- =================================================
+                 IMAGEM PRINCIPAL DO FUNDO DO MAR
+            ================================================== -->
 
             <img
                 src="imagens/file_000000005348820e88dc88e2d0c1234c.png"
-                alt="Fundo do mar"
+                alt=""
                 class="imagem-mar"
             >
 
 
-            <!-- =================================================
-                 EFEITO DE LUZ
-            ================================================== -->
-
-            <div class="luz-agua"></div>
-
 
             <!-- =================================================
-                 PEIXINHOS
+                 LUZ / REFLEXO DA ÁGUA
             ================================================== -->
 
-            <div class="peixe peixe-1">
-                <span class="corpo-peixe"></span>
-                <span class="cauda-peixe"></span>
-                <span class="olho-peixe"></span>
-            </div>
+            <div
+                class="luz-agua"
+                aria-hidden="true"
+            ></div>
 
-            <div class="peixe peixe-2">
-                <span class="corpo-peixe"></span>
-                <span class="cauda-peixe"></span>
-                <span class="olho-peixe"></span>
-            </div>
-
-            <div class="peixe peixe-3">
-                <span class="corpo-peixe"></span>
-                <span class="cauda-peixe"></span>
-                <span class="olho-peixe"></span>
-            </div>
 
 
             <!-- =================================================
                  BOLHAS
             ================================================== -->
 
-            <div class="bolha bolha-1"></div>
-            <div class="bolha bolha-2"></div>
-            <div class="bolha bolha-3"></div>
-            <div class="bolha bolha-4"></div>
-            <div class="bolha bolha-5"></div>
-            <div class="bolha bolha-6"></div>
-            <div class="bolha bolha-7"></div>
-            <div class="bolha bolha-8"></div>
-            <div class="bolha bolha-9"></div>
-            <div class="bolha bolha-10"></div>
+            <div
+                class="bolha bolha-1"
+                aria-hidden="true"
+            ></div>
 
+            <div
+                class="bolha bolha-2"
+                aria-hidden="true"
+            ></div>
 
-            <!-- =================================================
-                 BRILHOS DA ÁGUA
-            ================================================== -->
+            <div
+                class="bolha bolha-3"
+                aria-hidden="true"
+            ></div>
 
-            <div class="brilho brilho-1"></div>
-            <div class="brilho brilho-2"></div>
-            <div class="brilho brilho-3"></div>
+            <div
+                class="bolha bolha-4"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="bolha bolha-5"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="bolha bolha-6"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="bolha bolha-7"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="bolha bolha-8"
+                aria-hidden="true"
+            ></div>
+
 
         </section>
 
+
     </main>
 
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script src="script.js"></script>
 
