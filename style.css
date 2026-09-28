@@ -13,11 +13,18 @@ body {
 
 body {
     background: #07547a;
+    font-family: "Arial", sans-serif;
+    color: #ffffff;
+}
+
+button,
+a {
+    font-family: inherit;
 }
 
 
 /* =====================================================
-   PRIMEIRA IMAGEM
+   CAPA
 ===================================================== */
 
 #abertura {
@@ -32,12 +39,11 @@ body {
     background: #8ed9eb;
 
     opacity: 1;
-
     transform: scale(1);
 
     transition:
         opacity 1.1s ease,
-        transform 1.5s cubic-bezier(.2,.7,.2,1);
+        transform 1.5s cubic-bezier(.2, .7, .2, 1);
 }
 
 .imagem-abertura {
@@ -101,7 +107,7 @@ body {
 
     transition:
         opacity 1.3s ease,
-        transform 2.2s cubic-bezier(.15,.7,.2,1),
+        transform 2.2s cubic-bezier(.15, .7, .2, 1),
         visibility 1.3s ease;
 }
 
@@ -127,12 +133,6 @@ body {
 
     object-fit: cover;
     object-position: center;
-
-    /*
-       Movimento MUITO sutil.
-       Parece água, mas não parece
-       que a imagem está tremendo.
-    */
 
     animation:
         ondulacaoMar
@@ -265,94 +265,70 @@ body {
 }
 
 
-/* =====================================================
-   TAMANHOS DAS BOLHAS
-===================================================== */
-
 .bolha-1 {
     left: 8%;
-
-    width: 24px;
-    height: 24px;
-
+    width: 30px;
+    height: 30px;
     --tempo: 7s;
     --atraso: 0s;
 }
 
 .bolha-2 {
     left: 21%;
-
-    width: 38px;
-    height: 38px;
-
+    width: 48px;
+    height: 48px;
     --tempo: 9s;
     --atraso: 1.5s;
 }
 
 .bolha-3 {
     left: 35%;
-
-    width: 18px;
-    height: 18px;
-
+    width: 25px;
+    height: 25px;
     --tempo: 6s;
     --atraso: 2.5s;
 }
 
 .bolha-4 {
     left: 47%;
-
-    width: 30px;
-    height: 30px;
-
+    width: 40px;
+    height: 40px;
     --tempo: 8s;
     --atraso: .8s;
 }
 
 .bolha-5 {
     left: 60%;
-
-    width: 22px;
-    height: 22px;
-
+    width: 32px;
+    height: 32px;
     --tempo: 7s;
     --atraso: 3s;
 }
 
 .bolha-6 {
     left: 72%;
-
-    width: 43px;
-    height: 43px;
-
+    width: 52px;
+    height: 52px;
     --tempo: 10s;
     --atraso: 2s;
 }
 
 .bolha-7 {
     left: 84%;
-
-    width: 27px;
-    height: 27px;
-
+    width: 38px;
+    height: 38px;
     --tempo: 7.5s;
     --atraso: 4s;
 }
 
 .bolha-8 {
     left: 92%;
-
-    width: 17px;
-    height: 17px;
-
+    width: 25px;
+    height: 25px;
     --tempo: 6s;
     --atraso: 5s;
 }
 
-
-/* =====================================================
-   MOVIMENTO DAS BOLHAS
-===================================================== */
 
 @keyframes subirBolha {
 
@@ -395,6 +371,602 @@ body {
 
 
 /* =====================================================
+   TODAS AS CENAS INTERNAS
+===================================================== */
+
+.cena {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100svh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(30px) scale(.98);
+
+    transition:
+        opacity .8s ease,
+        transform .9s cubic-bezier(.2, .7, .2, 1),
+        visibility .8s ease;
+
+    z-index: 15;
+}
+
+.cena.ativa {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0) scale(1);
+}
+
+
+/* =====================================================
+   FUNDO DAS TELAS
+===================================================== */
+
+#cenaMenina,
+#informacoes,
+#presentes,
+#confirmacao {
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(4, 93, 132, .95),
+            rgba(3, 61, 92, .98)
+        );
+
+}
+
+
+/* =====================================================
+   EFEITO DE ÁGUA NAS TELAS
+===================================================== */
+
+#cenaMenina::before,
+#informacoes::before,
+#presentes::before,
+#confirmacao::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -20%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 20% 10%,
+            rgba(255,255,255,.13),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 80% 80%,
+            rgba(102,224,255,.12),
+            transparent 40%
+        );
+
+    animation:
+        movimentoFundo
+        10s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes movimentoFundo {
+
+    from {
+        transform: translate3d(-2%, -1%, 0);
+    }
+
+    to {
+        transform: translate3d(2%, 1%, 0);
+    }
+}
+
+
+/* =====================================================
+   BOTÕES DE CONTINUAR
+===================================================== */
+
+.botao-continuar,
+.botao-principal,
+.botao-secundario {
+
+    border: none;
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        opacity .25s ease;
+}
+
+
+.botao-continuar:hover,
+.botao-principal:hover,
+.botao-secundario:hover {
+
+    transform: translateY(-2px);
+}
+
+
+.botao-continuar:active,
+.botao-principal:active,
+.botao-secundario:active {
+
+    transform: scale(.97);
+}
+
+
+.botao-continuar {
+
+    position: relative;
+
+    z-index: 20;
+
+    margin-top: 20px;
+
+    padding: 13px 28px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.92);
+
+    color: #07547a;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.15);
+}
+
+
+/* =====================================================
+   MENINA
+===================================================== */
+
+.conteudo-menina {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: min(100%, 430px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.imagem-menina {
+
+    width: min(82vw, 360px);
+
+    max-height: 52svh;
+
+    object-fit: contain;
+
+    display: block;
+
+    filter:
+        drop-shadow(0 15px 20px rgba(0,0,0,.18));
+
+    animation:
+        entradaMenina
+        1.2s
+        cubic-bezier(.2,.8,.2,1)
+        both,
+        flutuarMenina
+        5s
+        ease-in-out
+        1.2s
+        infinite;
+}
+
+
+@keyframes entradaMenina {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(35px)
+            scale(.88);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes flutuarMenina {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   FALA DA MENINA
+===================================================== */
+
+.fala-menina {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 20px 18px;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,.94);
+
+    color: #07547a;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+
+    text-align: left;
+
+    max-height: 25svh;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+}
+
+
+.fala-menina p {
+
+    margin-bottom: 12px;
+
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+
+.fala-menina p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =====================================================
+   CARTÕES
+===================================================== */
+
+.cartao-informacoes,
+.cartao-presentes,
+.cartao-confirmacao {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: min(100%, 430px);
+
+    padding: 30px 22px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.95);
+
+    color: #07547a;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.22);
+
+    text-align: center;
+}
+
+
+.pequeno-titulo {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    opacity: .65;
+}
+
+
+.cartao-informacoes h1,
+.cartao-presentes h1,
+.cartao-confirmacao h1 {
+
+    margin-bottom: 24px;
+
+    font-size: 29px;
+
+    line-height: 1.1;
+}
+
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.informacao {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 4px;
+
+    border-bottom:
+        1px solid rgba(7,84,122,.12);
+
+    text-align: left;
+}
+
+
+.informacao:last-of-type {
+    border-bottom: none;
+}
+
+
+.icone {
+
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2f6fb;
+
+    font-size: 22px;
+}
+
+
+.informacao div {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.informacao small {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+
+    opacity: .55;
+}
+
+
+.informacao strong {
+
+    font-size: 15px;
+}
+
+
+.informacao span:not(.icone) {
+
+    font-size: 13px;
+
+    opacity: .7;
+}
+
+
+/* =====================================================
+   BOTÃO PRINCIPAL
+===================================================== */
+
+.botao-principal {
+
+    display: flex;
+
+    width: 100%;
+
+    min-height: 50px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+
+    padding: 13px 20px;
+
+    border-radius: 25px;
+
+    background: #07547a;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 20px rgba(7,84,122,.22);
+}
+
+
+/* =====================================================
+   BOTÃO SECUNDÁRIO
+===================================================== */
+
+.botao-secundario {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 12px;
+
+    border-radius: 24px;
+
+    background: transparent;
+
+    color: #07547a;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   PRESENTES
+===================================================== */
+
+.texto-presente {
+
+    margin-top: -10px;
+    margin-bottom: 22px;
+
+    font-size: 14px;
+
+    opacity: .7;
+}
+
+
+.lista-presentes {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    text-align: center;
+}
+
+
+.item-presente {
+
+    min-height: 95px;
+
+    padding: 14px 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    border-radius: 18px;
+
+    background: #eefaff;
+}
+
+
+.item-presente span {
+
+    font-size: 25px;
+}
+
+
+.item-presente strong {
+
+    font-size: 13px;
+}
+
+
+.item-presente small {
+
+    font-size: 11px;
+
+    opacity: .65;
+}
+
+
+/* =====================================================
+   CONFIRMAÇÃO
+===================================================== */
+
+.coracao {
+
+    margin-bottom: 12px;
+
+    font-size: 50px;
+
+    animation:
+        pulsar
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes pulsar {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+.cartao-confirmacao p {
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    opacity: .75;
+}
+
+
+/* =====================================================
    CELULAR
 ===================================================== */
 
@@ -404,11 +976,10 @@ body {
         object-fit: cover;
     }
 
+
     .imagem-mar {
+
         inset: -4%;
 
         width: 108%;
         height: 108%;
-    }
-
-}
