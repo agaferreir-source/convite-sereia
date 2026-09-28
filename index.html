@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,10 @@
 
     <main id="convite">
 
-        <!-- PRIMEIRA TELA -->
+        <!-- ==================================================
+             PRIMEIRA TELA — ABERTURA
+        ================================================== -->
+
         <section id="abertura" class="tela ativa">
 
             <img
@@ -22,29 +26,103 @@
                 class="imagem-abertura"
             >
 
-            <!-- Área invisível sobre o lacre -->
+            <!--
+                Área invisível posicionada sobre o lacre.
+                A pessoa toca no próprio lacre da imagem.
+            -->
+
             <button
                 id="abrirConvite"
                 class="area-lacre"
-                aria-label="Toque no lacre para abrir o convite"
-            ></button>
+                aria-label="Toque no lacre para abrir o convite">
+            </button>
 
         </section>
 
 
-        <!-- SEGUNDA TELA - VAMOS CRIAR DEPOIS -->
+        <!-- ==================================================
+             TRANSIÇÃO — FUNDO DO MAR
+        ================================================== -->
+
+        <div id="transicaoMar" class="transicao-mar">
+
+            <!-- Luz entrando pela superfície -->
+            <div class="luz-mar"></div>
+
+
+            <!-- =========================
+                 BOLHAS
+            ========================== -->
+
+            <div class="bolha b1"></div>
+            <div class="bolha b2"></div>
+            <div class="bolha b3"></div>
+            <div class="bolha b4"></div>
+            <div class="bolha b5"></div>
+            <div class="bolha b6"></div>
+            <div class="bolha b7"></div>
+            <div class="bolha b8"></div>
+            <div class="bolha b9"></div>
+            <div class="bolha b10"></div>
+            <div class="bolha b11"></div>
+            <div class="bolha b12"></div>
+            <div class="bolha b13"></div>
+            <div class="bolha b14"></div>
+            <div class="bolha b15"></div>
+
+
+            <!-- =========================
+                 PEIXINHOS
+            ========================== -->
+
+            <div class="peixe peixe1">🐠</div>
+            <div class="peixe peixe2">🐟</div>
+            <div class="peixe peixe3">🐠</div>
+            <div class="peixe peixe4">🐟</div>
+            <div class="peixe peixe5">🐠</div>
+
+
+            <!-- =========================
+                 VEGETAÇÃO DO FUNDO
+            ========================== -->
+
+            <div class="vegetacao vegetacao1"></div>
+            <div class="vegetacao vegetacao2"></div>
+            <div class="vegetacao vegetacao3"></div>
+            <div class="vegetacao vegetacao4"></div>
+
+
+            <!-- Areia no fundo -->
+            <div class="areia"></div>
+
+        </div>
+
+
+        <!-- ==================================================
+             SEGUNDA TELA — MENINA
+        ================================================== -->
+
         <section id="mensagem" class="tela segunda-tela">
 
             <div class="conteudo-mensagem">
+
                 <h1>Olá! 💜</h1>
-                <p>Uma mensagem muito especial está chegando...</p>
+
+                <p>
+                    Uma mensagem muito especial
+                    está chegando...
+                </p>
+
             </div>
 
         </section>
 
     </main>
 
+
+    <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
+
 </html>
