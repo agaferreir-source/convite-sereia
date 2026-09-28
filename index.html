@@ -27,16 +27,12 @@
 
 <body>
 
-    <!-- =====================================================
-         CONVITE
-    ====================================================== -->
-
     <main id="convite">
 
 
-        <!-- =================================================
-             PRIMEIRA TELA
-        ================================================== -->
+        <!-- =====================================================
+             1. CAPA
+        ====================================================== -->
 
         <section
             id="abertura"
@@ -49,14 +45,6 @@
                 class="imagem-abertura"
             >
 
-
-            <!--
-                Área invisível sobre o lacre.
-
-                A pessoa toca aqui para abrir
-                o convite.
-            -->
-
             <button
                 id="abrirConvite"
                 class="area-lacre"
@@ -68,9 +56,9 @@
 
 
 
-        <!-- =================================================
-             CENA DO FUNDO DO MAR
-        ================================================== -->
+        <!-- =====================================================
+             2. FUNDO DO MAR / TRANSIÇÃO
+        ====================================================== -->
 
         <section
             id="cenaMar"
@@ -78,22 +66,11 @@
             aria-hidden="true"
         >
 
-
-            <!-- =================================================
-                 IMAGEM PRINCIPAL DO FUNDO DO MAR
-            ================================================== -->
-
             <img
                 src="imagens/file_000000005348820e88dc88e2d0c1234c.png"
                 alt=""
                 class="imagem-mar"
             >
-
-
-
-            <!-- =================================================
-                 LUZ / REFLEXO DA ÁGUA
-            ================================================== -->
 
             <div
                 class="luz-agua"
@@ -101,51 +78,335 @@
             ></div>
 
 
+            <!-- BOLHAS -->
+
+            <div class="bolha bolha-1"></div>
+            <div class="bolha bolha-2"></div>
+            <div class="bolha bolha-3"></div>
+            <div class="bolha bolha-4"></div>
+            <div class="bolha bolha-5"></div>
+            <div class="bolha bolha-6"></div>
+            <div class="bolha bolha-7"></div>
+            <div class="bolha bolha-8"></div>
+
 
             <!-- =================================================
-                 BOLHAS
+                 BOTÃO PARA CONTINUAR
             ================================================== -->
 
-            <div
-                class="bolha bolha-1"
-                aria-hidden="true"
-            ></div>
+            <button
+                id="continuarParaMenina"
+                class="botao-continuar"
+                type="button"
+            >
+                Continuar
+            </button>
 
-            <div
-                class="bolha bolha-2"
-                aria-hidden="true"
-            ></div>
+        </section>
 
-            <div
-                class="bolha bolha-3"
-                aria-hidden="true"
-            ></div>
 
-            <div
-                class="bolha bolha-4"
-                aria-hidden="true"
-            ></div>
 
-            <div
-                class="bolha bolha-5"
-                aria-hidden="true"
-            ></div>
+        <!-- =====================================================
+             3. MENINA
+        ====================================================== -->
 
-            <div
-                class="bolha bolha-6"
-                aria-hidden="true"
-            ></div>
+        <section
+            id="cenaMenina"
+            class="cena menina"
+        >
 
-            <div
-                class="bolha bolha-7"
-                aria-hidden="true"
-            ></div>
+            <div class="conteudo-menina">
 
-            <div
-                class="bolha bolha-8"
-                aria-hidden="true"
-            ></div>
+                <img
+                    src="imagens/menina-sereia.png"
+                    alt="Menina sereia"
+                    class="imagem-menina"
+                    id="imagemMenina"
+                >
 
+
+                <!--
+                    Futuramente podemos substituir a imagem acima
+                    pelo vídeo da menina falando.
+
+                    A estrutura já fica preparada para isso.
+                -->
+
+
+                <div
+                    class="fala-menina"
+                    id="falaMenina"
+                >
+
+                    <p>
+                        Oi! Eu tenho uma coisa muito especial
+                        pra contar pra você!
+                    </p>
+
+                    <p>
+                        A minha festinha tá chegando e eu quero
+                        muito que você venha comemorar comigo!
+                    </p>
+
+                    <p>
+                        Dia 25 de outubro, às três horas da tarde,
+                        a gente vai se encontrar na Associação
+                        de Moradores.
+                    </p>
+
+                    <p>
+                        E já fica o aviso:
+                        convidado não convida, viu? Kkkkk!
+                    </p>
+
+                    <p>
+                        Se você quiser me dar um presentinho,
+                        eu vou amar uma roupinha, um sapatinho,
+                        um lacinho, um brinquedo ou um gloss!
+                    </p>
+
+                    <p>
+                        As roupinhas podem ser tamanho 3 ou 4 anos,
+                        ou tamanho M, e a sandália pode ser 24 ou 25.
+                    </p>
+
+                    <p>
+                        Agora é só guardar esse dia
+                        e preparar a diversão!
+                    </p>
+
+                    <p>
+                        Eu espero você lá!
+                        Um beijinho e até a minha festinha!
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="continuarParaInformacoes"
+                    class="botao-continuar"
+                    type="button"
+                >
+                    Ver o convite
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             4. INFORMAÇÕES
+        ====================================================== -->
+
+        <section
+            id="informacoes"
+            class="cena informacoes"
+        >
+
+            <div class="cartao-informacoes">
+
+                <span class="pequeno-titulo">
+                    ANOTE NA AGENDA
+                </span>
+
+                <h1>
+                    Minha festinha
+                </h1>
+
+
+                <div class="informacao">
+
+                    <span class="icone">📅</span>
+
+                    <div>
+                        <small>DATA</small>
+                        <strong>25 de outubro de 2026</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="informacao">
+
+                    <span class="icone">🕒</span>
+
+                    <div>
+                        <small>HORÁRIO</small>
+                        <strong>15:00</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="informacao">
+
+                    <span class="icone">📍</span>
+
+                    <div>
+                        <small>LOCAL</small>
+                        <strong>Associação de Moradores</strong>
+                        <span>Rua Oliveira Bueno, nº 850</span>
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="abrirLocalizacao"
+                    class="botao-principal"
+                    type="button"
+                >
+                    📍 Ver localização
+                </button>
+
+                <button
+                    id="continuarParaPresentes"
+                    class="botao-secundario"
+                    type="button"
+                >
+                    Sugestões de presente
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             5. PRESENTES
+        ====================================================== -->
+
+        <section
+            id="presentes"
+            class="cena presentes"
+        >
+
+            <div class="cartao-presentes">
+
+                <span class="pequeno-titulo">
+                    SE QUISER ME PRESENTEAR 💕
+                </span>
+
+                <h1>
+                    Eu vou amar!
+                </h1>
+
+                <p class="texto-presente">
+                    E convidado não convida kkkkk!
+                </p>
+
+
+                <div class="lista-presentes">
+
+                    <div class="item-presente">
+                        <span>👗</span>
+                        <strong>Roupa</strong>
+                        <small>3/4 anos ou M</small>
+                    </div>
+
+
+                    <div class="item-presente">
+                        <span>👡</span>
+                        <strong>Sandália</strong>
+                        <small>24/25</small>
+                    </div>
+
+
+                    <div class="item-presente">
+                        <span>🎀</span>
+                        <strong>Laços</strong>
+                    </div>
+
+
+                    <div class="item-presente">
+                        <span>🧸</span>
+                        <strong>Brinquedos</strong>
+                    </div>
+
+
+                    <div class="item-presente">
+                        <span>💄</span>
+                        <strong>Gloss</strong>
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="continuarParaConfirmacao"
+                    class="botao-principal"
+                    type="button"
+                >
+                    Confirmar presença 💕
+                </button>
+
+
+                <button
+                    id="voltarInformacoes"
+                    class="botao-secundario"
+                    type="button"
+                >
+                    Voltar
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             6. CONFIRMAÇÃO
+        ====================================================== -->
+
+        <section
+            id="confirmacao"
+            class="cena confirmacao"
+        >
+
+            <div class="cartao-confirmacao">
+
+                <div class="coracao">
+                    🧜🏽‍♀️
+                </div>
+
+                <span class="pequeno-titulo">
+                    SUA PRESENÇA É MUITO IMPORTANTE
+                </span>
+
+                <h1>
+                    Você vem?
+                </h1>
+
+                <p>
+                    Eu vou ficar muito feliz
+                    em comemorar esse dia com você! 💕
+                </p>
+
+
+                <a
+                    href="https://wa.me/5521XXXXXXXXX"
+                    class="botao-principal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    💕 Confirmar presença
+                </a>
+
+
+                <button
+                    id="voltarPresentes"
+                    class="botao-secundario"
+                    type="button"
+                >
+                    Voltar
+                </button>
+
+            </div>
 
         </section>
 
