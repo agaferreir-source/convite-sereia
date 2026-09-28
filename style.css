@@ -11,25 +11,16 @@ body {
 }
 
 body {
-    font-family: Georgia, "Times New Roman", serif;
-    overflow-x: hidden;
     background: #b9e8f2;
-}
-
-button {
-    font: inherit;
-}
-
-#convite {
-    width: 100%;
-    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* =========================
-   TELA
+   TELAS
 ========================= */
 
 .tela {
+    display: none;
     width: 100%;
     min-height: 100vh;
     position: relative;
@@ -37,7 +28,7 @@ button {
 }
 
 .tela.ativa {
-    display: flex;
+    display: block;
 }
 
 /* =========================
@@ -45,143 +36,109 @@ button {
 ========================= */
 
 #abertura {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    background:
-        radial-gradient(circle at 20% 25%, rgba(255,255,255,0.35) 0 3px, transparent 4px),
-        radial-gradient(circle at 75% 65%, rgba(255,255,255,0.25) 0 4px, transparent 5px),
-        linear-gradient(
-            180deg,
-            #8fd8e8 0%,
-            #66c5dc 45%,
-            #277fa9 100%
-        );
-}
-
-/* Luz suave do fundo do mar */
-
-#abertura::before {
-    content: "";
-    position: absolute;
-    inset: -20%;
-    background:
-        radial-gradient(
-            ellipse at 50% 0%,
-            rgba(255,255,255,0.32),
-            transparent 55%
-        );
-    pointer-events: none;
-}
-
-/* =========================
-   BOLHAS
-========================= */
-
-#abertura::after {
-    content: "○   ○      ○          ○    ○";
-    position: absolute;
-    bottom: -40px;
-    left: 0;
-    width: 100%;
-    font-size: 30px;
-    letter-spacing: 20px;
-    color: rgba(255,255,255,0.45);
-    animation: bolhas 8s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes bolhas {
-    from {
-        transform: translateY(0);
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 1;
-    }
-
-    to {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
-}
-
-/* =========================
-   CONTEÚDO
-========================= */
-
-.conteudo-abertura {
     position: relative;
-    z-index: 2;
-
-    width: min(90%, 430px);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-
-    animation: aparecer 1.5s ease;
+    width: 100%;
+    min-height: 100vh;
+    background: #8ed9eb;
 }
 
-.texto-abertura {
-    color: white;
-    font-size: clamp(24px, 6vw, 34px);
-    line-height: 1.3;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+/* Imagem principal */
+
+.imagem-abertura {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* =========================
-   BOTÃO
+   ÁREA INVISÍVEL DO LACRE
 ========================= */
 
-.botao-lacre {
-    border: 0;
-    border-radius: 50px;
+.area-lacre {
+    position: absolute;
 
-    padding: 16px 25px;
+    /*
+      Posição aproximada do lacre
+      da imagem original.
+    */
 
-    background: rgba(255,255,255,0.92);
-    color: #397f9d;
+    left: 34%;
+    top: 51%;
 
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
+    width: 30%;
+    height: 15%;
 
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.15);
+    border: none;
+    background: transparent;
 
     cursor: pointer;
 
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    z-index: 10;
+
+    -webkit-tap-highlight-color: transparent;
 }
 
-.botao-lacre:active {
-    transform: scale(0.94);
-}
+/* Pequeno efeito ao tocar */
 
-.botao-lacre:hover {
-    transform: translateY(-3px);
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.18);
+.area-lacre:active {
+    transform: scale(0.96);
 }
 
 /* =========================
-   ANIMAÇÃO INICIAL
+   SEGUNDA TELA
 ========================= */
 
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+.segunda-tela {
+    min-height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8eddf0 0%,
+            #4bbbd7 50%,
+            #237da5 100%
+        );
+}
+
+.conteudo-mensagem {
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
+
+.conteudo-mensagem h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.conteudo-mensagem p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 600px) {
+
+    .imagem-abertura {
+        min-height: auto;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .area-lacre {
+        left: 34%;
+        top: 51%;
+        width: 30%;
+        height: 15%;
     }
+
 }
