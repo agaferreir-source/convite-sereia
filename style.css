@@ -11,16 +11,20 @@ body {
 }
 
 body {
-    background: #b9e8f2;
-    overflow-x: hidden;
+    overflow: hidden;
+    background: #063f63;
+    font-family: Georgia, "Times New Roman", serif;
 }
 
-/* =========================
-   TELAS
-========================= */
+button {
+    font: inherit;
+}
+
+/* ==================================================
+   ESTRUTURA DAS TELAS
+================================================== */
 
 .tela {
-    display: none;
     width: 100%;
     min-height: 100vh;
     position: relative;
@@ -31,39 +35,38 @@ body {
     display: block;
 }
 
-/* =========================
-   ABERTURA
-========================= */
+/* ==================================================
+   PRIMEIRA TELA
+================================================== */
 
 #abertura {
     position: relative;
     width: 100%;
     min-height: 100vh;
     background: #8ed9eb;
-}
 
-/* Imagem principal */
+    z-index: 20;
+}
 
 .imagem-abertura {
     display: block;
+
     width: 100%;
-    height: auto;
-    min-height: 100vh;
+    height: 100vh;
+
     object-fit: cover;
     object-position: center;
+
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-/* =========================
+/* ==================================================
    ÁREA INVISÍVEL DO LACRE
-========================= */
+================================================== */
 
 .area-lacre {
     position: absolute;
-
-    /*
-      Posição aproximada do lacre
-      da imagem original.
-    */
 
     left: 34%;
     top: 51%;
@@ -72,26 +75,571 @@ body {
     height: 15%;
 
     border: none;
+    outline: none;
+
     background: transparent;
 
     cursor: pointer;
 
-    z-index: 10;
+    z-index: 30;
 
     -webkit-tap-highlight-color: transparent;
-}
 
-/* Pequeno efeito ao tocar */
+    transition: transform 0.25s ease;
+}
 
 .area-lacre:active {
-    transform: scale(0.96);
+    transform: scale(0.92);
 }
 
-/* =========================
+
+/* ==================================================
+   TRANSIÇÃO DO FUNDO DO MAR
+================================================== */
+
+.transicao-mar {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    z-index: 10;
+
+    opacity: 0;
+    visibility: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% -10%,
+            rgba(130, 235, 255, 0.75) 0%,
+            rgba(42, 155, 194, 0.35) 25%,
+            transparent 55%
+        ),
+        linear-gradient(
+            180deg,
+            #65d4e9 0%,
+            #168eb9 35%,
+            #08618e 65%,
+            #033d65 100%
+        );
+
+    transform: scale(1.08);
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease,
+        transform 1.8s ease;
+}
+
+
+/* Quando o JavaScript ativar a transição */
+
+.transicao-mar.ativa {
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+/* ==================================================
+   LUZ DA SUPERFÍCIE
+================================================== */
+
+.luz-mar {
+
+    position: absolute;
+
+    top: -15%;
+    left: 50%;
+
+    width: 160%;
+    height: 70%;
+
+    transform: translateX(-50%);
+
+    background:
+        repeating-linear-gradient(
+            100deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.13) 7%,
+            transparent 14%
+        );
+
+    filter: blur(14px);
+
+    opacity: 0.75;
+
+    animation: movimentoLuz 7s ease-in-out infinite alternate;
+}
+
+@keyframes movimentoLuz {
+
+    from {
+        transform:
+            translateX(-52%)
+            rotate(-3deg);
+    }
+
+    to {
+        transform:
+            translateX(-47%)
+            rotate(3deg);
+    }
+}
+
+
+/* ==================================================
+   BOLHAS
+================================================== */
+
+.bolha {
+
+    position: absolute;
+
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255, 255, 255, 0.55);
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.12) 35%,
+            transparent 70%
+        );
+
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,0.25),
+        0 0 8px rgba(255,255,255,0.12);
+
+    opacity: 0;
+
+    animation:
+        subirBolha
+        var(--duracao)
+        linear
+        infinite;
+
+    animation-delay: var(--atraso);
+}
+
+
+/* tamanhos e posições */
+
+.b1 {
+    --duracao: 6s;
+    --atraso: 0s;
+
+    left: 8%;
+    width: 15px;
+    height: 15px;
+}
+
+.b2 {
+    --duracao: 8s;
+    --atraso: 1s;
+
+    left: 18%;
+    width: 8px;
+    height: 8px;
+}
+
+.b3 {
+    --duracao: 7s;
+    --atraso: 2.5s;
+
+    left: 27%;
+    width: 22px;
+    height: 22px;
+}
+
+.b4 {
+    --duracao: 9s;
+    --atraso: 0.5s;
+
+    left: 38%;
+    width: 11px;
+    height: 11px;
+}
+
+.b5 {
+    --duracao: 6.5s;
+    --atraso: 3s;
+
+    left: 47%;
+    width: 17px;
+    height: 17px;
+}
+
+.b6 {
+    --duracao: 8.5s;
+    --atraso: 1.8s;
+
+    left: 56%;
+    width: 9px;
+    height: 9px;
+}
+
+.b7 {
+    --duracao: 7.5s;
+    --atraso: 4s;
+
+    left: 64%;
+    width: 25px;
+    height: 25px;
+}
+
+.b8 {
+    --duracao: 9s;
+    --atraso: 2s;
+
+    left: 72%;
+    width: 12px;
+    height: 12px;
+}
+
+.b9 {
+    --duracao: 6s;
+    --atraso: 0.8s;
+
+    left: 80%;
+    width: 19px;
+    height: 19px;
+}
+
+.b10 {
+    --duracao: 8s;
+    --atraso: 3.2s;
+
+    left: 88%;
+    width: 10px;
+    height: 10px;
+}
+
+.b11 {
+    --duracao: 7s;
+    --atraso: 4.5s;
+
+    left: 94%;
+    width: 18px;
+    height: 18px;
+}
+
+.b12 {
+    --duracao: 10s;
+    --atraso: 5s;
+
+    left: 42%;
+    width: 7px;
+    height: 7px;
+}
+
+.b13 {
+    --duracao: 8s;
+    --atraso: 5.5s;
+
+    left: 13%;
+    width: 13px;
+    height: 13px;
+}
+
+.b14 {
+    --duracao: 7s;
+    --atraso: 6s;
+
+    left: 68%;
+    width: 8px;
+    height: 8px;
+}
+
+.b15 {
+    --duracao: 9s;
+    --atraso: 6.5s;
+
+    left: 32%;
+    width: 16px;
+    height: 16px;
+}
+
+
+@keyframes subirBolha {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform:
+            translateY(-50vh)
+            translateX(20px)
+            scale(1);
+    }
+
+    80% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            translateX(-25px)
+            scale(1.15);
+
+        opacity: 0;
+    }
+}
+
+
+/* ==================================================
+   PEIXINHOS
+================================================== */
+
+.peixe {
+
+    position: absolute;
+
+    opacity: 0;
+
+    font-size: 34px;
+
+    filter:
+        drop-shadow(
+            0 3px 4px rgba(0,0,0,0.15)
+        );
+
+    animation:
+        nadar
+        var(--duracao-peixe)
+        linear
+        infinite;
+
+    animation-delay: var(--atraso-peixe);
+
+    white-space: nowrap;
+}
+
+
+/* diferentes peixes */
+
+.peixe1 {
+
+    --duracao-peixe: 9s;
+    --atraso-peixe: 0s;
+
+    top: 25%;
+    left: -80px;
+
+    font-size: 30px;
+}
+
+.peixe2 {
+
+    --duracao-peixe: 12s;
+    --atraso-peixe: 2s;
+
+    top: 48%;
+    left: -100px;
+
+    font-size: 25px;
+}
+
+.peixe3 {
+
+    --duracao-peixe: 10s;
+    --atraso-peixe: 4s;
+
+    top: 65%;
+    left: -100px;
+
+    font-size: 38px;
+}
+
+.peixe4 {
+
+    --duracao-peixe: 14s;
+    --atraso-peixe: 1s;
+
+    top: 35%;
+    left: -100px;
+
+    font-size: 22px;
+}
+
+.peixe5 {
+
+    --duracao-peixe: 11s;
+    --atraso-peixe: 5s;
+
+    top: 78%;
+    left: -100px;
+
+    font-size: 28px;
+}
+
+
+@keyframes nadar {
+
+    0% {
+        transform:
+            translateX(-120px)
+            translateY(0);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    45% {
+        transform:
+            translateX(50vw)
+            translateY(-20px);
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateX(115vw)
+            translateY(20px);
+
+        opacity: 0;
+    }
+}
+
+
+/* ==================================================
+   VEGETAÇÃO DO FUNDO
+================================================== */
+
+.vegetacao {
+
+    position: absolute;
+
+    bottom: -10px;
+
+    width: 90px;
+    height: 190px;
+
+    background:
+        linear-gradient(
+            75deg,
+            transparent 40%,
+            rgba(12, 99, 83, 0.8) 42%,
+            rgba(19, 133, 101, 0.9) 58%,
+            transparent 60%
+        );
+
+    border-radius: 70% 30% 0 0;
+
+    transform-origin: bottom center;
+
+    animation:
+        balancarAlga
+        4s
+        ease-in-out
+        infinite alternate;
+}
+
+.vegetacao1 {
+    left: -15px;
+    height: 170px;
+}
+
+.vegetacao2 {
+    left: 22%;
+    height: 130px;
+    animation-delay: 0.8s;
+}
+
+.vegetacao3 {
+    right: 15%;
+    height: 180px;
+    animation-delay: 1.2s;
+}
+
+.vegetacao4 {
+    right: -20px;
+    height: 145px;
+    animation-delay: 0.4s;
+}
+
+@keyframes balancarAlga {
+
+    from {
+        transform:
+            rotate(-5deg);
+    }
+
+    to {
+        transform:
+            rotate(6deg);
+    }
+}
+
+
+/* ==================================================
+   AREIA
+================================================== */
+
+.areia {
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65px;
+
+    background:
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,255,255,0.22),
+            transparent 20%
+        ),
+        radial-gradient(
+            ellipse at 70% 60%,
+            rgba(255,255,255,0.18),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(19, 116, 139, 0.2),
+            rgba(181, 183, 128, 0.65)
+        );
+
+    opacity: 0.8;
+}
+
+
+/* ==================================================
    SEGUNDA TELA
-========================= */
+================================================== */
 
 .segunda-tela {
+
     min-height: 100vh;
 
     display: none;
@@ -102,43 +650,70 @@ body {
     background:
         linear-gradient(
             180deg,
-            #8eddf0 0%,
-            #4bbbd7 50%,
-            #237da5 100%
+            #65d4e9 0%,
+            #168eb9 40%,
+            #08618e 70%,
+            #033d65 100%
         );
 }
 
 .conteudo-mensagem {
+
+    position: relative;
+
+    z-index: 5;
+
     padding: 30px;
+
     text-align: center;
+
     color: white;
 }
 
 .conteudo-mensagem h1 {
+
     font-size: 38px;
+
     margin-bottom: 15px;
 }
 
 .conteudo-mensagem p {
+
     font-size: 20px;
+
     line-height: 1.5;
 }
 
-/* =========================
+
+/* ==================================================
    CELULARES
-========================= */
+================================================== */
 
 @media (max-width: 600px) {
 
     .imagem-abertura {
-        min-height: auto;
+
+        height: 100svh;
+
+        min-height: 100svh;
+
+        object-fit: cover;
     }
 
     .area-lacre {
+
         left: 34%;
+
         top: 51%;
+
         width: 30%;
+
         height: 15%;
+    }
+
+    .peixe {
+
+        font-size: 27px;
     }
 
 }
