@@ -5,13 +5,13 @@ const mensagem = document.getElementById("mensagem");
 
 botaoAbrir.addEventListener("click", () => {
 
-    // Evita clicar duas vezes
+    // Impede que o convite seja aberto duas vezes
     botaoAbrir.disabled = true;
 
 
-    // =========================================
-    // 1. A ABERTURA COMEÇA A MERGULHAR
-    // =========================================
+    /* =====================================================
+       1. A PRIMEIRA IMAGEM COMEÇA A MERGULHAR
+    ===================================================== */
 
     abertura.style.transition =
         "opacity 1s ease, transform 1.5s cubic-bezier(.2,.7,.2,1)";
@@ -21,9 +21,9 @@ botaoAbrir.addEventListener("click", () => {
     abertura.style.transform = "scale(1.08)";
 
 
-    // =========================================
-    // 2. FUNDO DO MAR ENTRA
-    // =========================================
+    /* =====================================================
+       2. O FUNDO DO MAR COMEÇA A APARECER
+    ===================================================== */
 
     setTimeout(() => {
 
@@ -32,9 +32,9 @@ botaoAbrir.addEventListener("click", () => {
     }, 300);
 
 
-    // =========================================
-    // 3. RETIRA A PRIMEIRA IMAGEM
-    // =========================================
+    /* =====================================================
+       3. RETIRA A PRIMEIRA IMAGEM
+    ===================================================== */
 
     setTimeout(() => {
 
@@ -43,9 +43,26 @@ botaoAbrir.addEventListener("click", () => {
     }, 1500);
 
 
-    // =========================================
-    // 4. DEIXA O MAR APARECER POR UM MOMENTO
-    // =========================================
+    /* =====================================================
+       4. O FUNDO DO MAR FICA NA TELA
+       
+       Nesse momento:
+       🫧 bolhas sobem
+       ✨ luz se movimenta
+       🌊 o cenário tem movimento
+    ===================================================== */
+
+    setTimeout(() => {
+
+        // Mantém o cenário do mar visível
+        transicaoMar.style.opacity = "1";
+
+    }, 1500);
+
+
+    /* =====================================================
+       5. PREPARA A SAÍDA DA TRANSIÇÃO
+    ===================================================== */
 
     setTimeout(() => {
 
@@ -54,12 +71,12 @@ botaoAbrir.addEventListener("click", () => {
 
         transicaoMar.style.opacity = "0";
 
-    }, 5000);
+    }, 5200);
 
 
-    // =========================================
-    // 5. ENTRA A PRÓXIMA CENA
-    // =========================================
+    /* =====================================================
+       6. MOSTRA A PRÓXIMA TELA
+    ===================================================== */
 
     setTimeout(() => {
 
@@ -80,6 +97,6 @@ botaoAbrir.addEventListener("click", () => {
 
         });
 
-    }, 6200);
+    }, 6400);
 
 });
