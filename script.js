@@ -1,245 +1,282 @@
-const botaoAbrir = document.getElementById("abrirConvite");
+const botaoAbrir =
+    document.getElementById("abrirConvite");
 
-const abertura = document.getElementById("abertura");
-const cenaMar = document.getElementById("cenaMar");
-const cenaMenina = document.getElementById("cenaMenina");
-const informacoes = document.getElementById("informacoes");
-const presentes = document.getElementById("presentes");
-const confirmacao = document.getElementById("confirmacao");
+const abertura =
+    document.getElementById("abertura");
 
-const continuarParaMenina =
-    document.getElementById("continuarParaMenina");
+const cenaMar =
+    document.getElementById("cenaMar");
+
+const cenaMenina =
+    document.getElementById("cenaMenina");
+
+const informacoes =
+    document.getElementById("informacoes");
+
+const presentes =
+    document.getElementById("presentes");
+
+const confirmacao =
+    document.getElementById("confirmacao");
+
 
 const continuarParaInformacoes =
-    document.getElementById("continuarParaInformacoes");
+    document.getElementById(
+        "continuarParaInformacoes"
+    );
 
 const continuarParaPresentes =
-    document.getElementById("continuarParaPresentes");
+    document.getElementById(
+        "continuarParaPresentes"
+    );
 
 const continuarParaConfirmacao =
-    document.getElementById("continuarParaConfirmacao");
+    document.getElementById(
+        "continuarParaConfirmacao"
+    );
 
 const voltarInformacoes =
-    document.getElementById("voltarInformacoes");
+    document.getElementById(
+        "voltarInformacoes"
+    );
 
 const voltarPresentes =
-    document.getElementById("voltarPresentes");
+    document.getElementById(
+        "voltarPresentes"
+    );
 
 const abrirLocalizacao =
-    document.getElementById("abrirLocalizacao");
+    document.getElementById(
+        "abrirLocalizacao"
+    );
 
 
-let conviteAberto = false;
+/* =====================================================
+   ESCONDER CENAS
+===================================================== */
 
+function esconderCenas() {
 
-/* =========================================================
-   FUNÇÃO PARA ESCONDER TODAS AS TELAS
-========================================================= */
-
-function esconderTelas() {
-
-    cenaMar.classList.remove("ativa");
     cenaMenina.classList.remove("ativa");
-    informacoes.classList.remove("ativa");
-    presentes.classList.remove("ativa");
-    confirmacao.classList.remove("ativa");
 
+    informacoes.classList.remove("ativa");
+
+    presentes.classList.remove("ativa");
+
+    confirmacao.classList.remove("ativa");
 }
 
 
-/* =========================================================
-   ABRIR O CONVITE
-========================================================= */
+/* =====================================================
+   ABRIR CONVITE
+===================================================== */
 
-botaoAbrir.addEventListener("click", () => {
+botaoAbrir.addEventListener(
+    "click",
+    () => {
 
-    if (conviteAberto) {
-        return;
-    }
-
-    conviteAberto = true;
-
-    botaoAbrir.disabled = true;
+        botaoAbrir.disabled = true;
 
 
-    /*
-     * O fundo do mar começa a aparecer
-     * por trás da capa.
-     */
+        cenaMar.classList.add("ativa");
 
-    cenaMar.classList.add("ativa");
-
-
-    /*
-     * Pequeno zoom na capa.
-     */
-
-    setTimeout(() => {
 
         abertura.style.opacity = "0";
-        abertura.style.transform = "scale(1.025)";
 
-    }, 100);
-
-
-    /*
-     * Retiramos a capa depois
-     * da animação.
-     */
-
-    setTimeout(() => {
-
-        abertura.style.display = "none";
-
-    }, 1400);
+        abertura.style.transform =
+            "scale(1.04)";
 
 
-});
+        /*
+         * A transição acontece sozinha.
+         * Depois do mergulho, a menina aparece.
+         */
+
+        setTimeout(
+            () => {
+
+                abertura.style.display =
+                    "none";
+
+            },
+            1400
+        );
 
 
-/* =========================================================
-   FUNDO DO MAR → MENINA
-========================================================= */
+        setTimeout(
+            () => {
 
-if (continuarParaMenina) {
+                cenaMenina.classList.add(
+                    "ativa"
+                );
 
-    continuarParaMenina.addEventListener("click", () => {
+            },
+            1800
+        );
 
-        cenaMar.classList.remove("ativa");
-
-        setTimeout(() => {
-
-            cenaMenina.classList.add("ativa");
-
-        }, 300);
-
-    });
-
-}
+    }
+);
 
 
-/* =========================================================
+/* =====================================================
    MENINA → INFORMAÇÕES
-========================================================= */
+===================================================== */
 
-if (continuarParaInformacoes) {
+continuarParaInformacoes.addEventListener(
+    "click",
+    () => {
 
-    continuarParaInformacoes.addEventListener("click", () => {
-
-        cenaMenina.classList.remove("ativa");
-
-        setTimeout(() => {
-
-            informacoes.classList.add("ativa");
-
-        }, 300);
-
-    });
-
-}
+        cenaMenina.classList.remove(
+            "ativa"
+        );
 
 
-/* =========================================================
+        setTimeout(
+            () => {
+
+                informacoes.classList.add(
+                    "ativa"
+                );
+
+            },
+            350
+        );
+
+    }
+);
+
+
+/* =====================================================
    INFORMAÇÕES → PRESENTES
-========================================================= */
+===================================================== */
 
-if (continuarParaPresentes) {
+continuarParaPresentes.addEventListener(
+    "click",
+    () => {
 
-    continuarParaPresentes.addEventListener("click", () => {
-
-        informacoes.classList.remove("ativa");
-
-        setTimeout(() => {
-
-            presentes.classList.add("ativa");
-
-        }, 300);
-
-    });
-
-}
+        informacoes.classList.remove(
+            "ativa"
+        );
 
 
-/* =========================================================
+        setTimeout(
+            () => {
+
+                presentes.classList.add(
+                    "ativa"
+                );
+
+            },
+            350
+        );
+
+    }
+);
+
+
+/* =====================================================
    PRESENTES → CONFIRMAÇÃO
-========================================================= */
+===================================================== */
 
-if (continuarParaConfirmacao) {
+continuarParaConfirmacao.addEventListener(
+    "click",
+    () => {
 
-    continuarParaConfirmacao.addEventListener("click", () => {
-
-        presentes.classList.remove("ativa");
-
-        setTimeout(() => {
-
-            confirmacao.classList.add("ativa");
-
-        }, 300);
-
-    });
-
-}
+        presentes.classList.remove(
+            "ativa"
+        );
 
 
-/* =========================================================
-   PRESENTES → INFORMAÇÕES
-========================================================= */
+        setTimeout(
+            () => {
 
-if (voltarInformacoes) {
+                confirmacao.classList.add(
+                    "ativa"
+                );
 
-    voltarInformacoes.addEventListener("click", () => {
+            },
+            350
+        );
 
-        presentes.classList.remove("ativa");
-
-        setTimeout(() => {
-
-            informacoes.classList.add("ativa");
-
-        }, 300);
-
-    });
-
-}
+    }
+);
 
 
-/* =========================================================
-   CONFIRMAÇÃO → PRESENTES
-========================================================= */
+/* =====================================================
+   VOLTAR → INFORMAÇÕES
+===================================================== */
 
-if (voltarPresentes) {
+voltarInformacoes.addEventListener(
+    "click",
+    () => {
 
-    voltarPresentes.addEventListener("click", () => {
-
-        confirmacao.classList.remove("ativa");
-
-        setTimeout(() => {
-
-            presentes.classList.add("ativa");
-
-        }, 300);
-
-    });
-
-}
+        presentes.classList.remove(
+            "ativa"
+        );
 
 
-/* =========================================================
+        setTimeout(
+            () => {
+
+                informacoes.classList.add(
+                    "ativa"
+                );
+
+            },
+            350
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VOLTAR → PRESENTES
+===================================================== */
+
+voltarPresentes.addEventListener(
+    "click",
+    () => {
+
+        confirmacao.classList.remove(
+            "ativa"
+        );
+
+
+        setTimeout(
+            () => {
+
+                presentes.classList.add(
+                    "ativa"
+                );
+
+            },
+            350
+        );
+
+    }
+);
+
+
+/* =====================================================
    LOCALIZAÇÃO
-========================================================= */
+===================================================== */
 
-if (abrirLocalizacao) {
-
-    abrirLocalizacao.addEventListener("click", () => {
+abrirLocalizacao.addEventListener(
+    "click",
+    () => {
 
         const endereco =
-            "Associação de Moradores, Rua Oliveira Bueno, 850";
+            "Rua Oliveira Bueno 850";
 
         const url =
             "https://www.google.com/maps/search/?api=1&query=" +
             encodeURIComponent(endereco);
 
-        window.open(url, "_blank");
+        window.open(
+            url,
+            "_blank"
+        );
 
-    });
-
-}
+    }
+);
