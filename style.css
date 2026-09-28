@@ -1,5 +1,5 @@
 /* =========================================================
-   CONFIGURAÇÕES GERAIS
+   CONFIGURAÇÃO GERAL
 ========================================================= */
 
 * {
@@ -11,63 +11,52 @@
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #07547a;
 }
 
 body {
-    overflow: hidden;
-    background: #063f63;
-    font-family: Georgia, "Times New Roman", serif;
-}
-
-button {
-    font: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
 /* =========================================================
-   ESTRUTURA DAS TELAS
-========================================================= */
-
-.tela {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100svh;
-
-    position: relative;
-    overflow: hidden;
-}
-
-.tela.ativa {
-    display: block;
-}
-
-
-/* =========================================================
-   PRIMEIRA TELA — IMAGEM DO CONVITE
+   ABERTURA
 ========================================================= */
 
 #abertura {
-    position: relative;
+    position: fixed;
+
+    inset: 0;
 
     width: 100%;
-    min-height: 100vh;
-    min-height: 100svh;
+    height: 100svh;
+
+    z-index: 20;
 
     background: #8ed9eb;
 
-    z-index: 20;
+    opacity: 1;
+
+    transform: scale(1);
+
+    transition:
+        opacity 1s ease,
+        transform 1.4s cubic-bezier(.2,.7,.2,1);
 }
+
 
 .imagem-abertura {
     display: block;
 
     width: 100%;
-    height: 100vh;
-    height: 100svh;
+    height: 100%;
 
     object-fit: cover;
-    object-position: center center;
+    object-position: center;
 
     user-select: none;
     -webkit-user-drag: none;
@@ -81,19 +70,14 @@ button {
 .area-lacre {
     position: absolute;
 
-    /*
-       Essa área fica por cima do lacre
-       da imagem.
-    */
-
     left: 34%;
     top: 51%;
 
     width: 30%;
     height: 15%;
 
-    border: none;
-    outline: none;
+    border: 0;
+    outline: 0;
 
     background: transparent;
 
@@ -102,65 +86,47 @@ button {
     z-index: 30;
 
     -webkit-tap-highlight-color: transparent;
-
-    transition: transform 0.25s ease;
 }
 
 .area-lacre:active {
-    transform: scale(0.92);
+    transform: scale(.94);
 }
 
 
 /* =========================================================
-   TRANSIÇÃO — FUNDO DO MAR
+   CENA DO MAR
 ========================================================= */
 
-.transicao-mar {
+.cena-mar {
     position: fixed;
 
     inset: 0;
 
     width: 100%;
-    height: 100vh;
     height: 100svh;
 
     overflow: hidden;
 
-    z-index: 10;
+    z-index: 5;
 
     opacity: 0;
+
     visibility: hidden;
 
-    /*
-       IMAGEM REAL DO FUNDO DO MAR
-    */
-
-    background-image: url("imagens/file_000000005348820e88dc88e2d0c1234c.png");
-
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-
-    /*
-       Começa um pouco aproximada
-       e depois "mergulha" para dentro da cena.
-    */
-
-    transform: scale(1.12);
+    transform: scale(1.04);
 
     transition:
-        opacity 1s ease,
-        transform 2s cubic-bezier(.2, .7, .2, 1),
-        visibility 1s ease;
+        opacity 1.4s ease,
+        transform 2s cubic-bezier(.2,.7,.2,1),
+        visibility 1.4s ease;
 }
 
 
-/*
-   Quando a transição é ativada pelo JavaScript
-*/
+/* Cena ativada */
 
-.transicao-mar.ativa {
+.cena-mar.ativa {
     opacity: 1;
+
     visibility: visible;
 
     transform: scale(1);
@@ -168,117 +134,292 @@ button {
 
 
 /* =========================================================
-   MOVIMENTO SUAVE DA ÁGUA
+   IMAGEM DO FUNDO DO MAR
 ========================================================= */
 
-.transicao-mar::before {
-    content: "";
-
+.imagem-mar {
     position: absolute;
 
-    inset: -8%;
+    inset: 0;
 
-    background:
-        linear-gradient(
-            105deg,
-            transparent 15%,
-            rgba(255,255,255,0.08) 25%,
-            transparent 35%,
-            rgba(255,255,255,0.10) 48%,
-            transparent 58%,
-            rgba(255,255,255,0.07) 70%,
-            transparent 82%
-        );
+    width: 100%;
+    height: 100%;
 
-    background-size: 180% 100%;
+    object-fit: cover;
+    object-position: center;
 
-    mix-blend-mode: screen;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    /*
+       Movimento extremamente sutil.
+       Não queremos deformar a arte.
+    */
 
     animation:
-        movimentoAgua
-        7s
+        movimentoFundo
+        10s
         ease-in-out
         infinite
         alternate;
-
-    pointer-events: none;
-
-    z-index: 2;
 }
 
 
-@keyframes movimentoAgua {
+@keyframes movimentoFundo {
 
-    0% {
-        transform: translateX(-8%);
+    from {
+        transform: scale(1);
     }
 
-    100% {
-        transform: translateX(8%);
+    to {
+        transform: scale(1.035);
     }
 }
 
 
 /* =========================================================
-   RAIOS DE LUZ NA ÁGUA
+   LUZ DA ÁGUA
 ========================================================= */
 
-.luz-mar {
+.luz-agua {
     position: absolute;
 
-    top: -15%;
-    left: 50%;
+    top: -20%;
+    left: -30%;
 
-    width: 130%;
-    height: 75%;
+    width: 160%;
+    height: 80%;
 
-    transform: translateX(-50%);
+    z-index: 2;
+
+    pointer-events: none;
 
     background:
         linear-gradient(
             105deg,
-            transparent 12%,
-            rgba(255,255,255,0.10) 23%,
-            transparent 34%,
-            rgba(255,255,255,0.09) 45%,
-            transparent 56%,
-            rgba(255,255,255,0.11) 67%,
-            transparent 80%
+            transparent 10%,
+            rgba(255,255,255,.13) 25%,
+            transparent 38%,
+            rgba(255,255,255,.10) 50%,
+            transparent 62%,
+            rgba(255,255,255,.13) 75%,
+            transparent 90%
         );
 
-    filter: blur(10px);
+    filter: blur(12px);
 
-    opacity: 0.55;
+    opacity: .55;
 
     animation:
-        raiosAgua
-        6s
+        luzMovimento
+        7s
         ease-in-out
         infinite
         alternate;
+}
 
-    z-index: 3;
+
+@keyframes luzMovimento {
+
+    from {
+        transform:
+            translateX(-8%)
+            rotate(-2deg);
+    }
+
+    to {
+        transform:
+            translateX(8%)
+            rotate(2deg);
+    }
+}
+
+
+/* =========================================================
+   PEIXINHOS
+========================================================= */
+
+.peixe {
+    position: absolute;
+
+    z-index: 7;
+
+    width: 48px;
+    height: 30px;
+
+    opacity: 0;
 
     pointer-events: none;
 }
 
 
-@keyframes raiosAgua {
+/* corpo */
+
+.corpo-peixe {
+    position: absolute;
+
+    left: 10px;
+    top: 5px;
+
+    width: 34px;
+    height: 21px;
+
+    border-radius: 60% 50% 50% 60%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd98a,
+            #f5a86b
+        );
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.15);
+}
+
+
+/* cauda */
+
+.cauda-peixe {
+    position: absolute;
+
+    left: 0;
+    top: 6px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+
+    border-right: 16px solid #f0a06a;
+}
+
+
+/* olho */
+
+.olho-peixe {
+    position: absolute;
+
+    left: 35px;
+    top: 10px;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #294c5a;
+}
+
+
+/* =========================================================
+   PEIXE 1
+========================================================= */
+
+.peixe-1 {
+    top: 28%;
+    left: -70px;
+
+    animation:
+        nadarDireita
+        9s
+        linear
+        infinite;
+}
+
+
+/* =========================================================
+   PEIXE 2
+========================================================= */
+
+.peixe-2 {
+    top: 48%;
+    left: -80px;
+
+    transform: scale(.7);
+
+    animation:
+        nadarDireita
+        12s
+        linear
+        infinite;
+
+    animation-delay: 2s;
+}
+
+
+/* =========================================================
+   PEIXE 3
+========================================================= */
+
+.peixe-3 {
+    top: 67%;
+    left: -80px;
+
+    transform: scale(.85);
+
+    animation:
+        nadarDireita
+        10s
+        linear
+        infinite;
+
+    animation-delay: 4s;
+}
+
+
+/* =========================================================
+   MOVIMENTO DOS PEIXES
+========================================================= */
+
+@keyframes nadarDireita {
 
     0% {
         transform:
-            translateX(-53%)
-            rotate(-2deg);
+            translateX(-100px)
+            translateY(0)
+            scale(.85);
 
-        opacity: 0.35;
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    25% {
+        transform:
+            translateX(25vw)
+            translateY(-12px)
+            scale(.85);
+    }
+
+    50% {
+        transform:
+            translateX(50vw)
+            translateY(10px)
+            scale(.85);
+    }
+
+    75% {
+        transform:
+            translateX(75vw)
+            translateY(-8px)
+            scale(.85);
+    }
+
+    92% {
+        opacity: 1;
     }
 
     100% {
         transform:
-            translateX(-47%)
-            rotate(2deg);
+            translateX(110vw)
+            translateY(8px)
+            scale(.85);
 
-        opacity: 0.65;
+        opacity: 0;
     }
 }
 
@@ -290,33 +431,35 @@ button {
 .bolha {
     position: absolute;
 
-    bottom: -60px;
+    bottom: -50px;
+
+    z-index: 8;
 
     border-radius: 50%;
 
-    border: 2px solid rgba(255,255,255,0.65);
+    border:
+        1.5px solid
+        rgba(255,255,255,.7);
 
     background:
         radial-gradient(
             circle at 30% 25%,
-            rgba(255,255,255,0.95),
-            rgba(255,255,255,0.18) 35%,
+            rgba(255,255,255,.95),
+            rgba(255,255,255,.18) 35%,
             transparent 70%
         );
 
     box-shadow:
-        0 0 8px rgba(255,255,255,0.25),
-        inset 0 0 8px rgba(255,255,255,0.25);
+        inset 0 0 5px rgba(255,255,255,.3),
+        0 0 7px rgba(255,255,255,.2);
 
     opacity: 0;
-
-    z-index: 5;
 
     pointer-events: none;
 
     animation:
-        subirBolha
-        var(--duracao)
+        bolhaSubindo
+        var(--tempo)
         linear
         infinite;
 
@@ -324,128 +467,106 @@ button {
 }
 
 
-/* =========================================================
-   POSIÇÃO E TAMANHO DAS BOLHAS
-========================================================= */
+/* tamanhos e posições */
 
-.b1 {
-    left: 8%;
+.bolha-1 {
+    left: 7%;
 
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
 
-    --duracao: 6s;
+    --tempo: 6s;
     --atraso: 0s;
 }
 
-.b2 {
-    left: 18%;
+.bolha-2 {
+    left: 17%;
 
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
 
-    --duracao: 8s;
+    --tempo: 8s;
     --atraso: 1s;
 }
 
-.b3 {
+.bolha-3 {
     left: 29%;
 
     width: 8px;
     height: 8px;
 
-    --duracao: 5.5s;
+    --tempo: 5.5s;
     --atraso: 2s;
 }
 
-.b4 {
-    left: 39%;
-
-    width: 17px;
-    height: 17px;
-
-    --duracao: 7s;
-    --atraso: 0.5s;
-}
-
-.b5 {
-    left: 48%;
-
-    width: 10px;
-    height: 10px;
-
-    --duracao: 6.5s;
-    --atraso: 2.5s;
-}
-
-.b6 {
-    left: 57%;
-
-    width: 25px;
-    height: 25px;
-
-    --duracao: 8.5s;
-    --atraso: 1.5s;
-}
-
-.b7 {
-    left: 68%;
-
-    width: 12px;
-    height: 12px;
-
-    --duracao: 6s;
-    --atraso: 3s;
-}
-
-.b8 {
-    left: 77%;
-
-    width: 20px;
-    height: 20px;
-
-    --duracao: 7.5s;
-    --atraso: 0.8s;
-}
-
-.b9 {
-    left: 87%;
-
-    width: 9px;
-    height: 9px;
-
-    --duracao: 5.5s;
-    --atraso: 3.5s;
-}
-
-.b10 {
-    left: 94%;
+.bolha-4 {
+    left: 40%;
 
     width: 16px;
     height: 16px;
 
-    --duracao: 8s;
-    --atraso: 2s;
+    --tempo: 7s;
+    --atraso: .5s;
 }
 
-.b11 {
-    left: 34%;
+.bolha-5 {
+    left: 51%;
+
+    width: 9px;
+    height: 9px;
+
+    --tempo: 6s;
+    --atraso: 2.5s;
+}
+
+.bolha-6 {
+    left: 61%;
+
+    width: 24px;
+    height: 24px;
+
+    --tempo: 8.5s;
+    --atraso: 1.5s;
+}
+
+.bolha-7 {
+    left: 72%;
+
+    width: 13px;
+    height: 13px;
+
+    --tempo: 6.5s;
+    --atraso: 3s;
+}
+
+.bolha-8 {
+    left: 81%;
+
+    width: 19px;
+    height: 19px;
+
+    --tempo: 7.5s;
+    --atraso: 1s;
+}
+
+.bolha-9 {
+    left: 90%;
+
+    width: 9px;
+    height: 9px;
+
+    --tempo: 5.5s;
+    --atraso: 3.5s;
+}
+
+.bolha-10 {
+    left: 35%;
 
     width: 7px;
     height: 7px;
 
-    --duracao: 6s;
+    --tempo: 6s;
     --atraso: 4s;
-}
-
-.b12 {
-    left: 73%;
-
-    width: 11px;
-    height: 11px;
-
-    --duracao: 7s;
-    --atraso: 4.5s;
 }
 
 
@@ -453,18 +574,18 @@ button {
    ANIMAÇÃO DAS BOLHAS
 ========================================================= */
 
-@keyframes subirBolha {
+@keyframes bolhaSubindo {
 
     0% {
         transform:
             translate(0, 0)
-            scale(0.6);
+            scale(.5);
 
         opacity: 0;
     }
 
     10% {
-        opacity: 0.8;
+        opacity: .85;
     }
 
     50% {
@@ -474,13 +595,13 @@ button {
     }
 
     80% {
-        opacity: 0.65;
+        opacity: .65;
     }
 
     100% {
         transform:
             translate(-15px, -115vh)
-            scale(1.15);
+            scale(1.1);
 
         opacity: 0;
     }
@@ -488,114 +609,35 @@ button {
 
 
 /* =========================================================
-   ELEMENTOS ANTIGOS DA TRANSIÇÃO
+   PEQUENOS BRILHOS
 ========================================================= */
 
-/*
-   Os peixes, vegetações e areia antigos
-   não serão utilizados porque agora
-   tudo isso já existe na imagem real.
-*/
+.brilho {
+    position: absolute;
 
-.peixe,
-.vegetacao,
-.areia {
-    display: none;
+    z-index: 6;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.8);
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.7);
+
+    pointer-events: none;
+
+    animation:
+        brilhoPiscando
+        3s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
-/* =========================================================
-   SEGUNDA TELA
-========================================================= */
-
-.segunda-tela {
-    min-height: 100vh;
-    min-height: 100svh;
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-
-    background:
-        linear-gradient(
-            180deg,
-            #65d4e9 0%,
-            #168eb9 40%,
-            #08618e 70%,
-            #033d65 100%
-        );
-}
-
-.conteudo-mensagem {
-    position: relative;
-
-    z-index: 5;
-
-    width: 90%;
-    max-width: 500px;
-
-    padding: 30px;
-
-    text-align: center;
-
-    color: white;
-}
-
-.conteudo-mensagem h1 {
-    font-size: 38px;
-
-    margin-bottom: 15px;
-}
-
-.conteudo-mensagem p {
-    font-size: 20px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   AJUSTES PARA TABLET
-========================================================= */
-
-@media (min-width: 601px) {
-
-    .imagem-abertura {
-        object-fit: contain;
-
-        background: #8ed9eb;
-    }
-
-}
-
-
-/* =========================================================
-   AJUSTES PARA CELULAR
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .imagem-abertura {
-        width: 100%;
-        height: 100svh;
-
-        object-fit: cover;
-        object-position: center center;
-    }
-
-    .area-lacre {
-        left: 34%;
-        top: 51%;
-
-        width: 30%;
-        height: 15%;
-    }
-
-    .bolha {
-        border-width: 1.5px;
-    }
-
-}
+.brilho-1 {
+    top: 25%;
+    left: 25
