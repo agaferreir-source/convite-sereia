@@ -2,35 +2,31 @@ const botaoAbrir = document.getElementById("abrirConvite");
 const abertura = document.getElementById("abertura");
 const cenaMar = document.getElementById("cenaMar");
 
-let conviteAberto = false;
-
+let aberto = false;
 
 botaoAbrir.addEventListener("click", () => {
 
-    // Impede vários cliques
-    if (conviteAberto) {
+    if (aberto) {
         return;
     }
 
-    conviteAberto = true;
+    aberto = true;
 
     botaoAbrir.disabled = true;
 
 
-    /* =====================================================
-       1. FUNDO DO MAR COMEÇA A APARECER
-    ===================================================== */
+    /*
+     * Primeiro o fundo do mar aparece
+     * por trás da imagem de abertura.
+     */
 
     cenaMar.classList.add("ativa");
 
 
-    /* =====================================================
-       2. PRIMEIRA IMAGEM DESAPARECE
-       
-       Sem aquele zoom exagerado.
-       A ideia é parecer que estamos
-       entrando suavemente no mar.
-    ===================================================== */
+    /*
+     * Depois a primeira imagem
+     * desaparece suavemente.
+     */
 
     setTimeout(() => {
 
@@ -41,14 +37,15 @@ botaoAbrir.addEventListener("click", () => {
     }, 100);
 
 
-    /* =====================================================
-       3. RETIRA A PRIMEIRA TELA
-    ===================================================== */
+    /*
+     * Depois de desaparecer,
+     * retiramos a primeira tela.
+     */
 
     setTimeout(() => {
 
         abertura.style.display = "none";
 
-    }, 1500);
+    }, 1400);
 
 });
