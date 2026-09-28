@@ -5,53 +5,61 @@ const mensagem = document.getElementById("mensagem");
 
 botaoAbrir.addEventListener("click", () => {
 
-    /* =========================================
-       1. IMAGEM COMEÇA A SAIR
-    ========================================= */
+    // Evita clicar duas vezes
+    botaoAbrir.disabled = true;
+
+
+    // =========================================
+    // 1. A ABERTURA COMEÇA A MERGULHAR
+    // =========================================
 
     abertura.style.transition =
-        "opacity 0.9s ease, transform 1.2s ease";
+        "opacity 1s ease, transform 1.5s cubic-bezier(.2,.7,.2,1)";
 
     abertura.style.opacity = "0";
+
     abertura.style.transform = "scale(1.08)";
 
 
-    /* =========================================
-       2. FUNDO DO MAR APARECE
-    ========================================= */
+    // =========================================
+    // 2. FUNDO DO MAR ENTRA
+    // =========================================
 
     setTimeout(() => {
 
         transicaoMar.classList.add("ativa");
 
-    }, 350);
+    }, 300);
 
 
-    /* =========================================
-       3. ESCONDE A PRIMEIRA TELA
-    ========================================= */
+    // =========================================
+    // 3. RETIRA A PRIMEIRA IMAGEM
+    // =========================================
 
     setTimeout(() => {
 
         abertura.style.display = "none";
 
-    }, 1200);
+    }, 1500);
 
 
-    /* =========================================
-       4. DEPOIS DA TRANSIÇÃO,
-          MOSTRA A PRÓXIMA TELA
-    ========================================= */
+    // =========================================
+    // 4. DEIXA O MAR APARECER POR UM MOMENTO
+    // =========================================
 
     setTimeout(() => {
 
+        transicaoMar.style.transition =
+            "opacity 1.2s ease";
+
         transicaoMar.style.opacity = "0";
 
-        transicaoMar.style.transition =
-            "opacity 1s ease";
+    }, 5000);
 
-    }, 3500);
 
+    // =========================================
+    // 5. ENTRA A PRÓXIMA CENA
+    // =========================================
 
     setTimeout(() => {
 
@@ -72,6 +80,6 @@ botaoAbrir.addEventListener("click", () => {
 
         });
 
-    }, 4300);
+    }, 6200);
 
 });
