@@ -1,3 +1,7 @@
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -20,13 +24,16 @@ button {
     font: inherit;
 }
 
-/* ==================================================
+
+/* =========================================================
    ESTRUTURA DAS TELAS
-================================================== */
+========================================================= */
 
 .tela {
     width: 100%;
     min-height: 100vh;
+    min-height: 100svh;
+
     position: relative;
     overflow: hidden;
 }
@@ -35,14 +42,18 @@ button {
     display: block;
 }
 
-/* ==================================================
-   PRIMEIRA TELA
-================================================== */
+
+/* =========================================================
+   PRIMEIRA TELA — IMAGEM DO CONVITE
+========================================================= */
 
 #abertura {
     position: relative;
+
     width: 100%;
     min-height: 100vh;
+    min-height: 100svh;
+
     background: #8ed9eb;
 
     z-index: 20;
@@ -53,20 +64,27 @@ button {
 
     width: 100%;
     height: 100vh;
+    height: 100svh;
 
     object-fit: cover;
-    object-position: center;
+    object-position: center center;
 
     user-select: none;
     -webkit-user-drag: none;
 }
 
-/* ==================================================
+
+/* =========================================================
    ÁREA INVISÍVEL DO LACRE
-================================================== */
+========================================================= */
 
 .area-lacre {
     position: absolute;
+
+    /*
+       Essa área fica por cima do lacre
+       da imagem.
+    */
 
     left: 34%;
     top: 51%;
@@ -93,18 +111,18 @@ button {
 }
 
 
-/* ==================================================
-   TRANSIÇÃO DO FUNDO DO MAR
-================================================== */
+/* =========================================================
+   TRANSIÇÃO — FUNDO DO MAR
+========================================================= */
 
 .transicao-mar {
-
     position: fixed;
 
     inset: 0;
 
     width: 100%;
     height: 100vh;
+    height: 100svh;
 
     overflow: hidden;
 
@@ -113,34 +131,35 @@ button {
     opacity: 0;
     visibility: hidden;
 
-    background:
-        radial-gradient(
-            ellipse at 50% -10%,
-            rgba(130, 235, 255, 0.75) 0%,
-            rgba(42, 155, 194, 0.35) 25%,
-            transparent 55%
-        ),
-        linear-gradient(
-            180deg,
-            #65d4e9 0%,
-            #168eb9 35%,
-            #08618e 65%,
-            #033d65 100%
-        );
+    /*
+       IMAGEM REAL DO FUNDO DO MAR
+    */
 
-    transform: scale(1.08);
+    background-image: url("imagens/file_000000005348820e88dc88e2d0c1234c.png");
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    /*
+       Começa um pouco aproximada
+       e depois "mergulha" para dentro da cena.
+    */
+
+    transform: scale(1.12);
 
     transition:
         opacity 1s ease,
-        visibility 1s ease,
-        transform 1.8s ease;
+        transform 2s cubic-bezier(.2, .7, .2, 1),
+        visibility 1s ease;
 }
 
 
-/* Quando o JavaScript ativar a transição */
+/*
+   Quando a transição é ativada pelo JavaScript
+*/
 
 .transicao-mar.ativa {
-
     opacity: 1;
     visibility: visible;
 
@@ -148,80 +167,152 @@ button {
 }
 
 
-/* ==================================================
-   LUZ DA SUPERFÍCIE
-================================================== */
+/* =========================================================
+   MOVIMENTO SUAVE DA ÁGUA
+========================================================= */
+
+.transicao-mar::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -8%;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 15%,
+            rgba(255,255,255,0.08) 25%,
+            transparent 35%,
+            rgba(255,255,255,0.10) 48%,
+            transparent 58%,
+            rgba(255,255,255,0.07) 70%,
+            transparent 82%
+        );
+
+    background-size: 180% 100%;
+
+    mix-blend-mode: screen;
+
+    animation:
+        movimentoAgua
+        7s
+        ease-in-out
+        infinite
+        alternate;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+@keyframes movimentoAgua {
+
+    0% {
+        transform: translateX(-8%);
+    }
+
+    100% {
+        transform: translateX(8%);
+    }
+}
+
+
+/* =========================================================
+   RAIOS DE LUZ NA ÁGUA
+========================================================= */
 
 .luz-mar {
-
     position: absolute;
 
     top: -15%;
     left: 50%;
 
-    width: 160%;
-    height: 70%;
+    width: 130%;
+    height: 75%;
 
     transform: translateX(-50%);
 
     background:
-        repeating-linear-gradient(
-            100deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.13) 7%,
-            transparent 14%
+        linear-gradient(
+            105deg,
+            transparent 12%,
+            rgba(255,255,255,0.10) 23%,
+            transparent 34%,
+            rgba(255,255,255,0.09) 45%,
+            transparent 56%,
+            rgba(255,255,255,0.11) 67%,
+            transparent 80%
         );
 
-    filter: blur(14px);
+    filter: blur(10px);
 
-    opacity: 0.75;
+    opacity: 0.55;
 
-    animation: movimentoLuz 7s ease-in-out infinite alternate;
+    animation:
+        raiosAgua
+        6s
+        ease-in-out
+        infinite
+        alternate;
+
+    z-index: 3;
+
+    pointer-events: none;
 }
 
-@keyframes movimentoLuz {
 
-    from {
+@keyframes raiosAgua {
+
+    0% {
         transform:
-            translateX(-52%)
-            rotate(-3deg);
+            translateX(-53%)
+            rotate(-2deg);
+
+        opacity: 0.35;
     }
 
-    to {
+    100% {
         transform:
             translateX(-47%)
-            rotate(3deg);
+            rotate(2deg);
+
+        opacity: 0.65;
     }
 }
 
 
-/* ==================================================
+/* =========================================================
    BOLHAS
-================================================== */
+========================================================= */
 
 .bolha {
-
     position: absolute;
 
-    bottom: -80px;
+    bottom: -60px;
 
     border-radius: 50%;
 
-    border: 2px solid rgba(255, 255, 255, 0.55);
+    border: 2px solid rgba(255,255,255,0.65);
 
     background:
         radial-gradient(
             circle at 30% 25%,
-            rgba(255, 255, 255, 0.9),
-            rgba(255, 255, 255, 0.12) 35%,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.18) 35%,
             transparent 70%
         );
 
     box-shadow:
-        inset 0 0 10px rgba(255,255,255,0.25),
-        0 0 8px rgba(255,255,255,0.12);
+        0 0 8px rgba(255,255,255,0.25),
+        inset 0 0 8px rgba(255,255,255,0.25);
 
     opacity: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
 
     animation:
         subirBolha
@@ -233,151 +324,141 @@ button {
 }
 
 
-/* tamanhos e posições */
+/* =========================================================
+   POSIÇÃO E TAMANHO DAS BOLHAS
+========================================================= */
 
 .b1 {
+    left: 8%;
+
+    width: 13px;
+    height: 13px;
+
     --duracao: 6s;
     --atraso: 0s;
-
-    left: 8%;
-    width: 15px;
-    height: 15px;
 }
 
 .b2 {
+    left: 18%;
+
+    width: 22px;
+    height: 22px;
+
     --duracao: 8s;
     --atraso: 1s;
-
-    left: 18%;
-    width: 8px;
-    height: 8px;
 }
 
 .b3 {
-    --duracao: 7s;
-    --atraso: 2.5s;
+    left: 29%;
 
-    left: 27%;
-    width: 22px;
-    height: 22px;
+    width: 8px;
+    height: 8px;
+
+    --duracao: 5.5s;
+    --atraso: 2s;
 }
 
 .b4 {
-    --duracao: 9s;
-    --atraso: 0.5s;
+    left: 39%;
 
-    left: 38%;
-    width: 11px;
-    height: 11px;
+    width: 17px;
+    height: 17px;
+
+    --duracao: 7s;
+    --atraso: 0.5s;
 }
 
 .b5 {
-    --duracao: 6.5s;
-    --atraso: 3s;
+    left: 48%;
 
-    left: 47%;
-    width: 17px;
-    height: 17px;
+    width: 10px;
+    height: 10px;
+
+    --duracao: 6.5s;
+    --atraso: 2.5s;
 }
 
 .b6 {
-    --duracao: 8.5s;
-    --atraso: 1.8s;
+    left: 57%;
 
-    left: 56%;
-    width: 9px;
-    height: 9px;
+    width: 25px;
+    height: 25px;
+
+    --duracao: 8.5s;
+    --atraso: 1.5s;
 }
 
 .b7 {
-    --duracao: 7.5s;
-    --atraso: 4s;
+    left: 68%;
 
-    left: 64%;
-    width: 25px;
-    height: 25px;
+    width: 12px;
+    height: 12px;
+
+    --duracao: 6s;
+    --atraso: 3s;
 }
 
 .b8 {
-    --duracao: 9s;
-    --atraso: 2s;
+    left: 77%;
 
-    left: 72%;
-    width: 12px;
-    height: 12px;
+    width: 20px;
+    height: 20px;
+
+    --duracao: 7.5s;
+    --atraso: 0.8s;
 }
 
 .b9 {
-    --duracao: 6s;
-    --atraso: 0.8s;
+    left: 87%;
 
-    left: 80%;
-    width: 19px;
-    height: 19px;
+    width: 9px;
+    height: 9px;
+
+    --duracao: 5.5s;
+    --atraso: 3.5s;
 }
 
 .b10 {
-    --duracao: 8s;
-    --atraso: 3.2s;
+    left: 94%;
 
-    left: 88%;
-    width: 10px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
+
+    --duracao: 8s;
+    --atraso: 2s;
 }
 
 .b11 {
-    --duracao: 7s;
-    --atraso: 4.5s;
+    left: 34%;
 
-    left: 94%;
-    width: 18px;
-    height: 18px;
+    width: 7px;
+    height: 7px;
+
+    --duracao: 6s;
+    --atraso: 4s;
 }
 
 .b12 {
-    --duracao: 10s;
-    --atraso: 5s;
+    left: 73%;
 
-    left: 42%;
-    width: 7px;
-    height: 7px;
-}
+    width: 11px;
+    height: 11px;
 
-.b13 {
-    --duracao: 8s;
-    --atraso: 5.5s;
-
-    left: 13%;
-    width: 13px;
-    height: 13px;
-}
-
-.b14 {
     --duracao: 7s;
-    --atraso: 6s;
-
-    left: 68%;
-    width: 8px;
-    height: 8px;
+    --atraso: 4.5s;
 }
 
-.b15 {
-    --duracao: 9s;
-    --atraso: 6.5s;
 
-    left: 32%;
-    width: 16px;
-    height: 16px;
-}
-
+/* =========================================================
+   ANIMAÇÃO DAS BOLHAS
+========================================================= */
 
 @keyframes subirBolha {
 
     0% {
         transform:
-            translateY(0)
-            translateX(0)
-            scale(0.7);
+            translate(0, 0)
+            scale(0.6);
 
         opacity: 0;
     }
@@ -388,19 +469,17 @@ button {
 
     50% {
         transform:
-            translateY(-50vh)
-            translateX(20px)
+            translate(18px, -50vh)
             scale(1);
     }
 
     80% {
-        opacity: 0.7;
+        opacity: 0.65;
     }
 
     100% {
         transform:
-            translateY(-115vh)
-            translateX(-25px)
+            translate(-15px, -115vh)
             scale(1.15);
 
         opacity: 0;
@@ -408,244 +487,37 @@ button {
 }
 
 
-/* ==================================================
-   PEIXINHOS
-================================================== */
+/* =========================================================
+   ELEMENTOS ANTIGOS DA TRANSIÇÃO
+========================================================= */
 
-.peixe {
+/*
+   Os peixes, vegetações e areia antigos
+   não serão utilizados porque agora
+   tudo isso já existe na imagem real.
+*/
 
-    position: absolute;
-
-    opacity: 0;
-
-    font-size: 34px;
-
-    filter:
-        drop-shadow(
-            0 3px 4px rgba(0,0,0,0.15)
-        );
-
-    animation:
-        nadar
-        var(--duracao-peixe)
-        linear
-        infinite;
-
-    animation-delay: var(--atraso-peixe);
-
-    white-space: nowrap;
-}
-
-
-/* diferentes peixes */
-
-.peixe1 {
-
-    --duracao-peixe: 9s;
-    --atraso-peixe: 0s;
-
-    top: 25%;
-    left: -80px;
-
-    font-size: 30px;
-}
-
-.peixe2 {
-
-    --duracao-peixe: 12s;
-    --atraso-peixe: 2s;
-
-    top: 48%;
-    left: -100px;
-
-    font-size: 25px;
-}
-
-.peixe3 {
-
-    --duracao-peixe: 10s;
-    --atraso-peixe: 4s;
-
-    top: 65%;
-    left: -100px;
-
-    font-size: 38px;
-}
-
-.peixe4 {
-
-    --duracao-peixe: 14s;
-    --atraso-peixe: 1s;
-
-    top: 35%;
-    left: -100px;
-
-    font-size: 22px;
-}
-
-.peixe5 {
-
-    --duracao-peixe: 11s;
-    --atraso-peixe: 5s;
-
-    top: 78%;
-    left: -100px;
-
-    font-size: 28px;
-}
-
-
-@keyframes nadar {
-
-    0% {
-        transform:
-            translateX(-120px)
-            translateY(0);
-
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    45% {
-        transform:
-            translateX(50vw)
-            translateY(-20px);
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translateX(115vw)
-            translateY(20px);
-
-        opacity: 0;
-    }
-}
-
-
-/* ==================================================
-   VEGETAÇÃO DO FUNDO
-================================================== */
-
-.vegetacao {
-
-    position: absolute;
-
-    bottom: -10px;
-
-    width: 90px;
-    height: 190px;
-
-    background:
-        linear-gradient(
-            75deg,
-            transparent 40%,
-            rgba(12, 99, 83, 0.8) 42%,
-            rgba(19, 133, 101, 0.9) 58%,
-            transparent 60%
-        );
-
-    border-radius: 70% 30% 0 0;
-
-    transform-origin: bottom center;
-
-    animation:
-        balancarAlga
-        4s
-        ease-in-out
-        infinite alternate;
-}
-
-.vegetacao1 {
-    left: -15px;
-    height: 170px;
-}
-
-.vegetacao2 {
-    left: 22%;
-    height: 130px;
-    animation-delay: 0.8s;
-}
-
-.vegetacao3 {
-    right: 15%;
-    height: 180px;
-    animation-delay: 1.2s;
-}
-
-.vegetacao4 {
-    right: -20px;
-    height: 145px;
-    animation-delay: 0.4s;
-}
-
-@keyframes balancarAlga {
-
-    from {
-        transform:
-            rotate(-5deg);
-    }
-
-    to {
-        transform:
-            rotate(6deg);
-    }
-}
-
-
-/* ==================================================
-   AREIA
-================================================== */
-
+.peixe,
+.vegetacao,
 .areia {
-
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 65px;
-
-    background:
-        radial-gradient(
-            ellipse at 20% 30%,
-            rgba(255,255,255,0.22),
-            transparent 20%
-        ),
-        radial-gradient(
-            ellipse at 70% 60%,
-            rgba(255,255,255,0.18),
-            transparent 25%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(19, 116, 139, 0.2),
-            rgba(181, 183, 128, 0.65)
-        );
-
-    opacity: 0.8;
+    display: none;
 }
 
 
-/* ==================================================
+/* =========================================================
    SEGUNDA TELA
-================================================== */
+========================================================= */
 
 .segunda-tela {
-
     min-height: 100vh;
+    min-height: 100svh;
 
     display: none;
 
     align-items: center;
     justify-content: center;
+
+    position: relative;
 
     background:
         linear-gradient(
@@ -658,10 +530,12 @@ button {
 }
 
 .conteudo-mensagem {
-
     position: relative;
 
     z-index: 5;
+
+    width: 90%;
+    max-width: 500px;
 
     padding: 30px;
 
@@ -671,49 +545,57 @@ button {
 }
 
 .conteudo-mensagem h1 {
-
     font-size: 38px;
 
     margin-bottom: 15px;
 }
 
 .conteudo-mensagem p {
-
     font-size: 20px;
 
     line-height: 1.5;
 }
 
 
-/* ==================================================
-   CELULARES
-================================================== */
+/* =========================================================
+   AJUSTES PARA TABLET
+========================================================= */
+
+@media (min-width: 601px) {
+
+    .imagem-abertura {
+        object-fit: contain;
+
+        background: #8ed9eb;
+    }
+
+}
+
+
+/* =========================================================
+   AJUSTES PARA CELULAR
+========================================================= */
 
 @media (max-width: 600px) {
 
     .imagem-abertura {
-
+        width: 100%;
         height: 100svh;
 
-        min-height: 100svh;
-
         object-fit: cover;
+        object-position: center center;
     }
 
     .area-lacre {
-
         left: 34%;
-
         top: 51%;
 
         width: 30%;
-
         height: 15%;
     }
 
-    .peixe {
-
-        font-size: 27px;
+    .bolha {
+        border-width: 1.5px;
     }
 
 }
