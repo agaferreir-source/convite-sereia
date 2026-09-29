@@ -1,66 +1,117 @@
+/* ==========================================================
+   RESET
+========================================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
 html,
 body {
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
+
+    background: #000;
+
 }
+
 
 body {
-    background: #000;
-    font-family: sans-serif;
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    -webkit-tap-highlight-color: transparent;
+
 }
 
-/* CONVITE */
+
+
+/* ==========================================================
+   CONVITE
+========================================================== */
 
 #convite {
+
+    position: relative;
+
     width: 100%;
     height: 100dvh;
-    position: relative;
+
     overflow: hidden;
+
 }
 
-/* CADA TELA */
+
+
+/* ==========================================================
+   TELAS
+========================================================== */
 
 .tela {
+
     position: absolute;
+
     inset: 0;
 
     width: 100%;
     height: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     opacity: 0;
+
     visibility: hidden;
 
-    transform: scale(1.03);
+    pointer-events: none;
+
+    transform: scale(1.025);
 
     transition:
-        opacity 0.8s ease,
-        transform 1s cubic-bezier(.22,.61,.36,1);
+        opacity 0.7s ease,
+        transform 1s cubic-bezier(
+            0.22,
+            0.61,
+            0.36,
+            1
+        ),
+        visibility 0.7s ease;
 
-    z-index: 1;
 }
+
 
 .tela.ativa {
+
     opacity: 1;
+
     visibility: visible;
+
+    pointer-events: auto;
+
     transform: scale(1);
 
-    z-index: 2;
 }
 
-/* IMAGENS */
 
-.tela img {
+
+/* ==========================================================
+   IMAGENS
+========================================================== */
+
+.imagem-tela {
+
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
 
@@ -69,104 +120,236 @@ body {
     display: block;
 
     user-select: none;
+
     -webkit-user-drag: none;
+
 }
 
 
-/* ==========================================
-   ABERTURA
-========================================== */
 
-.area-toque {
+/* ==========================================================
+   MOVIMENTO SUTIL NAS IMAGENS
+========================================================== */
+
+.tela.ativa .imagem-tela {
+
+    animation:
+        movimentoSubaquatico 10s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+@keyframes movimentoSubaquatico {
+
+    0% {
+
+        transform:
+            scale(1)
+            translate3d(0, 0, 0);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.012)
+            translate3d(
+                -0.15%,
+                -0.1%,
+                0
+            );
+
+    }
+
+    100% {
+
+        transform:
+            scale(1.02)
+            translate3d(
+                0.15%,
+                0.1%,
+                0
+            );
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   PRIMEIRA TELA — LACRE
+========================================================== */
+
+.area-lacre {
+
     position: absolute;
 
-    /*
-       Área grande para tocar no lacre.
-       Se precisar, podemos diminuir depois.
-    */
+    width: 48%;
+    height: 38%;
 
-    width: 45%;
-    height: 35%;
+    left: 26%;
+    top: 31%;
 
-    left: 27.5%;
-    top: 32%;
+    border: none;
+
+    background: transparent;
 
     cursor: pointer;
 
     z-index: 10;
 
+    padding: 0;
+
     -webkit-tap-highlight-color: transparent;
+
 }
 
 
-/* ==========================================
-   ÁREAS CLICÁVEIS DA QUARTA IMAGEM
-========================================== */
 
-.area-interativa {
+/* ==========================================================
+   BOTÕES DA QUARTA TELA
+========================================================== */
+
+.botao-interativo {
 
     position: absolute;
 
     border: none;
+
     background: transparent;
+
+    padding: 0;
+
+    margin: 0;
 
     cursor: pointer;
 
     z-index: 20;
 
+    border-radius: 50%;
+
     -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
+
 }
 
 
-/*
-   QUARTO.JPG
+.botao-interativo:active {
 
-   As três bolinhas estão na parte inferior.
+    transform: scale(0.9);
 
-   Os valores são relativos à tela,
-   então funcionam em celulares diferentes.
-*/
+    filter: brightness(1.1);
+
+}
 
 
-/* PRESENTES — bolinha da esquerda */
 
-.area-interativa.presente {
+/* ==========================================================
+   PRESENTES
+   CÍRCULO DA ESQUERDA
+========================================================== */
 
-    width: 29%;
-    height: 25%;
+.botao-presentes {
 
-    left: 5%;
+    width: 28%;
+
+    height: 23%;
+
+    left: 6%;
+
     bottom: 12%;
+
 }
 
 
-/* LOCALIZAÇÃO — bolinha do meio */
 
-.area-interativa.local {
+/* ==========================================================
+   LOCALIZAÇÃO
+   CÍRCULO DO MEIO
+========================================================== */
 
-    width: 29%;
-    height: 25%;
+.botao-local {
 
-    left: 35.5%;
+    width: 28%;
+
+    height: 23%;
+
+    left: 36%;
+
     bottom: 12%;
+
 }
 
 
-/* CONFIRMAR — bolinha da direita */
 
-.area-interativa.confirmar {
+/* ==========================================================
+   CONFIRMAÇÃO
+   CÍRCULO DA DIREITA
+========================================================== */
 
-    width: 29%;
-    height: 25%;
+.botao-confirmar {
 
-    right: 5%;
+    width: 28%;
+
+    height: 23%;
+
+    right: 6%;
+
     bottom: 12%;
+
 }
 
 
-/* ==========================================
+
+/* ==========================================================
+   BOTÃO VOLTAR DA QUINTA TELA
+========================================================== */
+
+.botao-voltar {
+
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    width: 44px;
+    height: 44px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.85);
+
+    color: #8b4b9d;
+
+    font-size: 30px;
+
+    line-height: 42px;
+
+    cursor: pointer;
+
+    z-index: 50;
+
+    box-shadow:
+        0 4px 18px
+        rgba(0,0,0,0.18);
+
+}
+
+
+
+/* ==========================================================
    TRANSIÇÃO
-========================================== */
+========================================================== */
 
 #transicao {
 
@@ -174,177 +357,526 @@ body {
 
     inset: 0;
 
-    background: rgba(255, 255, 255, 0);
+    width: 100%;
+    height: 100%;
 
     pointer-events: none;
 
-    z-index: 999;
+    z-index: 9999;
 
     opacity: 0;
 
-    transition:
-        opacity 0.45s ease,
-        background 0.45s ease;
-}
+    visibility: hidden;
 
-
-/*
-   Quando a transição acontece
-*/
-
-#transicao.entrando {
-
-    opacity: 1;
+    overflow: hidden;
 
     background:
         radial-gradient(
-            circle at center,
-            rgba(255,255,255,.95),
-            rgba(190,240,255,.75),
-            rgba(100,190,235,.35),
-            rgba(0,100,180,0)
+            circle at 50% 50%,
+            rgba(255,255,255,0.9),
+            rgba(164,236,250,0.55),
+            rgba(75,184,224,0.18),
+            transparent 72%
         );
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
 }
 
 
-/* ==========================================
-   BOLHAS DA TRANSIÇÃO
-========================================== */
+#transicao.ativa {
 
-.bolhas::before,
-.bolhas::after {
+    opacity: 1;
 
-    content: "";
+    visibility: visible;
+
+}
+
+
+
+/* ==========================================================
+   LUZ DA ÁGUA
+========================================================== */
+
+.luz-agua {
 
     position: absolute;
 
-    width: 18px;
-    height: 18px;
+    width: 180%;
+
+    height: 45%;
+
+    left: -40%;
+
+    top: 27%;
 
     border-radius: 50%;
 
-    border: 2px solid rgba(255,255,255,.8);
+    background:
+        linear-gradient(
+            105deg,
+            transparent 10%,
+            rgba(255,255,255,0.15) 35%,
+            rgba(255,255,255,0.65) 48%,
+            rgba(255,255,255,0.1) 62%,
+            transparent 80%
+        );
+
+    filter: blur(10px);
+
+    transform:
+        translateX(-80%)
+        rotate(-7deg);
+
+}
+
+
+#transicao.ativa .luz-agua {
+
+    animation:
+        passarLuz 0.95s
+        ease-in-out
+        forwards;
+
+}
+
+
+@keyframes passarLuz {
+
+    0% {
+
+        transform:
+            translateX(-80%)
+            rotate(-7deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(80%)
+            rotate(-7deg);
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   BOLHAS
+========================================================== */
+
+.bolha {
+
+    position: absolute;
+
+    bottom: -40px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.85);
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,0.9),
+            rgba(255,255,255,0.15) 45%,
+            transparent 70%
+        );
 
     opacity: 0;
+
 }
 
 
-#transicao.entrando .bolhas::before {
+#transicao.ativa .bolha {
 
-    opacity: 1;
+    animation:
+        subirBolha
+        1.2s
+        ease-out
+        forwards;
 
-    left: 25%;
-    bottom: -30px;
-
-    animation: bolha1 0.8s ease-out forwards;
 }
 
 
-#transicao.entrando .bolhas::after {
+.bolha1 {
 
-    opacity: 1;
+    width: 12px;
+    height: 12px;
 
-    right: 25%;
-    bottom: -30px;
+    left: 12%;
 
-    animation: bolha2 0.9s ease-out forwards;
 }
 
 
-@keyframes bolha1 {
+.bolha2 {
+
+    width: 7px;
+    height: 7px;
+
+    left: 28%;
+
+    animation-delay: 0.12s !important;
+
+}
+
+
+.bolha3 {
+
+    width: 19px;
+    height: 19px;
+
+    left: 43%;
+
+    animation-delay: 0.05s !important;
+
+}
+
+
+.bolha4 {
+
+    width: 9px;
+    height: 9px;
+
+    left: 59%;
+
+    animation-delay: 0.2s !important;
+
+}
+
+
+.bolha5 {
+
+    width: 15px;
+    height: 15px;
+
+    left: 74%;
+
+    animation-delay: 0.1s !important;
+
+}
+
+
+.bolha6 {
+
+    width: 6px;
+    height: 6px;
+
+    left: 89%;
+
+    animation-delay: 0.25s !important;
+
+}
+
+
+@keyframes subirBolha {
 
     0% {
-        transform: scale(.3);
+
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(0.5);
+
         opacity: 0;
+
     }
 
-    30% {
+    20% {
+
         opacity: 1;
+
+    }
+
+    60% {
+
+        transform:
+            translateY(-55vh)
+            translateX(15px)
+            scale(1);
+
     }
 
     100% {
-        transform: translateY(-110vh) scale(1.5);
+
+        transform:
+            translateY(-115vh)
+            translateX(-12px)
+            scale(1.2);
+
         opacity: 0;
+
     }
+
 }
 
 
-@keyframes bolha2 {
 
-    0% {
-        transform: scale(.2);
-        opacity: 0;
-    }
+/* ==========================================================
+   BRILHOS
+========================================================== */
 
-    30% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-90vh) scale(1.8);
-        opacity: 0;
-    }
-}
-
-
-/* ==========================================
-   BOTÃO VOLTAR
-========================================== */
-
-.voltar {
+.brilho {
 
     position: absolute;
 
-    top: 20px;
-    left: 20px;
-
-    width: 45px;
-    height: 45px;
+    width: 5px;
+    height: 5px;
 
     border-radius: 50%;
 
-    border: 2px solid rgba(255,255,255,.8);
+    background: #fff;
 
-    background: rgba(255,255,255,.75);
+    box-shadow:
+        0 0 7px #fff,
+        0 0 18px
+        rgba(255,255,255,0.8);
 
-    color: #7b3fb3;
+    opacity: 0;
 
-    font-size: 24px;
+}
+
+
+#transicao.ativa .brilho {
+
+    animation:
+        brilho 0.9s
+        ease-out
+        forwards;
+
+}
+
+
+.brilho1 {
+
+    left: 20%;
+    top: 30%;
+
+}
+
+
+.brilho2 {
+
+    left: 52%;
+    top: 65%;
+
+    animation-delay: 0.15s !important;
+
+}
+
+
+.brilho3 {
+
+    left: 80%;
+    top: 35%;
+
+    animation-delay: 0.25s !important;
+
+}
+
+
+@keyframes brilho {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0);
+
+    }
+
+    40% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.7);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.4);
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   AVISO DE CONFIRMAÇÃO
+========================================================== */
+
+.aviso {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(20,50,80,0.45);
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+}
+
+
+.aviso.aberto {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.aviso-caixa {
+
+    width: min(
+        90vw,
+        350px
+    );
+
+    padding: 28px 22px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaff,
+            #f8ddf5
+        );
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.25);
+
+    transform: scale(0.85);
+
+    transition:
+        transform 0.4s
+        cubic-bezier(
+            0.17,
+            0.89,
+            0.32,
+            1.28
+        );
+
+}
+
+
+.aviso.aberto .aviso-caixa {
+
+    transform: scale(1);
+
+}
+
+
+.aviso-coracao {
+
+    font-size: 40px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.aviso-caixa p {
+
+    color: #70427d;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+    margin-bottom: 20px;
+
+}
+
+
+#fecharAviso {
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding:
+        10px
+        25px;
+
+    background: #c477bd;
+
+    color: white;
+
+    font-weight: bold;
 
     cursor: pointer;
 
-    z-index: 50;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,.15);
 }
 
 
-/* ==========================================
-   CELULAR
-========================================== */
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
 
 @media (max-width: 600px) {
 
-    .tela img {
-        object-fit: cover;
-    }
+    .botao-voltar {
 
-    .voltar {
         width: 42px;
         height: 42px;
-        font-size: 22px;
+
     }
+
 }
 
 
-/* ==========================================
-   TELAS MUITO ALTAS
-========================================== */
+@media (prefers-reduced-motion: reduce) {
 
-@media (max-aspect-ratio: 9/16) {
+    *,
+    *::before,
+    *::after {
 
-    .tela img {
-        object-fit: cover;
+        animation-duration:
+            0.01ms !important;
+
+        transition-duration:
+            0.01ms !important;
+
     }
+
 }
