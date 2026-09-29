@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#75d9f5">
+
+  <meta name="theme-color" content="#78dff5">
+
   <title>Convite da Antonella</title>
 
   <link rel="stylesheet" href="style.css">
@@ -13,31 +15,52 @@
 
   <main class="convite">
 
-    <!-- PRIMEIRA TELA -->
-    <section class="tela ativa" id="tela1">
-      <img src="Primeiro.png" alt="Abertura do convite">
+    <!-- =========================
+         TELA 1 - LACRE
+    ========================== -->
 
-      <!-- Área invisível para abrir -->
+    <section class="tela tela-1 ativa" id="tela1">
+
+      <img
+        src="Primeiro.png"
+        alt="Abertura do convite"
+        class="imagem"
+      >
+
+      <div class="camada-efeitos"></div>
+
       <button
         class="area-toque"
         id="abrirConvite"
         aria-label="Abrir convite">
       </button>
+
     </section>
 
 
-    <!-- SEGUNDA TELA -->
-    <section class="tela" id="tela2">
-      <img src="Segundo.png" alt="Mensagem do convite">
+    <!-- =========================
+         TELA 2 - MENSAGEM
+    ========================== -->
 
-      <div class="efeitos">
-        <span class="bolha b1"></span>
-        <span class="bolha b2"></span>
-        <span class="bolha b3"></span>
-        <span class="bolha b4"></span>
-        <span class="brilho brilho1"></span>
-        <span class="brilho brilho2"></span>
-        <span class="brilho brilho3"></span>
+    <section class="tela tela-2" id="tela2">
+
+      <img
+        src="Segundo.png"
+        alt="Mensagem do convite"
+        class="imagem"
+      >
+
+      <div class="camada-efeitos">
+
+        <div class="bolhas"></div>
+
+        <span class="brilho brilho-1"></span>
+        <span class="brilho brilho-2"></span>
+        <span class="brilho brilho-3"></span>
+        <span class="brilho brilho-4"></span>
+
+        <div class="luz-agua"></div>
+
       </div>
 
       <button
@@ -45,19 +68,32 @@
         id="irTela3"
         aria-label="Continuar">
       </button>
+
     </section>
 
 
-    <!-- TERCEIRA TELA -->
-    <section class="tela" id="tela3">
-      <img src="Terceiro.png" alt="Antonella, data e horário">
+    <!-- =========================
+         TELA 3 - DATA
+    ========================== -->
 
-      <div class="efeitos">
-        <span class="bolha b5"></span>
-        <span class="bolha b6"></span>
-        <span class="bolha b7"></span>
-        <span class="brilho brilho4"></span>
-        <span class="brilho brilho5"></span>
+    <section class="tela tela-3" id="tela3">
+
+      <img
+        src="Terceiro.png"
+        alt="Antonella e informações da festa"
+        class="imagem"
+      >
+
+      <div class="camada-efeitos">
+
+        <div class="bolhas"></div>
+
+        <span class="brilho brilho-5"></span>
+        <span class="brilho brilho-6"></span>
+        <span class="brilho brilho-7"></span>
+
+        <div class="luz-agua"></div>
+
       </div>
 
       <button
@@ -65,24 +101,44 @@
         id="irTela4"
         aria-label="Continuar">
       </button>
+
     </section>
 
 
-    <!-- QUARTA TELA -->
-    <section class="tela" id="tela4">
-      <img src="Quarto.png" alt="Informações do aniversário">
+    <!-- =========================
+         TELA 4 - INTERAÇÕES
+    ========================== -->
 
-      <!--
-        ÁREAS CLICÁVEIS
-        Vamos posicionar depois exatamente em cima
-        dos três elementos da sua arte.
-      -->
+    <section class="tela tela-4" id="tela4">
+
+      <img
+        src="Quarto.png"
+        alt="Informações do aniversário"
+        class="imagem"
+      >
+
+      <div class="camada-efeitos">
+
+        <div class="bolhas"></div>
+
+        <span class="brilho brilho-8"></span>
+        <span class="brilho brilho-9"></span>
+
+        <div class="luz-agua"></div>
+
+      </div>
+
+
+      <!-- LOCALIZAÇÃO -->
 
       <button
         class="botao-invisivel local"
         id="botaoLocal"
-        aria-label="Abrir localização">
+        aria-label="Ver localização">
       </button>
+
+
+      <!-- PRESENTES -->
 
       <button
         class="botao-invisivel presentes"
@@ -90,15 +146,56 @@
         aria-label="Ver sugestão de presentes">
       </button>
 
+
+      <!-- CONFIRMAÇÃO
+           Será configurada depois -->
+
       <button
         class="botao-invisivel rsvp"
         id="botaoRsvp"
         aria-label="Confirmar presença">
       </button>
 
+
+      <!-- MODAL DE PRESENTES -->
+
+      <div
+        class="modal-presentes"
+        id="modalPresentes"
+      >
+
+        <button
+          class="fechar-modal"
+          id="fecharPresentes"
+          aria-label="Fechar">
+          ×
+        </button>
+
+        <img
+          src="Quinta.jpg"
+          alt="Sugestão de presentes"
+        >
+
+      </div>
+
     </section>
 
+
+    <!-- TRANSIÇÃO -->
+
+    <div
+      class="transicao-mergulho"
+      id="transicao"
+    >
+
+      <div class="transicao-bolhas"></div>
+
+      <div class="transicao-luz"></div>
+
+    </div>
+
   </main>
+
 
   <script src="script.js"></script>
 
