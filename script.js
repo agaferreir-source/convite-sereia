@@ -177,13 +177,12 @@ document
 ========================================== */
 
 const imagens = [
-    "Primeiro.jpg",
-    "Segundo.jpg",
-    "Terceiro.jpg",
-    "Quarto.jpg",
+    "Primeiro.png",
+    "Segundo.png",
+    "Terceiro.png",
+    "Quarto.png",
     "Quinta.jpg"
 ];
-
 
 imagens.forEach((arquivo) => {
 
