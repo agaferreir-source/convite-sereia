@@ -1,282 +1,162 @@
-const botaoAbrir =
-    document.getElementById("abrirConvite");
+// ============================================
+// LINKS DOS BOTÕES
+// ============================================
 
-const abertura =
-    document.getElementById("abertura");
+// Coloque os links aqui quando estiverem prontos.
 
-const cenaMar =
-    document.getElementById("cenaMar");
+const MAPS_URL = "";
 
-const cenaMenina =
-    document.getElementById("cenaMenina");
+const PRESENTES_URL = "";
 
-const informacoes =
-    document.getElementById("informacoes");
-
-const presentes =
-    document.getElementById("presentes");
-
-const confirmacao =
-    document.getElementById("confirmacao");
+const RSVP_URL = "";
 
 
-const continuarParaInformacoes =
-    document.getElementById(
-        "continuarParaInformacoes"
+// ============================================
+// TELAS
+// ============================================
+
+const telas = [
+  document.getElementById("tela1"),
+  document.getElementById("tela2"),
+  document.getElementById("tela3"),
+  document.getElementById("tela4")
+];
+
+let telaAtual = 0;
+
+
+// ============================================
+// TROCAR DE TELA
+// ============================================
+
+function mostrarTela(numero) {
+
+  telas.forEach((tela, index) => {
+
+    tela.classList.toggle(
+      "ativa",
+      index === numero
     );
 
-const continuarParaPresentes =
-    document.getElementById(
-        "continuarParaPresentes"
-    );
+  });
 
-const continuarParaConfirmacao =
-    document.getElementById(
-        "continuarParaConfirmacao"
-    );
+  telaAtual = numero;
 
-const voltarInformacoes =
-    document.getElementById(
-        "voltarInformacoes"
-    );
-
-const voltarPresentes =
-    document.getElementById(
-        "voltarPresentes"
-    );
-
-const abrirLocalizacao =
-    document.getElementById(
-        "abrirLocalizacao"
-    );
-
-
-/* =====================================================
-   ESCONDER CENAS
-===================================================== */
-
-function esconderCenas() {
-
-    cenaMenina.classList.remove("ativa");
-
-    informacoes.classList.remove("ativa");
-
-    presentes.classList.remove("ativa");
-
-    confirmacao.classList.remove("ativa");
 }
 
 
-/* =====================================================
-   ABRIR CONVITE
-===================================================== */
+// ============================================
+// PRIMEIRO → SEGUNDO
+// ============================================
 
-botaoAbrir.addEventListener(
-    "click",
-    () => {
+document
+  .getElementById("abrirConvite")
+  .addEventListener("click", () => {
 
-        botaoAbrir.disabled = true;
+    mostrarTela(1);
 
-
-        cenaMar.classList.add("ativa");
-
-
-        abertura.style.opacity = "0";
-
-        abertura.style.transform =
-            "scale(1.04)";
+  });
 
 
-        /*
-         * A transição acontece sozinha.
-         * Depois do mergulho, a menina aparece.
-         */
+// ============================================
+// SEGUNDO → TERCEIRO
+// ============================================
 
-        setTimeout(
-            () => {
+document
+  .getElementById("irTela3")
+  .addEventListener("click", () => {
 
-                abertura.style.display =
-                    "none";
+    mostrarTela(2);
 
-            },
-            1400
-        );
+  });
 
 
-        setTimeout(
-            () => {
+// ============================================
+// TERCEIRO → QUARTO
+// ============================================
 
-                cenaMenina.classList.add(
-                    "ativa"
-                );
+document
+  .getElementById("irTela4")
+  .addEventListener("click", () => {
 
-            },
-            1800
-        );
+    mostrarTela(3);
 
-    }
-);
+  });
 
 
-/* =====================================================
-   MENINA → INFORMAÇÕES
-===================================================== */
+// ============================================
+// LOCALIZAÇÃO
+// ============================================
 
-continuarParaInformacoes.addEventListener(
-    "click",
-    () => {
+document
+  .getElementById("botaoLocal")
+  .addEventListener("click", () => {
 
-        cenaMenina.classList.remove(
-            "ativa"
-        );
+    if (MAPS_URL.trim() !== "") {
 
+      window.open(
+        MAPS_URL,
+        "_blank"
+      );
 
-        setTimeout(
-            () => {
+    } else {
 
-                informacoes.classList.add(
-                    "ativa"
-                );
-
-            },
-            350
-        );
+      alert(
+        "O link da localização ainda não foi configurado."
+      );
 
     }
-);
+
+  });
 
 
-/* =====================================================
-   INFORMAÇÕES → PRESENTES
-===================================================== */
+// ============================================
+// SUGESTÃO DE PRESENTES
+// ============================================
 
-continuarParaPresentes.addEventListener(
-    "click",
-    () => {
+document
+  .getElementById("botaoPresentes")
+  .addEventListener("click", () => {
 
-        informacoes.classList.remove(
-            "ativa"
-        );
+    if (PRESENTES_URL.trim() !== "") {
 
+      window.open(
+        PRESENTES_URL,
+        "_blank"
+      );
 
-        setTimeout(
-            () => {
+    } else {
 
-                presentes.classList.add(
-                    "ativa"
-                );
-
-            },
-            350
-        );
+      alert(
+        "O link da lista de presentes ainda não foi configurado."
+      );
 
     }
-);
+
+  });
 
 
-/* =====================================================
-   PRESENTES → CONFIRMAÇÃO
-===================================================== */
+// ============================================
+// CONFIRMAR PRESENÇA
+// ============================================
 
-continuarParaConfirmacao.addEventListener(
-    "click",
-    () => {
+document
+  .getElementById("botaoRsvp")
+  .addEventListener("click", () => {
 
-        presentes.classList.remove(
-            "ativa"
-        );
+    if (RSVP_URL.trim() !== "") {
 
+      window.open(
+        RSVP_URL,
+        "_blank"
+      );
 
-        setTimeout(
-            () => {
+    } else {
 
-                confirmacao.classList.add(
-                    "ativa"
-                );
-
-            },
-            350
-        );
+      alert(
+        "O link de confirmação ainda não foi configurado."
+      );
 
     }
-);
 
-
-/* =====================================================
-   VOLTAR → INFORMAÇÕES
-===================================================== */
-
-voltarInformacoes.addEventListener(
-    "click",
-    () => {
-
-        presentes.classList.remove(
-            "ativa"
-        );
-
-
-        setTimeout(
-            () => {
-
-                informacoes.classList.add(
-                    "ativa"
-                );
-
-            },
-            350
-        );
-
-    }
-);
-
-
-/* =====================================================
-   VOLTAR → PRESENTES
-===================================================== */
-
-voltarPresentes.addEventListener(
-    "click",
-    () => {
-
-        confirmacao.classList.remove(
-            "ativa"
-        );
-
-
-        setTimeout(
-            () => {
-
-                presentes.classList.add(
-                    "ativa"
-                );
-
-            },
-            350
-        );
-
-    }
-);
-
-
-/* =====================================================
-   LOCALIZAÇÃO
-===================================================== */
-
-abrirLocalizacao.addEventListener(
-    "click",
-    () => {
-
-        const endereco =
-            "Rua Oliveira Bueno 850";
-
-        const url =
-            "https://www.google.com/maps/search/?api=1&query=" +
-            encodeURIComponent(endereco);
-
-        window.open(
-            url,
-            "_blank"
-        );
-
-    }
-);
+  });
