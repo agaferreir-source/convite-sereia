@@ -26,7 +26,6 @@ const telas = [
     document.getElementById("tela5")
 ];
 
-
 let telaAtual = 0;
 let trocando = false;
 
@@ -40,11 +39,6 @@ const transicao =
     document.getElementById("transicao");
 
 
-
-/* ==========================================================
-   LIMPAR TRANSIÇÃO
-========================================================== */
-
 function limparTransicao() {
 
     transicao.className = "";
@@ -57,18 +51,14 @@ function limparTransicao() {
    ESCOLHER TRANSIÇÃO
 ========================================================== */
 
-function escolherTransicao(
-    anterior,
-    destino
-) {
+function escolherTransicao(anterior, destino) {
 
     limparTransicao();
 
 
     /*
-       PRIMEIRO → SEGUNDO
-
-       Abertura do mar
+       1 → 2
+       Abertura principal
     */
 
     if (
@@ -76,16 +66,13 @@ function escolherTransicao(
         destino === 1
     ) {
 
-        transicao.classList.add(
-            "tipo1"
-        );
+        transicao.classList.add("tipo1");
 
     }
 
 
     /*
-       SEGUNDO → TERCEIRO
-
+       2 → 3
        Luz perolada
     */
 
@@ -94,16 +81,13 @@ function escolherTransicao(
         destino === 2
     ) {
 
-        transicao.classList.add(
-            "tipo2"
-        );
+        transicao.classList.add("tipo2");
 
     }
 
 
     /*
-       TERCEIRO → QUARTO
-
+       3 → 4
        Bolhas
     */
 
@@ -112,17 +96,14 @@ function escolherTransicao(
         destino === 3
     ) {
 
-        transicao.classList.add(
-            "tipo3"
-        );
+        transicao.classList.add("tipo3");
 
     }
 
 
     /*
-       QUARTO → QUINTA
-
-       Mergulho
+       4 → 5
+       Entrada delicada
     */
 
     else if (
@@ -130,16 +111,13 @@ function escolherTransicao(
         destino === 4
     ) {
 
-        transicao.classList.add(
-            "tipo4"
-        );
+        transicao.classList.add("tipo4");
 
     }
 
 
     /*
-       QUINTA → QUARTO
-
+       5 → 4
        Retorno
     */
 
@@ -148,17 +126,10 @@ function escolherTransicao(
         destino === 3
     ) {
 
-        transicao.classList.add(
-            "tipo5"
-        );
+        transicao.classList.add("tipo5");
 
     }
 
-
-    /*
-       Garante reinício
-       da animação CSS.
-    */
 
     void transicao.offsetWidth;
 
@@ -176,7 +147,6 @@ function mudarTela(novaTela) {
         return;
     }
 
-
     if (
         novaTela < 0 ||
         novaTela >= telas.length
@@ -184,9 +154,13 @@ function mudarTela(novaTela) {
         return;
     }
 
+    if (novaTela === telaAtual) {
+        return;
+    }
 
     if (
-        novaTela === telaAtual
+        !telas[telaAtual] ||
+        !telas[novaTela]
     ) {
         return;
     }
@@ -195,15 +169,8 @@ function mudarTela(novaTela) {
     trocando = true;
 
 
-    const anterior =
-        telaAtual;
+    const anterior = telaAtual;
 
-
-    /*
-       Escolhe uma animação
-       diferente dependendo
-       da passagem.
-    */
 
     escolherTransicao(
         anterior,
@@ -212,45 +179,37 @@ function mudarTela(novaTela) {
 
 
     /*
-       Troca a tela.
+       A imagem nova entra
+       depois que o efeito
+       começou.
     */
 
-    setTimeout(
-        function() {
+    setTimeout(() => {
 
-            telas[anterior]
-                .classList
-                .remove("ativa");
+        telas[anterior]
+            .classList
+            .remove("ativa");
 
+        telas[novaTela]
+            .classList
+            .add("ativa");
 
-            telas[novaTela]
-                .classList
-                .add("ativa");
+        telaAtual = novaTela;
 
-
-            telaAtual =
-                novaTela;
-
-        },
-        400
-    );
+    }, 430);
 
 
     /*
-       Remove completamente
-       a camada da transição.
+       Finaliza a transição.
     */
 
-    setTimeout(
-        function() {
+    setTimeout(() => {
 
-            limparTransicao();
+        limparTransicao();
 
-            trocando = false;
+        trocando = false;
 
-        },
-        1250
-    );
+    }, 1150);
 
 }
 
@@ -261,9 +220,7 @@ function mudarTela(novaTela) {
 ========================================================== */
 
 const abrirConvite =
-    document.getElementById(
-        "abrirConvite"
-    );
+    document.getElementById("abrirConvite");
 
 
 if (abrirConvite) {
@@ -289,9 +246,7 @@ if (abrirConvite) {
 ========================================================== */
 
 const tela2 =
-    document.getElementById(
-        "tela2"
-    );
+    document.getElementById("tela2");
 
 
 if (tela2) {
@@ -316,9 +271,7 @@ if (tela2) {
 ========================================================== */
 
 const tela3 =
-    document.getElementById(
-        "tela3"
-    );
+    document.getElementById("tela3");
 
 
 if (tela3) {
@@ -357,10 +310,6 @@ if (botaoPresentes) {
             event.preventDefault();
             event.stopPropagation();
 
-            console.log(
-                "Abrindo Quinta.jpg"
-            );
-
             mudarTela(4);
 
         }
@@ -389,7 +338,6 @@ if (botaoLocal) {
             event.preventDefault();
             event.stopPropagation();
 
-
             if (MAPS_URL) {
 
                 window.open(
@@ -414,7 +362,6 @@ const botaoConfirmar =
     document.getElementById(
         "botaoConfirmar"
     );
-
 
 const avisoConfirmacao =
     document.getElementById(
@@ -515,7 +462,7 @@ if (voltarPresentes) {
 
 
 /* ==========================================================
-   PRÉ-CARREGAMENTO
+   PRÉ-CARREGAR IMAGENS
 ========================================================== */
 
 const imagens = [
@@ -533,8 +480,7 @@ imagens.forEach(
         const imagem =
             new Image();
 
-        imagem.src =
-            caminho;
+        imagem.src = caminho;
 
     }
 );
@@ -542,7 +488,7 @@ imagens.forEach(
 
 
 /* ==========================================================
-   PRIMEIRA TELA
+   TELA INICIAL
 ========================================================== */
 
 telas.forEach(
@@ -552,18 +498,13 @@ telas.forEach(
             return;
         }
 
-
         if (indice === 0) {
 
-            tela.classList.add(
-                "ativa"
-            );
+            tela.classList.add("ativa");
 
         } else {
 
-            tela.classList.remove(
-                "ativa"
-            );
+            tela.classList.remove("ativa");
 
         }
 
