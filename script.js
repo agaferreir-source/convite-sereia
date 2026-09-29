@@ -4,7 +4,7 @@
 
 
 /* ==========================================================
-   LINKS
+   CONFIGURAÇÕES
 ========================================================== */
 
 const MAPS_URL =
@@ -12,10 +12,8 @@ const MAPS_URL =
 
 
 /*
-   Quando tivermos o WhatsApp,
-   colocaremos o link aqui.
-
-   Por enquanto fica vazio.
+   Quando você tiver o número/link da confirmação,
+   colocaremos aqui.
 */
 
 const RSVP_URL = "";
@@ -49,32 +47,24 @@ const transicao =
     document.getElementById("transicao");
 
 
-
 function iniciarTransicao() {
 
     if (!transicao) {
         return;
     }
 
-    /*
-       Remove a classe primeiro
-       para permitir que a animação
-       seja executada novamente.
-    */
-
     transicao.classList.remove("ativa");
+
+    /*
+       Força o navegador a reiniciar
+       a animação.
+    */
 
     void transicao.offsetWidth;
 
     transicao.classList.add("ativa");
-
 }
 
-
-
-/* ==========================================================
-   FINALIZAR TRANSIÇÃO
-========================================================== */
 
 function finalizarTransicao() {
 
@@ -83,34 +73,25 @@ function finalizarTransicao() {
     }
 
     transicao.classList.remove("ativa");
-
 }
 
 
 
 /* ==========================================================
-   TROCAR DE TELA
+   MUDAR DE TELA
 ========================================================== */
 
 function mudarTela(novaTela) {
 
-    if (trocando) {
-        return;
-    }
+    console.log(
+        "Mudando da tela",
+        telaAtual + 1,
+        "para",
+        novaTela + 1
+    );
 
 
-    if (
-        novaTela < 0 ||
-        novaTela >= telas.length
-    ) {
-        return;
-    }
-
-
-    if (
-        !telas[novaTela] ||
-        !telas[telaAtual]
-    ) {
+    if (novaTela < 0 || novaTela >= telas.length) {
         return;
     }
 
@@ -120,65 +101,60 @@ function mudarTela(novaTela) {
     }
 
 
+    if (trocando) {
+        return;
+    }
+
+
     trocando = true;
 
 
     /*
-       Começa a animação
-       de água.
+       Inicia o efeito de água.
     */
 
     iniciarTransicao();
 
 
     /*
-       Espera a luz passar
-       antes de trocar a imagem.
+       Depois de um pequeno momento,
+       troca realmente a imagem.
     */
 
-    setTimeout(() => {
+    setTimeout(function() {
 
-        telas[telaAtual]
-            .classList
-            .remove("ativa");
+        telas[telaAtual].classList.remove("ativa");
 
-
-        telas[novaTela]
-            .classList
-            .add("ativa");
-
+        telas[novaTela].classList.add("ativa");
 
         telaAtual = novaTela;
 
-
-    }, 380);
+    }, 430);
 
 
     /*
-       Retira a camada
-       de transição.
+       Termina a transição.
     */
 
-    setTimeout(() => {
+    setTimeout(function() {
 
         finalizarTransicao();
 
         trocando = false;
 
-    }, 1100);
+    }, 1200);
 
 }
 
 
 
 /* ==========================================================
-   PRIMEIRO → SEGUNDO
+   PRIMEIRA TELA
+   LACRE → SEGUNDA
 ========================================================== */
 
 const abrirConvite =
-    document.getElementById(
-        "abrirConvite"
-    );
+    document.getElementById("abrirConvite");
 
 
 if (abrirConvite) {
@@ -188,6 +164,8 @@ if (abrirConvite) {
         function(event) {
 
             event.preventDefault();
+
+            event.stopPropagation();
 
             mudarTela(1);
 
@@ -199,7 +177,7 @@ if (abrirConvite) {
 
 
 /* ==========================================================
-   SEGUNDO → TERCEIRO
+   SEGUNDA → TERCEIRA
 ========================================================== */
 
 const tela2 =
@@ -210,7 +188,9 @@ if (tela2) {
 
     tela2.addEventListener(
         "click",
-        function() {
+        function(event) {
+
+            event.preventDefault();
 
             mudarTela(2);
 
@@ -222,7 +202,7 @@ if (tela2) {
 
 
 /* ==========================================================
-   TERCEIRO → QUARTO
+   TERCEIRA → QUARTA
 ========================================================== */
 
 const tela3 =
@@ -233,7 +213,9 @@ if (tela3) {
 
     tela3.addEventListener(
         "click",
-        function() {
+        function(event) {
+
+            event.preventDefault();
 
             mudarTela(3);
 
@@ -245,13 +227,12 @@ if (tela3) {
 
 
 /* ==========================================================
-   PRESENTES → QUINTA
+   QUARTA → QUINTA
+   SUGESTÃO DE PRESENTES
 ========================================================== */
 
 const botaoPresentes =
-    document.getElementById(
-        "botaoPresentes"
-    );
+    document.getElementById("botaoPresentes");
 
 
 if (botaoPresentes) {
@@ -264,6 +245,14 @@ if (botaoPresentes) {
 
             event.stopPropagation();
 
+            console.log(
+                "Botão de presentes clicado!"
+            );
+
+            /*
+               Vai DIRETAMENTE para Quinta.png/jpg.
+            */
+
             mudarTela(4);
 
         }
@@ -274,13 +263,125 @@ if (botaoPresentes) {
 
 
 /* ==========================================================
-   VOLTAR DA QUINTA → QUARTA
+   LOCALIZAÇÃO
+========================================================== */
+
+const botaoLocal =
+    document.getElementById("botaoLocal");
+
+
+if (botaoLocal) {
+
+    botaoLocal.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            console.log(
+                "Localização clicada!"
+            );
+
+
+            if (MAPS_URL) {
+
+                window.open(
+                    MAPS_URL,
+                    "_blank"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   CONFIRMAÇÃO
+========================================================== */
+
+const botaoConfirmar =
+    document.getElementById("botaoConfirmar");
+
+
+const avisoConfirmacao =
+    document.getElementById("avisoConfirmacao");
+
+
+if (botaoConfirmar) {
+
+    botaoConfirmar.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            if (RSVP_URL) {
+
+                window.open(
+                    RSVP_URL,
+                    "_blank"
+                );
+
+                return;
+            }
+
+
+            if (avisoConfirmacao) {
+
+                avisoConfirmacao.classList.add(
+                    "aberto"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   FECHAR AVISO
+========================================================== */
+
+const fecharAviso =
+    document.getElementById("fecharAviso");
+
+
+if (fecharAviso) {
+
+    fecharAviso.addEventListener(
+        "click",
+        function() {
+
+            avisoConfirmacao.classList.remove(
+                "aberto"
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   VOLTAR DA QUINTA
 ========================================================== */
 
 const voltarPresentes =
-    document.getElementById(
-        "voltarPresentes"
-    );
+    document.getElementById("voltarPresentes");
 
 
 if (voltarPresentes) {
@@ -303,162 +404,7 @@ if (voltarPresentes) {
 
 
 /* ==========================================================
-   LOCALIZAÇÃO
-========================================================== */
-
-const botaoLocal =
-    document.getElementById(
-        "botaoLocal"
-    );
-
-
-if (botaoLocal) {
-
-    botaoLocal.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-
-            if (!MAPS_URL) {
-                return;
-            }
-
-
-            window.open(
-                MAPS_URL,
-                "_blank"
-            );
-
-        }
-    );
-
-}
-
-
-
-/* ==========================================================
-   CONFIRMAR PRESENÇA
-========================================================== */
-
-const botaoConfirmar =
-    document.getElementById(
-        "botaoConfirmar"
-    );
-
-
-const avisoConfirmacao =
-    document.getElementById(
-        "avisoConfirmacao"
-    );
-
-
-if (botaoConfirmar) {
-
-    botaoConfirmar.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-
-            /*
-               Quando tivermos o link,
-               ele será aberto aqui.
-            */
-
-            if (RSVP_URL) {
-
-                window.open(
-                    RSVP_URL,
-                    "_blank"
-                );
-
-                return;
-            }
-
-
-            /*
-               Enquanto não temos o link.
-            */
-
-            if (avisoConfirmacao) {
-
-                avisoConfirmacao
-                    .classList
-                    .add("aberto");
-
-            }
-
-        }
-    );
-
-}
-
-
-
-/* ==========================================================
-   FECHAR AVISO
-========================================================== */
-
-const fecharAviso =
-    document.getElementById(
-        "fecharAviso"
-    );
-
-
-if (fecharAviso && avisoConfirmacao) {
-
-    fecharAviso.addEventListener(
-        "click",
-        function() {
-
-            avisoConfirmacao
-                .classList
-                .remove("aberto");
-
-        }
-    );
-
-}
-
-
-
-/* ==========================================================
-   FECHAR AVISO CLICANDO FORA
-========================================================== */
-
-if (avisoConfirmacao) {
-
-    avisoConfirmacao.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target ===
-                avisoConfirmacao
-            ) {
-
-                avisoConfirmacao
-                    .classList
-                    .remove("aberto");
-
-            }
-
-        }
-    );
-
-}
-
-
-
-/* ==========================================================
-   PRÉ-CARREGAR TODAS AS IMAGENS
+   PRÉ-CARREGAMENTO
 ========================================================== */
 
 const imagens = [
@@ -472,16 +418,13 @@ const imagens = [
 ];
 
 
-imagens.forEach(
-    function(caminho) {
+imagens.forEach(function(caminho) {
 
-        const imagem =
-            new Image();
+    const img = new Image();
 
-        imagem.src = caminho;
+    img.src = caminho;
 
-    }
-);
+});
 
 
 
@@ -489,26 +432,21 @@ imagens.forEach(
    GARANTIR PRIMEIRA TELA
 ========================================================== */
 
-telas.forEach(
-    function(tela, indice) {
+telas.forEach(function(tela, indice) {
 
-        if (!tela) {
-            return;
-        }
+    if (!tela) {
+        return;
+    }
 
-        if (indice === 0) {
 
-            tela.classList.add(
-                "ativa"
-            );
+    if (indice === 0) {
 
-        } else {
+        tela.classList.add("ativa");
 
-            tela.classList.remove(
-                "ativa"
-            );
+    } else {
 
-        }
+        tela.classList.remove("ativa");
 
     }
-);
+
+});
