@@ -1,13 +1,13 @@
 // ============================================
-// LINKS DOS BOTÕES
+// LINKS
 // ============================================
 
-// Coloque os links aqui quando estiverem prontos.
+const MAPS_URL =
+  "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
 
-const MAPS_URL = "";
+const PRESENTES_URL = "Quinta.jpg";
 
-const PRESENTES_URL = "";
-
+// Vamos colocar depois.
 const RSVP_URL = "";
 
 
@@ -22,6 +22,9 @@ const telas = [
   document.getElementById("tela4")
 ];
 
+const transicao =
+  document.getElementById("transicao");
+
 let telaAtual = 0;
 
 
@@ -29,18 +32,34 @@ let telaAtual = 0;
 // TROCAR DE TELA
 // ============================================
 
-function mostrarTela(numero) {
+function mudarTela(proximaTela) {
 
-  telas.forEach((tela, index) => {
+  if (proximaTela === telaAtual) {
+    return;
+  }
 
-    tela.classList.toggle(
-      "ativa",
-      index === numero
-    );
+  // Começa o efeito de mergulho
+  transicao.classList.add("ativa");
 
-  });
 
-  telaAtual = numero;
+  // Pequeno intervalo para o efeito aparecer
+  setTimeout(() => {
+
+    telas[telaAtual].classList.remove("ativa");
+
+    telas[proximaTela].classList.add("ativa");
+
+    telaAtual = proximaTela;
+
+  }, 450);
+
+
+  // Retira o efeito depois da troca
+  setTimeout(() => {
+
+    transicao.classList.remove("ativa");
+
+  }, 1050);
 
 }
 
@@ -53,7 +72,7 @@ document
   .getElementById("abrirConvite")
   .addEventListener("click", () => {
 
-    mostrarTela(1);
+    mudarTela(1);
 
   });
 
@@ -66,7 +85,7 @@ document
   .getElementById("irTela3")
   .addEventListener("click", () => {
 
-    mostrarTela(2);
+    mudarTela(2);
 
   });
 
@@ -79,7 +98,7 @@ document
   .getElementById("irTela4")
   .addEventListener("click", () => {
 
-    mostrarTela(3);
+    mudarTela(3);
 
   });
 
@@ -92,20 +111,15 @@ document
   .getElementById("botaoLocal")
   .addEventListener("click", () => {
 
-    if (MAPS_URL.trim() !== "") {
-
-      window.open(
-        MAPS_URL,
-        "_blank"
-      );
-
-    } else {
-
-      alert(
-        "O link da localização ainda não foi configurado."
-      );
-
+    if (!MAPS_URL) {
+      return;
     }
+
+    window.open(
+      MAPS_URL,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
   });
 
@@ -114,26 +128,45 @@ document
 // SUGESTÃO DE PRESENTES
 // ============================================
 
+const modalPresentes =
+  document.getElementById("modalPresentes");
+
+
 document
   .getElementById("botaoPresentes")
   .addEventListener("click", () => {
 
-    if (PRESENTES_URL.trim() !== "") {
-
-      window.open(
-        PRESENTES_URL,
-        "_blank"
-      );
-
-    } else {
-
-      alert(
-        "O link da lista de presentes ainda não foi configurado."
-      );
-
-    }
+    modalPresentes.classList.add("aberto");
 
   });
+
+
+// ============================================
+// FECHAR PRESENTES
+// ============================================
+
+document
+  .getElementById("fecharPresentes")
+  .addEventListener("click", () => {
+
+    modalPresentes.classList.remove("aberto");
+
+  });
+
+
+// ============================================
+// FECHAR CLICANDO FORA DA IMAGEM
+// ============================================
+
+modalPresentes.addEventListener("click", (event) => {
+
+  if (event.target === modalPresentes) {
+
+    modalPresentes.classList.remove("aberto");
+
+  }
+
+});
 
 
 // ============================================
@@ -144,19 +177,20 @@ document
   .getElementById("botaoRsvp")
   .addEventListener("click", () => {
 
-    if (RSVP_URL.trim() !== "") {
-
-      window.open(
-        RSVP_URL,
-        "_blank"
-      );
-
-    } else {
+    if (!RSVP_URL) {
 
       alert(
-        "O link de confirmação ainda não foi configurado."
+        "A confirmação de presença será configurada em breve. 💗"
       );
 
+      return;
+
     }
+
+    window.open(
+      RSVP_URL,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
   });
