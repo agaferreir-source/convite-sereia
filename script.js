@@ -10,12 +10,6 @@
 const MAPS_URL =
     "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
 
-
-/*
-   Link da confirmação.
-   Será colocado depois.
-*/
-
 const RSVP_URL = "";
 
 
@@ -34,7 +28,6 @@ const telas = [
 
 
 let telaAtual = 0;
-
 let trocando = false;
 
 
@@ -47,131 +40,127 @@ const transicao =
     document.getElementById("transicao");
 
 
-function limparTiposTransicao() {
 
-    if (!transicao) {
-        return;
-    }
+/* ==========================================================
+   LIMPAR TRANSIÇÃO
+========================================================== */
 
-    transicao.classList.remove(
-        "tipo1",
-        "tipo2",
-        "tipo3",
-        "tipo4",
-        "tipo5",
-        "ativa"
-    );
+function limparTransicao() {
+
+    transicao.className = "";
 
 }
 
 
+
 /* ==========================================================
-   ESCOLHER A TRANSIÇÃO
+   ESCOLHER TRANSIÇÃO
 ========================================================== */
 
 function escolherTransicao(
-    telaAnterior,
-    novaTela
+    anterior,
+    destino
 ) {
 
-    limparTiposTransicao();
+    limparTransicao();
 
 
     /*
-       1 → 2
+       PRIMEIRO → SEGUNDO
+
        Abertura do mar
     */
 
     if (
-        telaAnterior === 0 &&
-        novaTela === 1
+        anterior === 0 &&
+        destino === 1
     ) {
 
-        transicao.classList.add("tipo1");
+        transicao.classList.add(
+            "tipo1"
+        );
 
     }
 
 
     /*
-       2 → 3
+       SEGUNDO → TERCEIRO
+
        Luz perolada
     */
 
     else if (
-        telaAnterior === 1 &&
-        novaTela === 2
+        anterior === 1 &&
+        destino === 2
     ) {
 
-        transicao.classList.add("tipo2");
+        transicao.classList.add(
+            "tipo2"
+        );
 
     }
 
 
     /*
-       3 → 4
+       TERCEIRO → QUARTO
+
        Bolhas
     */
 
     else if (
-        telaAnterior === 2 &&
-        novaTela === 3
+        anterior === 2 &&
+        destino === 3
     ) {
 
-        transicao.classList.add("tipo3");
+        transicao.classList.add(
+            "tipo3"
+        );
 
     }
 
 
     /*
-       4 → 5
+       QUARTO → QUINTA
+
        Mergulho
     */
 
     else if (
-        telaAnterior === 3 &&
-        novaTela === 4
+        anterior === 3 &&
+        destino === 4
     ) {
 
-        transicao.classList.add("tipo4");
+        transicao.classList.add(
+            "tipo4"
+        );
 
     }
 
 
     /*
-       5 → 4
+       QUINTA → QUARTO
+
        Retorno
     */
 
     else if (
-        telaAnterior === 4 &&
-        novaTela === 3
+        anterior === 4 &&
+        destino === 3
     ) {
 
-        transicao.classList.add("tipo5");
+        transicao.classList.add(
+            "tipo5"
+        );
 
     }
 
 
     /*
-       Qualquer outra mudança
-       recebe a transição mais suave.
-    */
-
-    else {
-
-        transicao.classList.add("tipo2");
-
-    }
-
-
-    /*
-       Força o navegador a reiniciar
-       a animação.
+       Garante reinício
+       da animação CSS.
     */
 
     void transicao.offsetWidth;
-
-    transicao.classList.add("ativa");
 
 }
 
@@ -203,41 +192,33 @@ function mudarTela(novaTela) {
     }
 
 
-    if (
-        !telas[telaAtual] ||
-        !telas[novaTela]
-    ) {
-        return;
-    }
-
-
     trocando = true;
 
 
-    const telaAnterior =
+    const anterior =
         telaAtual;
 
 
     /*
-       Escolhe a transição
-       específica.
+       Escolhe uma animação
+       diferente dependendo
+       da passagem.
     */
 
     escolherTransicao(
-        telaAnterior,
+        anterior,
         novaTela
     );
 
 
     /*
-       Troca a imagem no meio
-       do efeito.
+       Troca a tela.
     */
 
     setTimeout(
         function() {
 
-            telas[telaAnterior]
+            telas[anterior]
                 .classList
                 .remove("ativa");
 
@@ -251,23 +232,24 @@ function mudarTela(novaTela) {
                 novaTela;
 
         },
-        430
+        400
     );
 
 
     /*
-       Finaliza a animação.
+       Remove completamente
+       a camada da transição.
     */
 
     setTimeout(
         function() {
 
-            limparTiposTransicao();
+            limparTransicao();
 
             trocando = false;
 
         },
-        1200
+        1250
     );
 
 }
@@ -291,7 +273,6 @@ if (abrirConvite) {
         function(event) {
 
             event.preventDefault();
-
             event.stopPropagation();
 
             mudarTela(1);
@@ -359,7 +340,6 @@ if (tela3) {
 
 /* ==========================================================
    QUARTO → QUINTA
-   SUGESTÃO DE PRESENTES
 ========================================================== */
 
 const botaoPresentes =
@@ -375,19 +355,11 @@ if (botaoPresentes) {
         function(event) {
 
             event.preventDefault();
-
             event.stopPropagation();
 
-
             console.log(
-                "Sugestão de presentes"
+                "Abrindo Quinta.jpg"
             );
-
-
-            /*
-               Abre a Quinta.jpg
-               através da quinta tela.
-            */
 
             mudarTela(4);
 
@@ -415,7 +387,6 @@ if (botaoLocal) {
         function(event) {
 
             event.preventDefault();
-
             event.stopPropagation();
 
 
@@ -458,14 +429,8 @@ if (botaoConfirmar) {
         function(event) {
 
             event.preventDefault();
-
             event.stopPropagation();
 
-
-            /*
-               Quando o link existir,
-               será aberto automaticamente.
-            */
 
             if (RSVP_URL) {
 
@@ -478,11 +443,6 @@ if (botaoConfirmar) {
 
             }
 
-
-            /*
-               Enquanto não existe link,
-               mostra o aviso.
-            */
 
             if (avisoConfirmacao) {
 
@@ -527,34 +487,6 @@ if (fecharAviso) {
 
 
 /* ==========================================================
-   CLICAR FORA DO AVISO
-========================================================== */
-
-if (avisoConfirmacao) {
-
-    avisoConfirmacao.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target ===
-                avisoConfirmacao
-            ) {
-
-                avisoConfirmacao
-                    .classList
-                    .remove("aberto");
-
-            }
-
-        }
-    );
-
-}
-
-
-
-/* ==========================================================
    QUINTA → QUARTA
 ========================================================== */
 
@@ -571,7 +503,6 @@ if (voltarPresentes) {
         function(event) {
 
             event.preventDefault();
-
             event.stopPropagation();
 
             mudarTela(3);
@@ -584,17 +515,15 @@ if (voltarPresentes) {
 
 
 /* ==========================================================
-   PRÉ-CARREGAR IMAGENS
+   PRÉ-CARREGAMENTO
 ========================================================== */
 
 const imagens = [
-
     "Primeiro.png",
     "Segundo.png",
     "Terceiro.png",
     "Quarto.png",
     "Quinta.jpg"
-
 ];
 
 
