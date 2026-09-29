@@ -12,9 +12,11 @@ body {
 }
 
 body {
-    background: #071d3a;
-    font-family: Arial, sans-serif;
+    background: #000;
+    font-family: sans-serif;
 }
+
+/* CONVITE */
 
 #convite {
     width: 100%;
@@ -23,101 +25,90 @@ body {
     overflow: hidden;
 }
 
-
-/* =================================
-   TELAS
-================================= */
+/* CADA TELA */
 
 .tela {
     position: absolute;
     inset: 0;
 
     width: 100%;
-    height: 100dvh;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     opacity: 0;
     visibility: hidden;
 
-    transform: scale(1.04);
+    transform: scale(1.03);
 
     transition:
-        opacity 1.1s ease,
-        transform 1.4s cubic-bezier(.22,.61,.36,1),
-        visibility 1.1s;
+        opacity 0.8s ease,
+        transform 1s cubic-bezier(.22,.61,.36,1);
 
-    overflow: hidden;
+    z-index: 1;
 }
 
 .tela.ativa {
     opacity: 1;
     visibility: visible;
-
     transform: scale(1);
+
+    z-index: 2;
 }
 
+/* IMAGENS */
 
-/* =================================
-   IMAGENS
-================================= */
-
-.imagem-tela {
-    position: absolute;
-
+.tela img {
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
+    display: block;
+
     user-select: none;
     -webkit-user-drag: none;
-
-    transform: scale(1.015);
-
-    animation: movimentoAgua 12s ease-in-out infinite alternate;
 }
 
 
-/* Movimento extremamente sutil */
+/* ==========================================
+   ABERTURA
+========================================== */
 
-@keyframes movimentoAgua {
-
-    0% {
-        transform: scale(1.015) translate3d(0, 0, 0);
-    }
-
-    50% {
-        transform: scale(1.025) translate3d(-0.4%, -0.3%, 0);
-    }
-
-    100% {
-        transform: scale(1.015) translate3d(0.4%, 0.3%, 0);
-    }
-
-}
-
-
-/* =================================
-   ÁREA DO LACRE
-================================= */
-
-.area-lacre {
-
+.area-toque {
     position: absolute;
 
     /*
-       Área grande para facilitar o toque.
-       Se precisar ajustar para o lacre,
-       altere estes valores.
+       Área grande para tocar no lacre.
+       Se precisar, podemos diminuir depois.
     */
 
-    width: 70%;
-    height: 45%;
+    width: 45%;
+    height: 35%;
 
-    left: 15%;
-    top: 27%;
+    left: 27.5%;
+    top: 32%;
 
-    background: transparent;
+    cursor: pointer;
+
+    z-index: 10;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ==========================================
+   ÁREAS CLICÁVEIS DA QUARTA IMAGEM
+========================================== */
+
+.area-interativa {
+
+    position: absolute;
+
     border: none;
+    background: transparent;
 
     cursor: pointer;
 
@@ -127,423 +118,233 @@ body {
 }
 
 
-/* =================================
-   ÁREA PARA AVANÇAR
-================================= */
-
-.area-tela {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: transparent;
-    border: none;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-    -webkit-tap-highlight-color: transparent;
-}
-
-
-/* =================================
-   BOLHAS
-================================= */
-
-.efeito-bolhas {
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 5;
-
-    overflow: hidden;
-}
-
-.efeito-bolhas::before,
-.efeito-bolhas::after {
-    content: "";
-
-    position: absolute;
-
-    width: 12px;
-    height: 12px;
-
-    border: 1px solid rgba(255,255,255,.55);
-
-    border-radius: 50%;
-
-    box-shadow:
-        80px 100px 0 2px rgba(255,255,255,.25),
-        180px 300px 0 4px rgba(255,255,255,.18),
-        280px 150px 0 1px rgba(255,255,255,.35),
-        350px 500px 0 3px rgba(255,255,255,.22),
-        70px 650px 0 2px rgba(255,255,255,.25),
-        330px 750px 0 5px rgba(255,255,255,.15);
-
-    animation: bolhasSubindo 9s linear infinite;
-}
-
-.efeito-bolhas::after {
-
-    width: 7px;
-    height: 7px;
-
-    animation-duration: 13s;
-
-    animation-delay: -4s;
-
-    opacity: .7;
-}
-
-
-@keyframes bolhasSubindo {
-
-    from {
-        transform: translateY(100vh);
-    }
-
-    to {
-        transform: translateY(-100vh);
-    }
-
-}
-
-
-/* =================================
-   BOTÕES DA QUARTA TELA
-================================= */
-
-.botao-interacao {
-
-    position: absolute;
-
-    background: transparent;
-
-    border: none;
-
-    cursor: pointer;
-
-    z-index: 30;
-
-    border-radius: 50%;
-
-    -webkit-tap-highlight-color: transparent;
-
-    transition:
-        transform .25s ease,
-        filter .25s ease;
-}
-
-
 /*
-   Estes valores correspondem
-   aproximadamente às três bolinhas
-   da imagem Quarto.jpg.
+   QUARTO.JPG
+
+   As três bolinhas estão na parte inferior.
+
+   Os valores são relativos à tela,
+   então funcionam em celulares diferentes.
 */
 
-.botao-presentes {
 
-    width: 28%;
-    height: 19%;
+/* PRESENTES — bolinha da esquerda */
 
-    left: 6%;
-    bottom: 16%;
+.area-interativa.presente {
+
+    width: 29%;
+    height: 25%;
+
+    left: 5%;
+    bottom: 12%;
 }
 
 
-.botao-local {
+/* LOCALIZAÇÃO — bolinha do meio */
 
-    width: 28%;
-    height: 19%;
+.area-interativa.local {
 
-    left: 36%;
-    bottom: 16%;
+    width: 29%;
+    height: 25%;
+
+    left: 35.5%;
+    bottom: 12%;
 }
 
 
-.botao-confirmar {
+/* CONFIRMAR — bolinha da direita */
 
-    width: 28%;
-    height: 19%;
+.area-interativa.confirmar {
 
-    right: 6%;
-    bottom: 16%;
+    width: 29%;
+    height: 25%;
+
+    right: 5%;
+    bottom: 12%;
 }
 
 
-.botao-interacao:active {
+/* ==========================================
+   TRANSIÇÃO
+========================================== */
 
-    transform: scale(.91);
-
-    filter: brightness(1.15);
-}
-
-
-/* =================================
-   MODAL DOS PRESENTES
-================================= */
-
-.modal {
+#transicao {
 
     position: fixed;
 
     inset: 0;
 
-    z-index: 100;
+    background: rgba(255, 255, 255, 0);
 
-    display: flex;
+    pointer-events: none;
 
-    align-items: center;
-    justify-content: center;
+    z-index: 999;
 
     opacity: 0;
-    visibility: hidden;
 
     transition:
-        opacity .6s ease,
-        visibility .6s ease;
+        opacity 0.45s ease,
+        background 0.45s ease;
 }
 
 
-.modal.aberto {
+/*
+   Quando a transição acontece
+*/
+
+#transicao.entrando {
 
     opacity: 1;
-    visibility: visible;
-}
-
-
-.modal-fundo {
-
-    position: absolute;
-
-    inset: 0;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(83,193,232,.25),
-            rgba(3,24,52,.88)
+            rgba(255,255,255,.95),
+            rgba(190,240,255,.75),
+            rgba(100,190,235,.35),
+            rgba(0,100,180,0)
         );
-
-    backdrop-filter: blur(8px);
 }
 
 
-.modal-conteudo {
+/* ==========================================
+   BOLHAS DA TRANSIÇÃO
+========================================== */
 
-    position: relative;
+.bolhas::before,
+.bolhas::after {
 
-    width: min(92vw, 500px);
-    max-height: 92vh;
-
-    display: flex;
-    justify-content: center;
-
-    transform: scale(.8) translateY(30px);
-
-    transition:
-        transform .7s cubic-bezier(.17,.89,.32,1.28);
-
-    z-index: 2;
-}
-
-
-.modal.aberto .modal-conteudo {
-
-    transform: scale(1) translateY(0);
-}
-
-
-.imagem-presentes {
-
-    width: 100%;
-    max-height: 88vh;
-
-    object-fit: contain;
-
-    border-radius: 24px;
-
-    box-shadow:
-        0 20px 70px rgba(0,0,0,.45);
-}
-
-
-/* =================================
-   BOTÃO FECHAR
-================================= */
-
-.fechar {
+    content: "";
 
     position: absolute;
 
-    top: -15px;
-    right: -10px;
-
-    width: 42px;
-    height: 42px;
+    width: 18px;
+    height: 18px;
 
     border-radius: 50%;
 
     border: 2px solid rgba(255,255,255,.8);
 
-    background: #e99bd2;
-
-    color: white;
-
-    font-size: 28px;
-
-    line-height: 35px;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.25);
-}
-
-
-/* =================================
-   AVISO
-================================= */
-
-.aviso {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 200;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(4,25,55,.55);
-
-    backdrop-filter: blur(7px);
-
     opacity: 0;
-    visibility: hidden;
-
-    transition: .4s ease;
 }
 
 
-.aviso.aberto {
+#transicao.entrando .bolhas::before {
 
     opacity: 1;
-    visibility: visible;
+
+    left: 25%;
+    bottom: -30px;
+
+    animation: bolha1 0.8s ease-out forwards;
 }
 
 
-.aviso-caixa {
+#transicao.entrando .bolhas::after {
 
-    width: 82%;
-    max-width: 360px;
+    opacity: 1;
 
-    padding: 28px 24px;
+    right: 25%;
+    bottom: -30px;
 
-    text-align: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff9ff,
-            #f8dcf5
-        );
-
-    border-radius: 28px;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.3);
-
-    transform: scale(.8);
-
-    transition: .5s ease;
+    animation: bolha2 0.9s ease-out forwards;
 }
 
 
-.aviso.aberto .aviso-caixa {
+@keyframes bolha1 {
 
-    transform: scale(1);
+    0% {
+        transform: scale(.3);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
 }
 
 
-.aviso-caixa span {
+@keyframes bolha2 {
 
-    display: block;
+    0% {
+        transform: scale(.2);
+        opacity: 0;
+    }
 
-    font-size: 42px;
+    30% {
+        opacity: 1;
+    }
 
-    margin-bottom: 10px;
+    100% {
+        transform: translateY(-90vh) scale(1.8);
+        opacity: 0;
+    }
 }
 
 
-.aviso-caixa p {
+/* ==========================================
+   BOTÃO VOLTAR
+========================================== */
 
-    color: #713b83;
+.voltar {
 
-    font-size: 17px;
+    position: absolute;
 
-    line-height: 1.5;
+    top: 20px;
+    left: 20px;
 
-    margin-bottom: 20px;
-}
+    width: 45px;
+    height: 45px;
 
+    border-radius: 50%;
 
-.aviso-caixa button {
+    border: 2px solid rgba(255,255,255,.8);
 
-    border: none;
+    background: rgba(255,255,255,.75);
 
-    padding: 10px 25px;
+    color: #7b3fb3;
 
-    border-radius: 20px;
-
-    background: #c66fc2;
-
-    color: white;
-
-    font-weight: bold;
+    font-size: 24px;
 
     cursor: pointer;
+
+    z-index: 50;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.15);
 }
 
 
-/* =================================
+/* ==========================================
    CELULAR
-================================= */
+========================================== */
 
 @media (max-width: 600px) {
 
-    .modal-conteudo {
-        width: 92vw;
+    .tela img {
+        object-fit: cover;
     }
 
+    .voltar {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+    }
 }
 
 
-/* =================================
-   REDUZIR ANIMAÇÕES SE NECESSÁRIO
-================================= */
+/* ==========================================
+   TELAS MUITO ALTAS
+========================================== */
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-aspect-ratio: 9/16) {
 
-    *,
-    *::before,
-    *::after {
-
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-
+    .tela img {
+        object-fit: cover;
     }
-
 }
