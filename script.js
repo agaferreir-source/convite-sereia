@@ -1,3 +1,31 @@
+/* ==========================================================
+   CONVITE ANTONELLA
+========================================================== */
+
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+const MAPS_URL =
+    "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
+
+
+/*
+   Quando tivermos o WhatsApp,
+   colocaremos o link aqui.
+
+   Por enquanto fica vazio.
+*/
+
+const RSVP_URL = "";
+
+
+
+/* ==========================================================
+   TELAS
+========================================================== */
+
 const telas = [
     document.getElementById("tela1"),
     document.getElementById("tela2"),
@@ -6,188 +34,481 @@ const telas = [
     document.getElementById("tela5")
 ];
 
-const transicao = document.getElementById("transicao");
 
 let telaAtual = 0;
 
+let trocando = false;
 
-/* ==========================================
-   TROCAR DE TELA
-========================================== */
 
-function mudarTela(numero) {
 
-    if (numero < 0 || numero >= telas.length) {
-        return;
-    }
+/* ==========================================================
+   TRANSIÇÃO
+========================================================== */
 
-    if (numero === telaAtual) {
+const transicao =
+    document.getElementById("transicao");
+
+
+
+function iniciarTransicao() {
+
+    if (!transicao) {
         return;
     }
 
     /*
-       Começa a transição
+       Remove a classe primeiro
+       para permitir que a animação
+       seja executada novamente.
     */
 
-    transicao.classList.add("entrando");
+    transicao.classList.remove("ativa");
 
+    void transicao.offsetWidth;
 
-    setTimeout(() => {
+    transicao.classList.add("ativa");
 
-        telas[telaAtual].classList.remove("ativa");
-
-        telas[numero].classList.add("ativa");
-
-        telaAtual = numero;
-
-
-        /*
-           Espera a nova imagem aparecer
-        */
-
-        setTimeout(() => {
-
-            transicao.classList.remove("entrando");
-
-        }, 250);
-
-
-    }, 400);
 }
 
 
-/* ==========================================
-   ABRIR O CONVITE
-========================================== */
 
-document
-    .getElementById("abrirConvite")
-    .addEventListener("click", () => {
+/* ==========================================================
+   FINALIZAR TRANSIÇÃO
+========================================================== */
 
-        mudarTela(1);
+function finalizarTransicao() {
 
-    });
+    if (!transicao) {
+        return;
+    }
 
+    transicao.classList.remove("ativa");
 
-/* ==========================================
-   PASSAGEM DA SEGUNDA PARA A TERCEIRA
-========================================== */
-
-document
-    .getElementById("tela2")
-    .addEventListener("click", () => {
-
-        mudarTela(2);
-
-    });
+}
 
 
-/* ==========================================
-   PASSAGEM DA TERCEIRA PARA A QUARTA
-========================================== */
 
-document
-    .getElementById("tela3")
-    .addEventListener("click", () => {
+/* ==========================================================
+   TROCAR DE TELA
+========================================================== */
 
-        mudarTela(3);
+function mudarTela(novaTela) {
 
-    });
-
-
-/* ==========================================
-   SUGESTÃO DE PRESENTES
-========================================== */
-
-document
-    .getElementById("botaoPresentes")
-    .addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        mudarTela(4);
-
-    });
+    if (trocando) {
+        return;
+    }
 
 
-/* ==========================================
+    if (
+        novaTela < 0 ||
+        novaTela >= telas.length
+    ) {
+        return;
+    }
+
+
+    if (
+        !telas[novaTela] ||
+        !telas[telaAtual]
+    ) {
+        return;
+    }
+
+
+    if (novaTela === telaAtual) {
+        return;
+    }
+
+
+    trocando = true;
+
+
+    /*
+       Começa a animação
+       de água.
+    */
+
+    iniciarTransicao();
+
+
+    /*
+       Espera a luz passar
+       antes de trocar a imagem.
+    */
+
+    setTimeout(() => {
+
+        telas[telaAtual]
+            .classList
+            .remove("ativa");
+
+
+        telas[novaTela]
+            .classList
+            .add("ativa");
+
+
+        telaAtual = novaTela;
+
+
+    }, 380);
+
+
+    /*
+       Retira a camada
+       de transição.
+    */
+
+    setTimeout(() => {
+
+        finalizarTransicao();
+
+        trocando = false;
+
+    }, 1100);
+
+}
+
+
+
+/* ==========================================================
+   PRIMEIRO → SEGUNDO
+========================================================== */
+
+const abrirConvite =
+    document.getElementById(
+        "abrirConvite"
+    );
+
+
+if (abrirConvite) {
+
+    abrirConvite.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            mudarTela(1);
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   SEGUNDO → TERCEIRO
+========================================================== */
+
+const tela2 =
+    document.getElementById("tela2");
+
+
+if (tela2) {
+
+    tela2.addEventListener(
+        "click",
+        function() {
+
+            mudarTela(2);
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   TERCEIRO → QUARTO
+========================================================== */
+
+const tela3 =
+    document.getElementById("tela3");
+
+
+if (tela3) {
+
+    tela3.addEventListener(
+        "click",
+        function() {
+
+            mudarTela(3);
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   PRESENTES → QUINTA
+========================================================== */
+
+const botaoPresentes =
+    document.getElementById(
+        "botaoPresentes"
+    );
+
+
+if (botaoPresentes) {
+
+    botaoPresentes.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            mudarTela(4);
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   VOLTAR DA QUINTA → QUARTA
+========================================================== */
+
+const voltarPresentes =
+    document.getElementById(
+        "voltarPresentes"
+    );
+
+
+if (voltarPresentes) {
+
+    voltarPresentes.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            mudarTela(3);
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
    LOCALIZAÇÃO
-========================================== */
+========================================================== */
 
-document
-    .getElementById("botaoLocal")
-    .addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        const mapa =
-            "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
-
-        window.open(mapa, "_blank");
-
-    });
+const botaoLocal =
+    document.getElementById(
+        "botaoLocal"
+    );
 
 
-/* ==========================================
+if (botaoLocal) {
+
+    botaoLocal.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            if (!MAPS_URL) {
+                return;
+            }
+
+
+            window.open(
+                MAPS_URL,
+                "_blank"
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
    CONFIRMAR PRESENÇA
-========================================== */
+========================================================== */
 
-document
-    .getElementById("botaoConfirmar")
-    .addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        /*
-           COLOQUE O LINK DO WHATSAPP AQUI
-           quando você me passar o número.
-
-           Exemplo:
-
-           const telefone = "5521999999999";
-
-           window.open(
-               "https://wa.me/" + telefone,
-               "_blank"
-           );
-        */
-
-        alert("O link para confirmar presença será configurado em breve. 💗");
-
-    });
+const botaoConfirmar =
+    document.getElementById(
+        "botaoConfirmar"
+    );
 
 
-/* ==========================================
-   VOLTAR DA QUINTA
-========================================== */
-
-document
-    .getElementById("voltarPresentes")
-    .addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        mudarTela(3);
-
-    });
+const avisoConfirmacao =
+    document.getElementById(
+        "avisoConfirmacao"
+    );
 
 
-/* ==========================================
-   PRÉ-CARREGAR AS IMAGENS
-========================================== */
+if (botaoConfirmar) {
+
+    botaoConfirmar.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            /*
+               Quando tivermos o link,
+               ele será aberto aqui.
+            */
+
+            if (RSVP_URL) {
+
+                window.open(
+                    RSVP_URL,
+                    "_blank"
+                );
+
+                return;
+            }
+
+
+            /*
+               Enquanto não temos o link.
+            */
+
+            if (avisoConfirmacao) {
+
+                avisoConfirmacao
+                    .classList
+                    .add("aberto");
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   FECHAR AVISO
+========================================================== */
+
+const fecharAviso =
+    document.getElementById(
+        "fecharAviso"
+    );
+
+
+if (fecharAviso && avisoConfirmacao) {
+
+    fecharAviso.addEventListener(
+        "click",
+        function() {
+
+            avisoConfirmacao
+                .classList
+                .remove("aberto");
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   FECHAR AVISO CLICANDO FORA
+========================================================== */
+
+if (avisoConfirmacao) {
+
+    avisoConfirmacao.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                avisoConfirmacao
+            ) {
+
+                avisoConfirmacao
+                    .classList
+                    .remove("aberto");
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   PRÉ-CARREGAR TODAS AS IMAGENS
+========================================================== */
 
 const imagens = [
+
     "Primeiro.png",
     "Segundo.png",
     "Terceiro.png",
     "Quarto.png",
     "Quinta.jpg"
+
 ];
 
-imagens.forEach((arquivo) => {
 
-    const imagem = new Image();
+imagens.forEach(
+    function(caminho) {
 
-    imagem.src = arquivo;
+        const imagem =
+            new Image();
 
-});
+        imagem.src = caminho;
+
+    }
+);
+
+
+
+/* ==========================================================
+   GARANTIR PRIMEIRA TELA
+========================================================== */
+
+telas.forEach(
+    function(tela, indice) {
+
+        if (!tela) {
+            return;
+        }
+
+        if (indice === 0) {
+
+            tela.classList.add(
+                "ativa"
+            );
+
+        } else {
+
+            tela.classList.remove(
+                "ativa"
+            );
+
+        }
+
+    }
+);
