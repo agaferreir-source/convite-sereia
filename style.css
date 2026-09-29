@@ -40,8 +40,6 @@ body {
     pointer-events: none;
 
     z-index: 1;
-
-    transform: scale(1);
 }
 
 .tela.ativa {
@@ -90,7 +88,7 @@ body {
 
 
 /* =========================================================
-   BOTÕES DA QUARTA TELA
+   BOTÕES
 ========================================================= */
 
 .botao-interativo {
@@ -116,7 +114,6 @@ body {
     transform: scale(.9);
 }
 
-
 .botao-presentes {
     width: 31%;
     height: 30%;
@@ -125,7 +122,6 @@ body {
     bottom: 8%;
 }
 
-
 .botao-local {
     width: 31%;
     height: 30%;
@@ -133,7 +129,6 @@ body {
     left: 34.5%;
     bottom: 8%;
 }
-
 
 .botao-confirmar {
     width: 31%;
@@ -173,7 +168,7 @@ body {
 
 
 /* =========================================================
-   CAMADA DAS TRANSIÇÕES
+   TRANSIÇÃO
 ========================================================= */
 
 #transicao {
@@ -195,182 +190,218 @@ body {
 
 
 /* =========================================================
-   ELEMENTOS
+   LUZ DA ÁGUA
+========================================================= */
+
+.luz-agua {
+    position: absolute;
+
+    width: 160%;
+    height: 100%;
+
+    left: -30%;
+    top: 0;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 15%,
+            rgba(255,255,255,.04) 30%,
+            rgba(255,255,255,.48) 48%,
+            rgba(255,255,255,.08) 62%,
+            transparent 80%
+        );
+
+    filter: blur(15px);
+
+    opacity: 0;
+}
+
+
+/* =========================================================
+   ONDAS
 ========================================================= */
 
 .onda {
     position: absolute;
 
-    width: 180%;
-    height: 55%;
+    width: 170%;
+    height: 45%;
 
-    left: -40%;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-}
-
-.onda-cima {
-    top: -35%;
-}
-
-.onda-baixo {
-    bottom: -35%;
-}
-
-
-.luz-agua {
-    position: absolute;
-
-    width: 180%;
-    height: 100%;
-
-    left: -40%;
-    top: 0;
-
-    pointer-events: none;
-}
-
-
-.bolha {
-    position: absolute;
-
-    bottom: -50px;
+    left: -35%;
 
     border-radius: 50%;
 
     opacity: 0;
-
-    pointer-events: none;
 }
 
+.onda-cima {
+    top: -28%;
+}
+
+.onda-baixo {
+    bottom: -28%;
+}
+
+
+/* =========================================================
+   BOLHAS
+========================================================= */
+
+.bolha {
+    position: absolute;
+
+    bottom: -40px;
+
+    border-radius: 50%;
+
+    border: 1.5px solid rgba(255,255,255,.8);
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,.9),
+            rgba(255,255,255,.12) 55%,
+            transparent 72%
+        );
+
+    box-shadow:
+        inset 1px 1px 3px rgba(255,255,255,.7);
+
+    opacity: 0;
+}
 
 .bolha1 {
     width: 12px;
     height: 12px;
-    left: 10%;
+    left: 8%;
 }
 
 .bolha2 {
-    width: 8px;
-    height: 8px;
-    left: 25%;
+    width: 7px;
+    height: 7px;
+    left: 22%;
 }
 
 .bolha3 {
-    width: 20px;
-    height: 20px;
-    left: 40%;
+    width: 18px;
+    height: 18px;
+    left: 38%;
 }
 
 .bolha4 {
-    width: 10px;
-    height: 10px;
-    left: 58%;
+    width: 9px;
+    height: 9px;
+    left: 56%;
 }
 
 .bolha5 {
-    width: 16px;
-    height: 16px;
-    left: 74%;
+    width: 15px;
+    height: 15px;
+    left: 73%;
 }
 
 .bolha6 {
-    width: 7px;
-    height: 7px;
-    left: 89%;
+    width: 8px;
+    height: 8px;
+    left: 88%;
 }
 
+
+/* =========================================================
+   BRILHOS
+========================================================= */
 
 .brilho {
     position: absolute;
 
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
 
     border-radius: 50%;
 
     background: white;
 
+    box-shadow:
+        0 0 8px white,
+        0 0 18px rgba(255,255,255,.9);
+
     opacity: 0;
 }
 
 
 /* =========================================================
-   TRANSIÇÃO 1
-   ABERTURA DO LACRE
+   1 — ABERTURA DO MAR
+   PRINCIPAL
 ========================================================= */
 
 #transicao.tipo1 {
     visibility: visible;
 
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.25),
+            rgba(135,224,239,.18),
+            transparent 75%
+        );
+
     animation:
-        t1Fade
-        1.15s
+        primeiraTransicao
+        1.1s
         ease-in-out
         forwards;
 }
 
-
 #transicao.tipo1 .onda-cima {
-
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.95),
-            rgba(118,219,239,.65),
+            rgba(255,255,255,.75),
+            rgba(145,229,242,.25),
             transparent
         );
 
     animation:
-        t1OndaCima
+        ondaCima
         1.1s
         ease-in-out
         forwards;
 }
 
-
 #transicao.tipo1 .onda-baixo {
-
     background:
         linear-gradient(
             0deg,
-            rgba(255,255,255,.9),
-            rgba(103,211,235,.5),
+            rgba(255,255,255,.65),
+            rgba(135,220,238,.2),
             transparent
         );
 
     animation:
-        t1OndaBaixo
+        ondaBaixo
         1.1s
         ease-in-out
         forwards;
 }
 
+#transicao.tipo1 .luz-agua {
+    animation:
+        luzPassando
+        1.1s
+        ease-in-out
+        forwards;
+}
 
 #transicao.tipo1 .bolha {
-
-    border: 1px solid rgba(255,255,255,.9);
-
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            white,
-            rgba(255,255,255,.15) 55%,
-            transparent 70%
-        );
-
     animation:
-        t1Bolha
+        bolhaSubindo
         1.1s
         ease-out
         forwards;
 }
 
-
-@keyframes t1Fade {
-
+@keyframes primeiraTransicao {
     0% {
         opacity: 0;
     }
@@ -379,7 +410,7 @@ body {
         opacity: 1;
     }
 
-    70% {
+    72% {
         opacity: 1;
     }
 
@@ -388,486 +419,436 @@ body {
     }
 }
 
-
-@keyframes t1OndaCima {
-
+@keyframes ondaCima {
     0% {
         transform:
-            translateX(-100%)
+            translateX(-90%)
             rotate(-8deg);
         opacity: 0;
     }
 
-    30% {
-        opacity: 1;
+    25% {
+        opacity: .8;
     }
 
     100% {
         transform:
-            translateX(100%)
+            translateX(90%)
             rotate(-8deg);
         opacity: 0;
     }
 }
 
-
-@keyframes t1OndaBaixo {
-
+@keyframes ondaBaixo {
     0% {
         transform:
-            translateX(100%)
+            translateX(90%)
             rotate(8deg);
         opacity: 0;
     }
 
-    30% {
-        opacity: 1;
+    25% {
+        opacity: .7;
     }
 
     100% {
         transform:
-            translateX(-100%)
+            translateX(-90%)
             rotate(8deg);
         opacity: 0;
     }
 }
 
+@keyframes luzPassando {
+    0% {
+        transform: translateX(-55%);
+        opacity: 0;
+    }
 
-@keyframes t1Bolha {
+    30% {
+        opacity: .7;
+    }
 
+    100% {
+        transform: translateX(55%);
+        opacity: 0;
+    }
+}
+
+@keyframes bolhaSubindo {
     0% {
         transform:
             translateY(0)
-            scale(.3);
+            scale(.35);
         opacity: 0;
     }
 
     20% {
-        opacity: 1;
+        opacity: .8;
     }
 
     100% {
         transform:
             translateY(-110vh)
-            scale(1.3);
+            translateX(20px)
+            scale(1.15);
         opacity: 0;
     }
 }
 
 
 /* =========================================================
-   TRANSIÇÃO 2
-   LUZ PEROLADA
+   2 — BRILHO SUAVE
 ========================================================= */
 
 #transicao.tipo2 {
-
     visibility: visible;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(255,255,255,.95),
-            rgba(246,222,248,.7),
-            rgba(140,215,232,.25),
-            transparent 75%
+            rgba(255,255,255,.22),
+            rgba(220,244,248,.12),
+            transparent 70%
         );
 
     animation:
-        t2Luz
-        1.05s
-        ease-in-out
-        forwards;
-}
-
-
-#transicao.tipo2 .luz-agua {
-
-    background:
-        linear-gradient(
-            110deg,
-            transparent 20%,
-            rgba(255,255,255,.05) 30%,
-            rgba(255,255,255,.9) 48%,
-            rgba(255,255,255,.05) 65%,
-            transparent 80%
-        );
-
-    filter: blur(18px);
-
-    animation:
-        t2Passagem
+        brilhoSuave
         1s
         ease-in-out
         forwards;
 }
 
+#transicao.tipo2 .luz-agua {
+    animation:
+        luzHorizontal
+        1s
+        ease-in-out
+        forwards;
+}
 
 #transicao.tipo2 .brilho {
-
-    box-shadow:
-        0 0 8px white,
-        0 0 25px white;
-
     animation:
-        t2Brilho
-        .9s
+        pequenosBrilhos
+        1s
         ease-out
         forwards;
 }
 
-
-@keyframes t2Luz {
-
+@keyframes brilhoSuave {
     0% {
         opacity: 0;
-    }
-
-    35% {
-        opacity: 1;
-    }
-
-    65% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-
-@keyframes t2Passagem {
-
-    0% {
-        transform:
-            translateX(-65%)
-            rotate(-8deg);
-        opacity: 0;
-    }
-
-    35% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translateX(65%)
-            rotate(-8deg);
-        opacity: 0;
-    }
-}
-
-
-@keyframes t2Brilho {
-
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    35% {
-        transform: scale(2.8);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(.2);
-        opacity: 0;
-    }
-}
-
-
-/* =========================================================
-   TRANSIÇÃO 3
-   EXPLOSÃO DE BOLHAS
-========================================================= */
-
-#transicao.tipo3 {
-
-    visibility: visible;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(176,239,249,.85),
-            rgba(50,157,201,.65),
-            rgba(20,90,150,.3)
-        );
-
-    animation:
-        t3Bolhas
-        1.1s
-        ease-out
-        forwards;
-}
-
-
-#transicao.tipo3 .bolha {
-
-    border:
-        2px solid
-        rgba(255,255,255,.9);
-
-    background:
-        rgba(255,255,255,.12);
-
-    box-shadow:
-        inset 2px 2px 4px
-        rgba(255,255,255,.7);
-
-    animation:
-        t3Subir
-        1.1s
-        ease-out
-        forwards;
-}
-
-
-@keyframes t3Bolhas {
-
-    0% {
-        opacity: 0;
-        transform: scale(.85);
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(1.08);
-    }
-}
-
-
-@keyframes t3Subir {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateY(20vh)
-            scale(.2);
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            translateY(-120vh)
-            translateX(30px)
-            scale(1.5);
-    }
-}
-
-
-/* =========================================================
-   TRANSIÇÃO 4
-   MERGULHO
-========================================================= */
-
-#transicao.tipo4 {
-
-    visibility: visible;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255,255,255,.95) 0%,
-            rgba(91,211,236,.85) 25%,
-            rgba(21,111,169,.9) 75%
-        );
-
-    animation:
-        t4Mergulho
-        1.2s
-        cubic-bezier(.65,0,.35,1)
-        forwards;
-}
-
-
-#transicao.tipo4 .onda-cima {
-
-    background:
-        rgba(255,255,255,.35);
-
-    filter: blur(12px);
-
-    animation:
-        t4Onda
-        1.2s
-        ease-in-out
-        forwards;
-}
-
-
-#transicao.tipo4 .bolha {
-
-    border:
-        1px solid
-        rgba(255,255,255,.85);
-
-    background:
-        rgba(255,255,255,.12);
-
-    animation:
-        t4Bolhas
-        1.25s
-        ease-out
-        forwards;
-}
-
-
-@keyframes t4Mergulho {
-
-    0% {
-        opacity: 0;
-        transform:
-            scale(.55);
-        filter: blur(0);
-    }
-
-    25% {
-        opacity: 1;
-        transform:
-            scale(.95);
-    }
-
-    60% {
-        opacity: 1;
-        transform:
-            scale(1.12);
-        filter: blur(2px);
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            scale(1.5);
-        filter: blur(7px);
-    }
-}
-
-
-@keyframes t4Onda {
-
-    0% {
-        transform:
-            translateY(100%);
-    }
-
-    100% {
-        transform:
-            translateY(-100%);
-    }
-}
-
-
-@keyframes t4Bolhas {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateY(25vh)
-            scale(.2);
-    }
-
-    25% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            translateY(-120vh)
-            scale(1.4);
-    }
-}
-
-
-/* =========================================================
-   TRANSIÇÃO 5
-   VOLTA DA QUINTA
-========================================================= */
-
-#transicao.tipo5 {
-
-    visibility: visible;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,255,255,.9),
-            rgba(245,218,244,.7),
-            rgba(120,201,225,.35),
-            transparent
-        );
-
-    animation:
-        t5Volta
-        .95s
-        ease-in-out
-        forwards;
-}
-
-
-#transicao.tipo5 .brilho {
-
-    animation:
-        t5Brilho
-        .9s
-        ease-out
-        forwards;
-}
-
-
-@keyframes t5Volta {
-
-    0% {
-        opacity: 0;
-        transform:
-            scale(1.3);
     }
 
     30% {
         opacity: 1;
     }
 
-    65% {
+    70% {
         opacity: 1;
     }
 
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes luzHorizontal {
+    0% {
         transform:
-            scale(.92);
+            translateX(-65%)
+            rotate(-7deg);
+        opacity: 0;
+    }
+
+    35% {
+        opacity: .7;
+    }
+
+    100% {
+        transform:
+            translateX(65%)
+            rotate(-7deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pequenosBrilhos {
+    0% {
+        transform: scale(.1);
+        opacity: 0;
+    }
+
+    35% {
+        transform: scale(2);
+        opacity: .9;
+    }
+
+    100% {
+        transform: scale(.2);
+        opacity: 0;
     }
 }
 
 
-@keyframes t5Brilho {
+/* =========================================================
+   3 — BOLHAS DELICADAS
+========================================================= */
 
+#transicao.tipo3 {
+    visibility: visible;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(180,239,246,.16),
+            transparent 70%
+        );
+
+    animation:
+        bolhasDelicadas
+        1.05s
+        ease-out
+        forwards;
+}
+
+#transicao.tipo3 .bolha {
+    animation:
+        bolhasSubindo
+        1.05s
+        ease-out
+        forwards;
+}
+
+@keyframes bolhasDelicadas {
     0% {
         opacity: 0;
-        transform: scale(2);
     }
 
-    40% {
+    25% {
+        opacity: 1;
+    }
+
+    75% {
         opacity: 1;
     }
 
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes bolhasSubindo {
+    0% {
+        transform:
+            translateY(15vh)
+            scale(.25);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .8;
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            translateX(25px)
+            scale(1.2);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   4 — ENTRADA NA QUINTA
+   SEM TELA AZUL
+========================================================= */
+
+#transicao.tipo4 {
+    visibility: visible;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.28),
+            rgba(180,235,242,.12),
+            transparent 72%
+        );
+
+    animation:
+        entradaQuinta
+        1.05s
+        ease-in-out
+        forwards;
+}
+
+#transicao.tipo4 .bolha {
+    animation:
+        bolhasQuinta
+        1.05s
+        ease-out
+        forwards;
+}
+
+#transicao.tipo4 .luz-agua {
+    animation:
+        luzQuinta
+        1.05s
+        ease-in-out
+        forwards;
+}
+
+@keyframes entradaQuinta {
+    0% {
+        opacity: 0;
+        transform: scale(.96);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes bolhasQuinta {
+    0% {
+        transform:
+            translateY(12vh)
+            scale(.3);
+        opacity: 0;
+    }
+
+    25% {
+        opacity: .8;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            translateX(-15px)
+            scale(1.1);
+        opacity: 0;
+    }
+}
+
+@keyframes luzQuinta {
+    0% {
+        transform: translateX(-60%);
+        opacity: 0;
+    }
+
+    40% {
+        opacity: .55;
+    }
+
+    100% {
+        transform: translateX(60%);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   5 — VOLTANDO DA QUINTA
+========================================================= */
+
+#transicao.tipo5 {
+    visibility: visible;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.2),
+            rgba(210,238,242,.08),
+            transparent 72%
+        );
+
+    animation:
+        retornoQuarta
+        1s
+        ease-in-out
+        forwards;
+}
+
+#transicao.tipo5 .brilho {
+    animation:
+        brilhoRetorno
+        .9s
+        ease-out
+        forwards;
+}
+
+#transicao.tipo5 .bolha {
+    animation:
+        bolhasRetorno
+        1s
+        ease-out
+        forwards;
+}
+
+@keyframes retornoQuarta {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(.98);
+    }
+}
+
+@keyframes brilhoRetorno {
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+
+    35% {
+        transform: scale(1);
+        opacity: .8;
+    }
+
+    100% {
         transform: scale(.2);
+        opacity: 0;
+    }
+}
+
+@keyframes bolhasRetorno {
+    0% {
+        transform:
+            translateY(5vh)
+            scale(.3);
+        opacity: 0;
+    }
+
+    25% {
+        opacity: .7;
+    }
+
+    100% {
+        transform:
+            translateY(-100vh)
+            scale(1.1);
+        opacity: 0;
     }
 }
 
@@ -877,7 +858,6 @@ body {
 ========================================================= */
 
 .aviso {
-
     position: fixed;
     inset: 0;
 
@@ -889,8 +869,7 @@ body {
 
     padding: 20px;
 
-    background:
-        rgba(20,50,80,.45);
+    background: rgba(20,50,80,.4);
 
     backdrop-filter: blur(7px);
 
@@ -902,15 +881,12 @@ body {
         visibility .3s ease;
 }
 
-
 .aviso.aberto {
     opacity: 1;
     visibility: visible;
 }
 
-
 .aviso-caixa {
-
     width: min(90vw,350px);
 
     padding: 28px 22px;
@@ -927,19 +903,15 @@ body {
         );
 
     box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.25);
+        0 20px 60px rgba(0,0,0,.25);
 }
-
 
 .aviso-coracao {
     font-size: 40px;
     margin-bottom: 10px;
 }
 
-
 .aviso-caixa p {
-
     color: #70427d;
 
     font-size: 16px;
@@ -949,9 +921,7 @@ body {
     margin-bottom: 20px;
 }
 
-
 #fecharAviso {
-
     border: none;
 
     border-radius: 20px;
