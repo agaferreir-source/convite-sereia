@@ -1,203 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#78dff5">
+    <title>Antonella - 3 Anos</title>
 
-  <title>Convite da Antonella</title>
-
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <main class="convite">
+    <main id="convite">
+
+        <!-- =========================
+             PRIMEIRA TELA
+        ========================== -->
+        <section class="tela ativa" id="tela1">
+
+            <img
+                src="Primeiro.jpg"
+                class="imagem-tela"
+                alt="Abertura do convite"
+            >
+
+            <!-- Área invisível para tocar no lacre -->
+            <button
+                class="area-lacre"
+                id="abrirConvite"
+                aria-label="Abrir convite">
+            </button>
+
+            <div class="efeito-bolhas"></div>
+
+        </section>
+
+
+        <!-- =========================
+             SEGUNDA TELA
+        ========================== -->
+        <section class="tela" id="tela2">
+
+            <img
+                src="Segundo.jpg"
+                class="imagem-tela"
+                alt="Mensagem do convite"
+            >
+
+            <div class="efeito-bolhas"></div>
+
+            <button
+                class="area-tela"
+                id="irTela3"
+                aria-label="Continuar">
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             TERCEIRA TELA
+        ========================== -->
+        <section class="tela" id="tela3">
+
+            <img
+                src="Terceiro.jpg"
+                class="imagem-tela"
+                alt="Data do aniversário"
+            >
+
+            <div class="efeito-bolhas"></div>
+
+            <button
+                class="area-tela"
+                id="irTela4"
+                aria-label="Ver informações">
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             QUARTA TELA
+        ========================== -->
+        <section class="tela" id="tela4">
+
+            <img
+                src="Quarto.jpg"
+                class="imagem-tela"
+                alt="Informações do aniversário"
+            >
+
+            <div class="efeito-bolhas"></div>
+
+            <!-- BOTÃO PRESENTES -->
+            <button
+                class="botao-interacao botao-presentes"
+                id="btnPresentes"
+                aria-label="Sugestão de presentes">
+            </button>
+
+            <!-- BOTÃO LOCALIZAÇÃO -->
+            <button
+                class="botao-interacao botao-local"
+                id="btnLocal"
+                aria-label="Localização">
+            </button>
+
+            <!-- BOTÃO CONFIRMAÇÃO -->
+            <button
+                class="botao-interacao botao-confirmar"
+                id="btnConfirmar"
+                aria-label="Confirmar presença">
+            </button>
+
+        </section>
+
+    </main>
+
 
     <!-- =========================
-         TELA 1 - LACRE
+         JANELA DE PRESENTES
     ========================== -->
 
-    <section class="tela tela-1 ativa" id="tela1">
+    <div class="modal" id="modalPresentes">
 
-      <img
-        src="Primeiro.png"
-        alt="Abertura do convite"
-        class="imagem"
-      >
+        <div class="modal-fundo"></div>
 
-      <div class="camada-efeitos"></div>
+        <div class="modal-conteudo">
 
-      <button
-        class="area-toque"
-        id="abrirConvite"
-        aria-label="Abrir convite">
-      </button>
+            <button
+                class="fechar"
+                id="fecharPresentes"
+                aria-label="Fechar">
+                ×
+            </button>
 
-    </section>
+            <img
+                src="Quinta.jpg"
+                alt="Sugestão de presentes"
+                class="imagem-presentes"
+            >
 
-
-    <!-- =========================
-         TELA 2 - MENSAGEM
-    ========================== -->
-
-    <section class="tela tela-2" id="tela2">
-
-      <img
-        src="Segundo.png"
-        alt="Mensagem do convite"
-        class="imagem"
-      >
-
-      <div class="camada-efeitos">
-
-        <div class="bolhas"></div>
-
-        <span class="brilho brilho-1"></span>
-        <span class="brilho brilho-2"></span>
-        <span class="brilho brilho-3"></span>
-        <span class="brilho brilho-4"></span>
-
-        <div class="luz-agua"></div>
-
-      </div>
-
-      <button
-        class="area-toque"
-        id="irTela3"
-        aria-label="Continuar">
-      </button>
-
-    </section>
-
-
-    <!-- =========================
-         TELA 3 - DATA
-    ========================== -->
-
-    <section class="tela tela-3" id="tela3">
-
-      <img
-        src="Terceiro.png"
-        alt="Antonella e informações da festa"
-        class="imagem"
-      >
-
-      <div class="camada-efeitos">
-
-        <div class="bolhas"></div>
-
-        <span class="brilho brilho-5"></span>
-        <span class="brilho brilho-6"></span>
-        <span class="brilho brilho-7"></span>
-
-        <div class="luz-agua"></div>
-
-      </div>
-
-      <button
-        class="area-toque"
-        id="irTela4"
-        aria-label="Continuar">
-      </button>
-
-    </section>
-
-
-    <!-- =========================
-         TELA 4 - INTERAÇÕES
-    ========================== -->
-
-    <section class="tela tela-4" id="tela4">
-
-      <img
-        src="Quarto.png"
-        alt="Informações do aniversário"
-        class="imagem"
-      >
-
-      <div class="camada-efeitos">
-
-        <div class="bolhas"></div>
-
-        <span class="brilho brilho-8"></span>
-        <span class="brilho brilho-9"></span>
-
-        <div class="luz-agua"></div>
-
-      </div>
-
-
-      <!-- LOCALIZAÇÃO -->
-
-      <button
-        class="botao-invisivel local"
-        id="botaoLocal"
-        aria-label="Ver localização">
-      </button>
-
-
-      <!-- PRESENTES -->
-
-      <button
-        class="botao-invisivel presentes"
-        id="botaoPresentes"
-        aria-label="Ver sugestão de presentes">
-      </button>
-
-
-      <!-- CONFIRMAÇÃO
-           Será configurada depois -->
-
-      <button
-        class="botao-invisivel rsvp"
-        id="botaoRsvp"
-        aria-label="Confirmar presença">
-      </button>
-
-
-      <!-- MODAL DE PRESENTES -->
-
-      <div
-        class="modal-presentes"
-        id="modalPresentes"
-      >
-
-        <button
-          class="fechar-modal"
-          id="fecharPresentes"
-          aria-label="Fechar">
-          ×
-        </button>
-
-        <img
-          src="Quinta.jpg"
-          alt="Sugestão de presentes"
-        >
-
-      </div>
-
-    </section>
-
-
-    <!-- TRANSIÇÃO -->
-
-    <div
-      class="transicao-mergulho"
-      id="transicao"
-    >
-
-      <div class="transicao-bolhas"></div>
-
-      <div class="transicao-luz"></div>
+        </div>
 
     </div>
 
-  </main>
+
+    <!-- =========================
+         MENSAGEM DE CONFIRMAÇÃO
+    ========================== -->
+
+    <div class="aviso" id="aviso">
+
+        <div class="aviso-caixa">
+
+            <span>💗</span>
+
+            <p>
+                A confirmação de presença será configurada em breve.
+            </p>
+
+            <button id="fecharAviso">
+                OK
+            </button>
+
+        </div>
+
+    </div>
 
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
