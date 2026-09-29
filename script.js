@@ -1,300 +1,194 @@
-document.addEventListener("DOMContentLoaded", () => {
+const telas = [
+    document.getElementById("tela1"),
+    document.getElementById("tela2"),
+    document.getElementById("tela3"),
+    document.getElementById("tela4"),
+    document.getElementById("tela5")
+];
+
+const transicao = document.getElementById("transicao");
+
+let telaAtual = 0;
+
+
+/* ==========================================
+   TROCAR DE TELA
+========================================== */
+
+function mudarTela(numero) {
+
+    if (numero < 0 || numero >= telas.length) {
+        return;
+    }
+
+    if (numero === telaAtual) {
+        return;
+    }
 
     /*
-    ==========================================
-    CONFIGURAÇÕES
-    ==========================================
+       Começa a transição
     */
 
-    const MAPS_URL =
-        "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
+    transicao.classList.add("entrando");
 
 
-    /*
-    ==========================================
-    TELAS
-    ==========================================
-    */
+    setTimeout(() => {
 
-    const telas = [
-        document.getElementById("tela1"),
-        document.getElementById("tela2"),
-        document.getElementById("tela3"),
-        document.getElementById("tela4")
-    ];
+        telas[telaAtual].classList.remove("ativa");
 
-
-    let telaAtual = 0;
-
-
-    /*
-    ==========================================
-    TROCAR TELA
-    ==========================================
-    */
-
-    function mostrarTela(numero) {
-
-        if (numero < 0 || numero >= telas.length) {
-            return;
-        }
-
-        telas.forEach((tela, index) => {
-
-            if (!tela) return;
-
-            tela.classList.toggle(
-                "ativa",
-                index === numero
-            );
-
-        });
+        telas[numero].classList.add("ativa");
 
         telaAtual = numero;
 
-    }
 
+        /*
+           Espera a nova imagem aparecer
+        */
 
-    /*
-    ==========================================
-    PRIMEIRA TELA
-    ==========================================
-    */
+        setTimeout(() => {
 
-    const abrirConvite =
-        document.getElementById("abrirConvite");
+            transicao.classList.remove("entrando");
 
+        }, 250);
 
-    if (abrirConvite) {
 
-        abrirConvite.addEventListener("click", (event) => {
+    }, 400);
+}
 
-            event.preventDefault();
 
-            mostrarTela(1);
+/* ==========================================
+   ABRIR O CONVITE
+========================================== */
 
-        });
+document
+    .getElementById("abrirConvite")
+    .addEventListener("click", () => {
 
-    }
-
-
-    /*
-    ==========================================
-    SEGUNDA → TERCEIRA
-    ==========================================
-    */
-
-    const irTela3 =
-        document.getElementById("irTela3");
-
-
-    if (irTela3) {
-
-        irTela3.addEventListener("click", (event) => {
-
-            event.preventDefault();
-
-            mostrarTela(2);
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    TERCEIRA → QUARTA
-    ==========================================
-    */
-
-    const irTela4 =
-        document.getElementById("irTela4");
-
-
-    if (irTela4) {
-
-        irTela4.addEventListener("click", (event) => {
-
-            event.preventDefault();
-
-            mostrarTela(3);
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    SUGESTÃO DE PRESENTES
-    ==========================================
-    */
-
-    const btnPresentes =
-        document.getElementById("btnPresentes");
-
-    const modalPresentes =
-        document.getElementById("modalPresentes");
-
-    const fecharPresentes =
-        document.getElementById("fecharPresentes");
-
-
-    if (btnPresentes && modalPresentes) {
-
-        btnPresentes.addEventListener("click", (event) => {
-
-            event.preventDefault();
-
-            modalPresentes.classList.add("aberto");
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    FECHAR PRESENTES
-    ==========================================
-    */
-
-    if (fecharPresentes && modalPresentes) {
-
-        fecharPresentes.addEventListener("click", () => {
-
-            modalPresentes.classList.remove("aberto");
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    CLICAR FORA DA IMAGEM
-    ==========================================
-    */
-
-    if (modalPresentes) {
-
-        modalPresentes.addEventListener("click", (event) => {
-
-            if (
-                event.target.classList.contains("modal-fundo")
-            ) {
-
-                modalPresentes.classList.remove("aberto");
-
-            }
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    LOCALIZAÇÃO
-    ==========================================
-    */
-
-    const btnLocal =
-        document.getElementById("btnLocal");
-
-
-    if (btnLocal) {
-
-        btnLocal.addEventListener("click", (event) => {
-
-            event.preventDefault();
-
-            window.open(
-                MAPS_URL,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    CONFIRMAR PRESENÇA
-    ==========================================
-    */
-
-    const btnConfirmar =
-        document.getElementById("btnConfirmar");
-
-    const aviso =
-        document.getElementById("aviso");
-
-    const fecharAviso =
-        document.getElementById("fecharAviso");
-
-
-    if (btnConfirmar && aviso) {
-
-        btnConfirmar.addEventListener("click", (event) => {
-
-            event.preventDefault();
-
-            aviso.classList.add("aberto");
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    FECHAR AVISO
-    ==========================================
-    */
-
-    if (fecharAviso && aviso) {
-
-        fecharAviso.addEventListener("click", () => {
-
-            aviso.classList.remove("aberto");
-
-        });
-
-    }
-
-
-    /*
-    ==========================================
-    ESC PARA FECHAR MODAIS
-    ==========================================
-    */
-
-    document.addEventListener("keydown", (event) => {
-
-        if (event.key === "Escape") {
-
-            if (modalPresentes) {
-                modalPresentes.classList.remove("aberto");
-            }
-
-            if (aviso) {
-                aviso.classList.remove("aberto");
-            }
-
-        }
+        mudarTela(1);
 
     });
 
 
-    /*
-    ==========================================
-    GARANTIR QUE COMEÇA NA PRIMEIRA TELA
-    ==========================================
-    */
+/* ==========================================
+   PASSAGEM DA SEGUNDA PARA A TERCEIRA
+========================================== */
 
-    mostrarTela(0);
+document
+    .getElementById("tela2")
+    .addEventListener("click", () => {
+
+        mudarTela(2);
+
+    });
+
+
+/* ==========================================
+   PASSAGEM DA TERCEIRA PARA A QUARTA
+========================================== */
+
+document
+    .getElementById("tela3")
+    .addEventListener("click", () => {
+
+        mudarTela(3);
+
+    });
+
+
+/* ==========================================
+   SUGESTÃO DE PRESENTES
+========================================== */
+
+document
+    .getElementById("botaoPresentes")
+    .addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        mudarTela(4);
+
+    });
+
+
+/* ==========================================
+   LOCALIZAÇÃO
+========================================== */
+
+document
+    .getElementById("botaoLocal")
+    .addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        const mapa =
+            "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
+
+        window.open(mapa, "_blank");
+
+    });
+
+
+/* ==========================================
+   CONFIRMAR PRESENÇA
+========================================== */
+
+document
+    .getElementById("botaoConfirmar")
+    .addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        /*
+           COLOQUE O LINK DO WHATSAPP AQUI
+           quando você me passar o número.
+
+           Exemplo:
+
+           const telefone = "5521999999999";
+
+           window.open(
+               "https://wa.me/" + telefone,
+               "_blank"
+           );
+        */
+
+        alert("O link para confirmar presença será configurado em breve. 💗");
+
+    });
+
+
+/* ==========================================
+   VOLTAR DA QUINTA
+========================================== */
+
+document
+    .getElementById("voltarPresentes")
+    .addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        mudarTela(3);
+
+    });
+
+
+/* ==========================================
+   PRÉ-CARREGAR AS IMAGENS
+========================================== */
+
+const imagens = [
+    "Primeiro.jpg",
+    "Segundo.jpg",
+    "Terceiro.jpg",
+    "Quarto.jpg",
+    "Quinta.jpg"
+];
+
+
+imagens.forEach((arquivo) => {
+
+    const imagem = new Image();
+
+    imagem.src = arquivo;
 
 });
