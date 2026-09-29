@@ -1,344 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#75d9f5">
+  <title>Convite da Antonella</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta name="theme-color" content="#07547a">
-
-    <title>Um convite especial</title>
-
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-<main id="convite">
+  <main class="convite">
 
+    <!-- PRIMEIRA TELA -->
+    <section class="tela ativa" id="tela1">
+      <img src="Primeiro.png" alt="Abertura do convite">
 
-    <!-- =====================================================
-         CAPA
-    ====================================================== -->
-
-    <section id="abertura" class="tela-abertura">
-
-        <img
-            src="imagens/file_00000000a768820e94da58a218e48e11.png"
-            alt="Convite"
-            class="imagem-abertura"
-        >
-
-        <button
-            id="abrirConvite"
-            class="area-lacre"
-            type="button"
-            aria-label="Abrir convite"
-        ></button>
-
+      <!-- Área invisível para abrir -->
+      <button
+        class="area-toque"
+        id="abrirConvite"
+        aria-label="Abrir convite">
+      </button>
     </section>
 
 
-
-    <!-- =====================================================
-         CENÁRIO PRINCIPAL DO MAR
-    ====================================================== -->
-
-    <section id="cenaMar" class="cena-mar">
-
-        <img
-            src="imagens/file_000000005348820e88dc88e2d0c1234c.png"
-            alt=""
-            class="imagem-mar"
-        >
-
-
-        <div class="luz-agua"></div>
-
-
-        <!-- BOLHAS -->
-
-        <div class="bolha bolha-1"></div>
-        <div class="bolha bolha-2"></div>
-        <div class="bolha bolha-3"></div>
-        <div class="bolha bolha-4"></div>
-        <div class="bolha bolha-5"></div>
-        <div class="bolha bolha-6"></div>
-        <div class="bolha bolha-7"></div>
-        <div class="bolha bolha-8"></div>
-
-
-        <!-- =================================================
-             MENINA
-        ================================================== -->
-
-        <div id="cenaMenina" class="conteudo-cena">
-
-            <div class="area-menina">
-
-                <img
-                    src="imagens/menina-sereia.png"
-                    alt="Menina sereia"
-                    class="imagem-menina"
-                    id="imagemMenina"
-                >
-
-                <div class="fala-menina">
-
-                    <p>
-                        Oi! Eu tenho uma coisa muito especial
-                        pra contar pra você! 💕
-                    </p>
-
-                    <p>
-                        A minha festinha tá chegando e eu quero
-                        muito que você venha comemorar comigo!
-                    </p>
-
-                    <p>
-                        Dia 25 de outubro, às três horas da tarde,
-                        a gente vai se encontrar na Associação
-                        de Moradores.
-                    </p>
-
-                    <p>
-                        E já fica o aviso:
-                        convidado não convida kkkkk!
-                    </p>
-
-                    <p>
-                        Eu espero você lá!
-                        Um beijinho! 🧜🏽‍♀️
-                    </p>
-
-                </div>
-
-                <button
-                    id="continuarParaInformacoes"
-                    class="botao"
-                    type="button"
-                >
-                    Ver os detalhes ✨
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             INFORMAÇÕES
-        ================================================== -->
-
-        <div id="informacoes" class="conteudo-cena">
-
-            <div class="conteudo-informacoes">
-
-                <span class="titulo-pequeno">
-                    ✦ ANOTE NA AGENDA ✦
-                </span>
-
-                <h1>
-                    Minha festinha
-                </h1>
-
-
-                <div class="detalhes">
-
-                    <div class="detalhe">
-                        <span>📅</span>
-
-                        <div>
-                            <small>DATA</small>
-                            <strong>25 de outubro de 2026</strong>
-                        </div>
-                    </div>
-
-
-                    <div class="detalhe">
-                        <span>🕒</span>
-
-                        <div>
-                            <small>HORÁRIO</small>
-                            <strong>15:00</strong>
-                        </div>
-                    </div>
-
-
-                    <div class="detalhe">
-                        <span>📍</span>
-
-                        <div>
-                            <small>LOCAL</small>
-                            <strong>Associação de Moradores</strong>
-                            <em>Rua Oliveira Bueno, nº 850</em>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <button
-                    id="abrirLocalizacao"
-                    class="botao"
-                    type="button"
-                >
-                    📍 Ver localização
-                </button>
-
-
-                <button
-                    id="continuarParaPresentes"
-                    class="botao-transparente"
-                    type="button"
-                >
-                    Ver sugestão de presente 🎁
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             PRESENTES
-        ================================================== -->
-
-        <div id="presentes" class="conteudo-cena">
-
-            <div class="conteudo-presentes">
-
-                <span class="titulo-pequeno">
-                    ✦ SE QUISER ME PRESENTEAR ✦
-                </span>
-
-                <h1>
-                    Eu vou amar! 💕
-                </h1>
-
-                <p class="frase-presente">
-                    E convidado não convida kkkkk!
-                </p>
-
-
-                <div class="lista-presentes">
-
-                    <div>
-                        <span>👗</span>
-                        <strong>Roupa</strong>
-                        <small>3/4 anos ou M</small>
-                    </div>
-
-                    <div>
-                        <span>👡</span>
-                        <strong>Sandália</strong>
-                        <small>24/25</small>
-                    </div>
-
-                    <div>
-                        <span>🎀</span>
-                        <strong>Laços</strong>
-                    </div>
-
-                    <div>
-                        <span>🧸</span>
-                        <strong>Brinquedos</strong>
-                    </div>
-
-                    <div>
-                        <span>💄</span>
-                        <strong>Gloss</strong>
-                    </div>
-
-                </div>
-
-
-                <button
-                    id="continuarParaConfirmacao"
-                    class="botao"
-                    type="button"
-                >
-                    Confirmar presença 💕
-                </button>
-
-
-                <button
-                    id="voltarInformacoes"
-                    class="botao-transparente"
-                    type="button"
-                >
-                    ← Voltar
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             CONFIRMAÇÃO
-        ================================================== -->
-
-        <div id="confirmacao" class="conteudo-cena">
-
-            <div class="conteudo-confirmacao">
-
-                <div class="emoji-sereia">
-                    🧜🏽‍♀️
-                </div>
-
-                <span class="titulo-pequeno">
-                    ✦ VOU FICAR MUITO FELIZ ✦
-                </span>
-
-                <h1>
-                    Você vem?
-                </h1>
-
-                <p>
-                    Sua presença vai deixar
-                    esse dia ainda mais especial. 💕
-                </p>
-
-
-                <!-- TROCAR PELO WHATSAPP CORRETO DEPOIS -->
-
-                <a
-                    href="#"
-                    id="botaoWhatsapp"
-                    class="botao"
-                >
-                    💕 Confirmar presença
-                </a>
-
-
-                <button
-                    id="voltarPresentes"
-                    class="botao-transparente"
-                    type="button"
-                >
-                    ← Voltar
-                </button>
-
-            </div>
-
-        </div>
-
+    <!-- SEGUNDA TELA -->
+    <section class="tela" id="tela2">
+      <img src="Segundo.png" alt="Mensagem do convite">
+
+      <div class="efeitos">
+        <span class="bolha b1"></span>
+        <span class="bolha b2"></span>
+        <span class="bolha b3"></span>
+        <span class="bolha b4"></span>
+        <span class="brilho brilho1"></span>
+        <span class="brilho brilho2"></span>
+        <span class="brilho brilho3"></span>
+      </div>
+
+      <button
+        class="area-toque"
+        id="irTela3"
+        aria-label="Continuar">
+      </button>
+    </section>
+
+
+    <!-- TERCEIRA TELA -->
+    <section class="tela" id="tela3">
+      <img src="Terceiro.png" alt="Antonella, data e horário">
+
+      <div class="efeitos">
+        <span class="bolha b5"></span>
+        <span class="bolha b6"></span>
+        <span class="bolha b7"></span>
+        <span class="brilho brilho4"></span>
+        <span class="brilho brilho5"></span>
+      </div>
+
+      <button
+        class="area-toque"
+        id="irTela4"
+        aria-label="Continuar">
+      </button>
+    </section>
+
+
+    <!-- QUARTA TELA -->
+    <section class="tela" id="tela4">
+      <img src="Quarto.png" alt="Informações do aniversário">
+
+      <!--
+        ÁREAS CLICÁVEIS
+        Vamos posicionar depois exatamente em cima
+        dos três elementos da sua arte.
+      -->
+
+      <button
+        class="botao-invisivel local"
+        id="botaoLocal"
+        aria-label="Abrir localização">
+      </button>
+
+      <button
+        class="botao-invisivel presentes"
+        id="botaoPresentes"
+        aria-label="Ver sugestão de presentes">
+      </button>
+
+      <button
+        class="botao-invisivel rsvp"
+        id="botaoRsvp"
+        aria-label="Confirmar presença">
+      </button>
 
     </section>
 
-</main>
+  </main>
 
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
