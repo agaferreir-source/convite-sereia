@@ -1,626 +1,715 @@
+/* =========================================================
+   CONVITE ANTONELLA — ESTILO PRINCIPAL
+   ========================================================= */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #79dff5;
-  touch-action: manipulation;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #68d9f3;
 }
 
 body {
-  font-family: sans-serif;
+    font-family: "Poppins", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+button {
+    font-family: inherit;
 }
 
 .convite {
-  position: relative;
-  width: 100%;
-  height: 100dvh;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
 }
 
-/* ==============================
+
+/* =========================================================
    TELAS
-============================== */
+   ========================================================= */
 
 .tela {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
-  transform: translateY(0);
+    transform: scale(1);
 
-  transition:
-    opacity 0.8s ease,
-    visibility 0.8s ease;
+    transition:
+        opacity 0.75s ease,
+        visibility 0.75s ease;
 }
 
 .tela.ativa {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
+
+
+/* Imagens principais */
 
 .imagem {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  object-fit: cover;
-  object-position: center;
+    object-fit: cover;
+    object-position: center;
 
-  display: block;
+    display: block;
+
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 
-/* ==============================
-   ÁREA DE TOQUE
-============================== */
-
-.area-toque {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background: transparent;
-  border: none;
-
-  z-index: 50;
-}
-
-
-/* ==============================
-   CAMADA DOS EFEITOS
-============================== */
-
-.camada-efeitos {
-  position: absolute;
-  inset: 0;
-
-  overflow: hidden;
-  pointer-events: none;
-
-  z-index: 20;
-}
-
-
-/* ==============================
-   LUZ SUAVE DA ÁGUA
-============================== */
-
-.luz-agua {
-  position: absolute;
-
-  width: 160%;
-  height: 45%;
-
-  left: -30%;
-  top: 5%;
-
-  opacity: 0.13;
-
-  background:
-    linear-gradient(
-      105deg,
-      transparent 15%,
-      rgba(255,255,255,0.5) 32%,
-      transparent 48%,
-      rgba(255,255,255,0.35) 63%,
-      transparent 80%
-    );
-
-  filter: blur(14px);
-
-  animation: luzAgua 9s ease-in-out infinite alternate;
-}
-
-@keyframes luzAgua {
-  from {
-    transform: translateX(-8%) rotate(-4deg);
-  }
-
-  to {
-    transform: translateX(8%) rotate(3deg);
-  }
-}
-
-
-/* ==============================
-   BOLHAS
-============================== */
-
-.bolhas::before,
-.bolhas::after {
-  content: "";
-
-  position: absolute;
-
-  bottom: -50px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255,255,255,0.65);
-
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      rgba(255,255,255,0.9),
-      rgba(255,255,255,0.15) 45%,
-      transparent 70%
-    );
-
-  box-shadow:
-    0 0 8px rgba(255,255,255,0.4);
-
-  animation: bolha 9s linear infinite;
-}
-
-.bolhas::before {
-  left: 18%;
-
-  width: 14px;
-  height: 14px;
-
-  animation-delay: 1s;
-}
-
-.bolhas::after {
-  left: 72%;
-
-  width: 9px;
-  height: 9px;
-
-  animation-delay: 4s;
-}
-
-@keyframes bolha {
-  0% {
-    transform:
-      translate3d(0, 0, 0)
-      scale(0.7);
-
-    opacity: 0;
-  }
-
-  12% {
-    opacity: 0.7;
-  }
-
-  50% {
-    transform:
-      translate3d(18px, -55vh, 0)
-      scale(1);
-  }
-
-  100% {
-    transform:
-      translate3d(-15px, -115vh, 0)
-      scale(1.15);
-
-    opacity: 0;
-  }
-}
-
-
-/* ==============================
-   BRILHOS
-============================== */
-
-.brilho {
-  position: absolute;
-
-  width: 4px;
-  height: 4px;
-
-  border-radius: 50%;
-
-  background: white;
-
-  box-shadow:
-    0 0 6px white,
-    0 0 12px rgba(255,255,255,0.65);
-
-  animation: brilho 3s ease-in-out infinite;
-}
-
-.brilho-1 {
-  left: 24%;
-  top: 32%;
-}
-
-.brilho-2 {
-  left: 71%;
-  top: 25%;
-  animation-delay: 1s;
-}
-
-.brilho-3 {
-  left: 45%;
-  top: 58%;
-  animation-delay: 1.8s;
-}
-
-.brilho-4 {
-  left: 80%;
-  top: 45%;
-  animation-delay: 2.4s;
-}
-
-.brilho-5 {
-  left: 18%;
-  top: 37%;
-}
-
-.brilho-6 {
-  left: 76%;
-  top: 30%;
-  animation-delay: 1s;
-}
-
-.brilho-7 {
-  left: 55%;
-  top: 65%;
-  animation-delay: 1.8s;
-}
-
-.brilho-8 {
-  left: 25%;
-  top: 40%;
-}
-
-.brilho-9 {
-  left: 80%;
-  top: 55%;
-  animation-delay: 1.2s;
-}
-
-@keyframes brilho {
-  0%,
-  100% {
-    opacity: 0.15;
-    transform: scale(0.7);
-  }
-
-  50% {
-    opacity: 0.9;
-    transform: scale(1.4);
-  }
-}
-
-
-/* ==============================
-   ANIMAÇÃO DA IMAGEM AO ENTRAR
-============================== */
+/* =========================================================
+   ENTRADA DAS TELAS
+   ========================================================= */
 
 .tela.entrando .imagem {
-  animation: entrarSuave 1.2s ease-out both;
+    animation: entradaDoMar 1.15s cubic-bezier(.22,.61,.36,1) both;
 }
 
-@keyframes entrarSuave {
-  0% {
-    opacity: 0;
-    transform: scale(1.025);
-    filter: blur(2px);
-  }
+@keyframes entradaDoMar {
 
-  100% {
+    0% {
+        opacity: 0;
+        transform: scale(1.06);
+        filter: blur(5px);
+    }
+
+    45% {
+        opacity: 0.75;
+        filter: blur(2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+
+/* =========================================================
+   MOVIMENTO MUITO SUTIL DAS IMAGENS
+   ========================================================= */
+
+.tela.ativa .imagem {
+    animation:
+        entradaDoMar 1.15s cubic-bezier(.22,.61,.36,1) both,
+        flutuarFundo 9s ease-in-out 1.15s infinite alternate;
+}
+
+@keyframes flutuarFundo {
+
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.025);
+    }
+}
+
+
+/* =========================================================
+   ÁREA DE ABERTURA
+   ========================================================= */
+
+.area-toque {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 50;
+}
+
+
+/* =========================================================
+   TRANSIÇÃO DO FUNDO DO MAR
+   ========================================================= */
+
+#transicao {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    opacity: 0;
+    visibility: hidden;
+
+    overflow: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+#transicao.ativa {
     opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
+    visibility: visible;
 }
 
 
-/* ==============================
-   ONDA DE ÁGUA DA TRANSIÇÃO
-============================== */
+/* =========================================================
+   CAMADA DE ÁGUA
+   ========================================================= */
 
-.transicao-mergulho {
-  position: fixed;
-  inset: 0;
+.onda-agua {
+    position: absolute;
 
-  z-index: 100;
+    width: 170%;
+    height: 55%;
 
-  pointer-events: none;
+    left: -35%;
+    top: 22%;
 
-  opacity: 0;
-  visibility: hidden;
+    border-radius: 50%;
 
-  overflow: hidden;
-}
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,255,255,0.42) 0%,
+            rgba(179,244,255,0.22) 28%,
+            rgba(80,211,239,0.13) 48%,
+            transparent 72%
+        );
 
-.transicao-mergulho.ativa {
-  opacity: 1;
-  visibility: visible;
-}
+    filter: blur(12px);
 
+    transform: scale(0.25);
 
-/*
-  Uma faixa luminosa atravessa
-  a tela como reflexo da água.
-*/
-
-.transicao-mergulho::before {
-  content: "";
-
-  position: absolute;
-
-  width: 170%;
-  height: 38%;
-
-  left: -180%;
-  top: 31%;
-
-  background:
-    linear-gradient(
-      105deg,
-      transparent 0%,
-      rgba(255,255,255,0.04) 30%,
-      rgba(255,255,255,0.65) 48%,
-      rgba(150,240,255,0.28) 55%,
-      transparent 75%
-    );
-
-  filter: blur(12px);
-
-  transform: rotate(-5deg);
-
-  animation: ondaPassando 1.15s ease-in-out forwards;
-}
-
-@keyframes ondaPassando {
-  0% {
-    left: -180%;
     opacity: 0;
-  }
 
-  20% {
-    opacity: 1;
-  }
+    animation: ondaPrincipal 1.45s cubic-bezier(.16,.72,.28,1) forwards;
+}
 
-  75% {
-    opacity: 0.9;
-  }
+@keyframes ondaPrincipal {
 
-  100% {
-    left: 120%;
-    opacity: 0;
-  }
+    0% {
+        transform:
+            translateY(35%)
+            scale(0.25);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.85;
+    }
+
+    55% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform:
+            translateY(-8%)
+            scale(2.25);
+
+        opacity: 0;
+    }
 }
 
 
-/*
-  Pequeno brilho que acompanha
-  a onda.
-*/
+/* =========================================================
+   REFLEXOS DE LUZ
+   ========================================================= */
 
-.transicao-luz {
-  position: absolute;
+.reflexo {
+    position: absolute;
 
-  width: 35%;
-  height: 35%;
+    width: 160%;
+    height: 35%;
 
-  left: 35%;
-  top: 32%;
+    left: -30%;
 
-  border-radius: 50%;
+    background:
+        linear-gradient(
+            105deg,
+            transparent 5%,
+            rgba(255,255,255,0.05) 20%,
+            rgba(255,255,255,0.58) 43%,
+            rgba(200,250,255,0.22) 52%,
+            transparent 72%
+        );
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,0.25),
-      transparent 70%
-    );
+    filter: blur(10px);
 
-  filter: blur(15px);
+    transform: rotate(-7deg);
 
-  opacity: 0;
+    opacity: 0;
 
-  animation: brilhoTransicao 1.1s ease-out forwards;
+    animation: reflexoAgua 1.3s ease-in-out forwards;
 }
 
-@keyframes brilhoTransicao {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
+.reflexo-1 {
+    top: 18%;
+}
 
-  35% {
-    opacity: 0.8;
-  }
+.reflexo-2 {
+    top: 48%;
+    animation-delay: 0.12s;
+    opacity: 0.3;
+}
 
-  100% {
-    opacity: 0;
-    transform: scale(2);
-  }
+@keyframes reflexoAgua {
+
+    0% {
+        left: -170%;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    55% {
+        opacity: 0.6;
+    }
+
+    100% {
+        left: 120%;
+        opacity: 0;
+    }
 }
 
 
-/* ==============================
+/* =========================================================
    BOLHAS DA TRANSIÇÃO
-============================== */
+   ========================================================= */
 
-.transicao-bolhas::before,
-.transicao-bolhas::after {
-  content: "";
+.bolha-transicao {
+    position: absolute;
 
-  position: absolute;
+    bottom: -40px;
 
-  bottom: -30px;
+    border-radius: 50%;
 
-  border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.78);
 
-  border: 1px solid rgba(255,255,255,0.7);
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.22) 35%,
+            transparent 70%
+        );
 
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      white,
-      rgba(255,255,255,0.1) 45%,
-      transparent 70%
-    );
+    box-shadow:
+        0 0 8px rgba(255,255,255,0.35);
 
-  animation: bolhasTransicao 1.1s ease-out forwards;
-}
-
-.transicao-bolhas::before {
-  left: 25%;
-
-  width: 17px;
-  height: 17px;
-}
-
-.transicao-bolhas::after {
-  right: 25%;
-
-  width: 10px;
-  height: 10px;
-
-  animation-delay: 0.12s;
-}
-
-@keyframes bolhasTransicao {
-  0% {
-    transform: translateY(0);
     opacity: 0;
-  }
 
-  20% {
-    opacity: 0.8;
-  }
+    animation:
+        subirBolha 1.5s ease-out forwards;
+}
 
-  100% {
-    transform: translateY(-85vh);
-    opacity: 0;
-  }
+.bolha-transicao:nth-child(1) {
+    left: 12%;
+    width: 12px;
+    height: 12px;
+    animation-delay: 0.05s;
+}
+
+.bolha-transicao:nth-child(2) {
+    left: 27%;
+    width: 7px;
+    height: 7px;
+    animation-delay: 0.18s;
+}
+
+.bolha-transicao:nth-child(3) {
+    left: 42%;
+    width: 18px;
+    height: 18px;
+    animation-delay: 0.1s;
+}
+
+.bolha-transicao:nth-child(4) {
+    left: 58%;
+    width: 9px;
+    height: 9px;
+    animation-delay: 0.3s;
+}
+
+.bolha-transicao:nth-child(5) {
+    left: 73%;
+    width: 14px;
+    height: 14px;
+    animation-delay: 0.15s;
+}
+
+.bolha-transicao:nth-child(6) {
+    left: 87%;
+    width: 6px;
+    height: 6px;
+    animation-delay: 0.35s;
+}
+
+@keyframes subirBolha {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(0.5);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    55% {
+        transform:
+            translateY(-45vh)
+            translateX(12px)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            translateX(-15px)
+            scale(1.15);
+
+        opacity: 0;
+    }
 }
 
 
-/* ==============================
-   BOTÕES INVISÍVEIS
-============================== */
+/* =========================================================
+   PEQUENOS BRILHOS
+   ========================================================= */
+
+.brilho-transicao {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 5px white,
+        0 0 13px rgba(255,255,255,0.8);
+
+    opacity: 0;
+
+    animation: aparecerBrilho 1s ease-out forwards;
+}
+
+.brilho-transicao:nth-of-type(1) {
+    left: 19%;
+    top: 32%;
+}
+
+.brilho-transicao:nth-of-type(2) {
+    left: 37%;
+    top: 62%;
+    animation-delay: 0.15s;
+}
+
+.brilho-transicao:nth-of-type(3) {
+    left: 62%;
+    top: 26%;
+    animation-delay: 0.25s;
+}
+
+.brilho-transicao:nth-of-type(4) {
+    left: 79%;
+    top: 57%;
+    animation-delay: 0.08s;
+}
+
+@keyframes aparecerBrilho {
+
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    45% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+
+/* =========================================================
+   BOTÕES DA QUARTA TELA
+   ========================================================= */
+
+/*
+   A imagem tem três círculos:
+
+   ESQUERDA  = presentes
+   CENTRO    = localização
+   DIREITA   = confirmação
+*/
 
 .botao-invisivel {
-  position: absolute;
+    position: absolute;
 
-  border: none;
-  background: transparent;
+    display: block;
 
-  cursor: pointer;
+    border: none;
+    outline: none;
 
-  z-index: 60;
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 60;
+
+    border-radius: 50%;
+
+    aspect-ratio: 1 / 1;
+
+    padding: 0;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
 }
 
-.local {
-  left: 5%;
-  top: 35%;
-
-  width: 90%;
-  height: 15%;
+.botao-invisivel:active {
+    transform: scale(0.92);
+    filter: brightness(1.08);
 }
+
+
+/* =========================================================
+   PRESENTES — CÍRCULO ESQUERDO
+   ========================================================= */
 
 .presentes {
-  left: 5%;
-  top: 51%;
+    left: 2%;
+    bottom: 8.2%;
 
-  width: 90%;
-  height: 15%;
+    width: 30%;
+
+    height: auto;
 }
+
+
+/* =========================================================
+   LOCALIZAÇÃO — CÍRCULO CENTRAL
+   ========================================================= */
+
+.local {
+    left: 35%;
+    bottom: 8.2%;
+
+    width: 30%;
+
+    height: auto;
+}
+
+
+/* =========================================================
+   CONFIRMAÇÃO — CÍRCULO DIREITO
+   ========================================================= */
 
 .rsvp {
-  left: 5%;
-  top: 67%;
+    left: 68%;
+    bottom: 8.2%;
 
-  width: 90%;
-  height: 15%;
+    width: 30%;
+
+    height: auto;
 }
 
 
-/* ==============================
-   MODAL DE PRESENTES
-============================== */
+/* =========================================================
+   MODAL DE SUGESTÃO DE PRESENTES
+   ========================================================= */
 
 .modal-presentes {
-  position: absolute;
-  inset: 0;
+    position: absolute;
 
-  z-index: 100;
+    inset: 0;
 
-  display: flex;
+    z-index: 500;
 
-  align-items: center;
-  justify-content: center;
+    display: flex;
 
-  padding: 25px;
+    align-items: center;
+    justify-content: center;
 
-  background: rgba(35,135,165,0.5);
+    padding: 20px;
 
-  backdrop-filter: blur(7px);
+    background:
+        rgba(25,145,180,0.42);
 
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
-  transform: scale(0.97);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s ease,
-    visibility 0.45s;
+    transform: scale(0.96);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        visibility 0.4s ease;
 }
 
 .modal-presentes.aberto {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 
-  transform: scale(1);
+    transform: scale(1);
 }
+
+
+/* Imagem Quinta */
 
 .modal-presentes img {
-  max-width: 100%;
-  max-height: 88%;
+    display: block;
 
-  object-fit: contain;
+    width: auto;
+    max-width: 94%;
+    max-height: 88dvh;
 
-  border-radius: 18px;
+    object-fit: contain;
 
-  box-shadow:
-    0 12px 45px rgba(0,0,0,0.25);
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.28);
+
+    animation: presenteEntrando 0.5s ease both;
 }
 
+@keyframes presenteEntrando {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* =========================================================
+   BOTÃO FECHAR MODAL
+   ========================================================= */
+
 .fechar-modal {
-  position: absolute;
+    position: absolute;
 
-  top: 20px;
-  right: 20px;
+    top: 18px;
+    right: 18px;
 
-  width: 40px;
-  height: 40px;
+    width: 42px;
+    height: 42px;
 
-  border: none;
-  border-radius: 50%;
+    border: none;
+    border-radius: 50%;
 
-  background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.94);
 
-  color: #5998ad;
+    color: #7c52a8;
 
-  font-size: 27px;
+    font-size: 26px;
+    line-height: 1;
 
-  cursor: pointer;
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.15);
+
+    z-index: 510;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .presentes,
+    .local,
+    .rsvp {
+        bottom: 8.5%;
+        width: 30%;
+    }
+
+    .modal-presentes {
+        padding: 15px;
+    }
+
+    .fechar-modal {
+        top: 14px;
+        right: 14px;
+    }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE / REDUÇÃO DE MOVIMENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
