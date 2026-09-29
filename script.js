@@ -19,7 +19,7 @@ const MAPS_URL =
    basta substituir o conteúdo desta variável.
 */
 
-const PRESENTES_URL = "Quinta.jpg";
+const PRESENTES_URL = "imagens/Quinta.jpg";
 
 
 /*
