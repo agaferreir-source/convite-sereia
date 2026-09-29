@@ -10,7 +10,7 @@
 const MAPS_URL =
     "https://maps.app.goo.gl/J9DJRDVVVrAqLymv9?g_st=ac";
 
-const RSVP_URL = "";
+const RSVP_URL = "https://wa.me/5521983793761?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20na%20festa%20da%20Antonella!%F0%9F%A9%B7";
 
 
 
