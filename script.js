@@ -4,7 +4,7 @@
 
 
 /* ==========================================================
-   CONFIGURAÇÕES
+   LINKS
 ========================================================== */
 
 const MAPS_URL =
@@ -12,8 +12,8 @@ const MAPS_URL =
 
 
 /*
-   Quando você tiver o número/link da confirmação,
-   colocaremos aqui.
+   Link da confirmação.
+   Será colocado depois.
 */
 
 const RSVP_URL = "";
@@ -47,13 +47,122 @@ const transicao =
     document.getElementById("transicao");
 
 
-function iniciarTransicao() {
+function limparTiposTransicao() {
 
     if (!transicao) {
         return;
     }
 
-    transicao.classList.remove("ativa");
+    transicao.classList.remove(
+        "tipo1",
+        "tipo2",
+        "tipo3",
+        "tipo4",
+        "tipo5",
+        "ativa"
+    );
+
+}
+
+
+/* ==========================================================
+   ESCOLHER A TRANSIÇÃO
+========================================================== */
+
+function escolherTransicao(
+    telaAnterior,
+    novaTela
+) {
+
+    limparTiposTransicao();
+
+
+    /*
+       1 → 2
+       Abertura do mar
+    */
+
+    if (
+        telaAnterior === 0 &&
+        novaTela === 1
+    ) {
+
+        transicao.classList.add("tipo1");
+
+    }
+
+
+    /*
+       2 → 3
+       Luz perolada
+    */
+
+    else if (
+        telaAnterior === 1 &&
+        novaTela === 2
+    ) {
+
+        transicao.classList.add("tipo2");
+
+    }
+
+
+    /*
+       3 → 4
+       Bolhas
+    */
+
+    else if (
+        telaAnterior === 2 &&
+        novaTela === 3
+    ) {
+
+        transicao.classList.add("tipo3");
+
+    }
+
+
+    /*
+       4 → 5
+       Mergulho
+    */
+
+    else if (
+        telaAnterior === 3 &&
+        novaTela === 4
+    ) {
+
+        transicao.classList.add("tipo4");
+
+    }
+
+
+    /*
+       5 → 4
+       Retorno
+    */
+
+    else if (
+        telaAnterior === 4 &&
+        novaTela === 3
+    ) {
+
+        transicao.classList.add("tipo5");
+
+    }
+
+
+    /*
+       Qualquer outra mudança
+       recebe a transição mais suave.
+    */
+
+    else {
+
+        transicao.classList.add("tipo2");
+
+    }
+
 
     /*
        Força o navegador a reiniciar
@@ -63,16 +172,7 @@ function iniciarTransicao() {
     void transicao.offsetWidth;
 
     transicao.classList.add("ativa");
-}
 
-
-function finalizarTransicao() {
-
-    if (!transicao) {
-        return;
-    }
-
-    transicao.classList.remove("ativa");
 }
 
 
@@ -83,25 +183,30 @@ function finalizarTransicao() {
 
 function mudarTela(novaTela) {
 
-    console.log(
-        "Mudando da tela",
-        telaAtual + 1,
-        "para",
-        novaTela + 1
-    );
-
-
-    if (novaTela < 0 || novaTela >= telas.length) {
-        return;
-    }
-
-
-    if (novaTela === telaAtual) {
-        return;
-    }
-
-
     if (trocando) {
+        return;
+    }
+
+
+    if (
+        novaTela < 0 ||
+        novaTela >= telas.length
+    ) {
+        return;
+    }
+
+
+    if (
+        novaTela === telaAtual
+    ) {
+        return;
+    }
+
+
+    if (
+        !telas[telaAtual] ||
+        !telas[novaTela]
+    ) {
         return;
     }
 
@@ -109,52 +214,74 @@ function mudarTela(novaTela) {
     trocando = true;
 
 
-    /*
-       Inicia o efeito de água.
-    */
-
-    iniciarTransicao();
+    const telaAnterior =
+        telaAtual;
 
 
     /*
-       Depois de um pequeno momento,
-       troca realmente a imagem.
+       Escolhe a transição
+       específica.
     */
 
-    setTimeout(function() {
-
-        telas[telaAtual].classList.remove("ativa");
-
-        telas[novaTela].classList.add("ativa");
-
-        telaAtual = novaTela;
-
-    }, 430);
+    escolherTransicao(
+        telaAnterior,
+        novaTela
+    );
 
 
     /*
-       Termina a transição.
+       Troca a imagem no meio
+       do efeito.
     */
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        finalizarTransicao();
+            telas[telaAnterior]
+                .classList
+                .remove("ativa");
 
-        trocando = false;
 
-    }, 1200);
+            telas[novaTela]
+                .classList
+                .add("ativa");
+
+
+            telaAtual =
+                novaTela;
+
+        },
+        430
+    );
+
+
+    /*
+       Finaliza a animação.
+    */
+
+    setTimeout(
+        function() {
+
+            limparTiposTransicao();
+
+            trocando = false;
+
+        },
+        1200
+    );
 
 }
 
 
 
 /* ==========================================================
-   PRIMEIRA TELA
-   LACRE → SEGUNDA
+   PRIMEIRO → SEGUNDO
 ========================================================== */
 
 const abrirConvite =
-    document.getElementById("abrirConvite");
+    document.getElementById(
+        "abrirConvite"
+    );
 
 
 if (abrirConvite) {
@@ -177,11 +304,13 @@ if (abrirConvite) {
 
 
 /* ==========================================================
-   SEGUNDA → TERCEIRA
+   SEGUNDO → TERCEIRO
 ========================================================== */
 
 const tela2 =
-    document.getElementById("tela2");
+    document.getElementById(
+        "tela2"
+    );
 
 
 if (tela2) {
@@ -202,11 +331,13 @@ if (tela2) {
 
 
 /* ==========================================================
-   TERCEIRA → QUARTA
+   TERCEIRO → QUARTO
 ========================================================== */
 
 const tela3 =
-    document.getElementById("tela3");
+    document.getElementById(
+        "tela3"
+    );
 
 
 if (tela3) {
@@ -227,12 +358,14 @@ if (tela3) {
 
 
 /* ==========================================================
-   QUARTA → QUINTA
+   QUARTO → QUINTA
    SUGESTÃO DE PRESENTES
 ========================================================== */
 
 const botaoPresentes =
-    document.getElementById("botaoPresentes");
+    document.getElementById(
+        "botaoPresentes"
+    );
 
 
 if (botaoPresentes) {
@@ -245,12 +378,15 @@ if (botaoPresentes) {
 
             event.stopPropagation();
 
+
             console.log(
-                "Botão de presentes clicado!"
+                "Sugestão de presentes"
             );
 
+
             /*
-               Vai DIRETAMENTE para Quinta.png/jpg.
+               Abre a Quinta.jpg
+               através da quinta tela.
             */
 
             mudarTela(4);
@@ -267,7 +403,9 @@ if (botaoPresentes) {
 ========================================================== */
 
 const botaoLocal =
-    document.getElementById("botaoLocal");
+    document.getElementById(
+        "botaoLocal"
+    );
 
 
 if (botaoLocal) {
@@ -279,11 +417,6 @@ if (botaoLocal) {
             event.preventDefault();
 
             event.stopPropagation();
-
-
-            console.log(
-                "Localização clicada!"
-            );
 
 
             if (MAPS_URL) {
@@ -307,11 +440,15 @@ if (botaoLocal) {
 ========================================================== */
 
 const botaoConfirmar =
-    document.getElementById("botaoConfirmar");
+    document.getElementById(
+        "botaoConfirmar"
+    );
 
 
 const avisoConfirmacao =
-    document.getElementById("avisoConfirmacao");
+    document.getElementById(
+        "avisoConfirmacao"
+    );
 
 
 if (botaoConfirmar) {
@@ -325,6 +462,11 @@ if (botaoConfirmar) {
             event.stopPropagation();
 
 
+            /*
+               Quando o link existir,
+               será aberto automaticamente.
+            */
+
             if (RSVP_URL) {
 
                 window.open(
@@ -333,14 +475,20 @@ if (botaoConfirmar) {
                 );
 
                 return;
+
             }
 
 
+            /*
+               Enquanto não existe link,
+               mostra o aviso.
+            */
+
             if (avisoConfirmacao) {
 
-                avisoConfirmacao.classList.add(
-                    "aberto"
-                );
+                avisoConfirmacao
+                    .classList
+                    .add("aberto");
 
             }
 
@@ -356,7 +504,9 @@ if (botaoConfirmar) {
 ========================================================== */
 
 const fecharAviso =
-    document.getElementById("fecharAviso");
+    document.getElementById(
+        "fecharAviso"
+    );
 
 
 if (fecharAviso) {
@@ -365,9 +515,9 @@ if (fecharAviso) {
         "click",
         function() {
 
-            avisoConfirmacao.classList.remove(
-                "aberto"
-            );
+            avisoConfirmacao
+                .classList
+                .remove("aberto");
 
         }
     );
@@ -377,11 +527,41 @@ if (fecharAviso) {
 
 
 /* ==========================================================
-   VOLTAR DA QUINTA
+   CLICAR FORA DO AVISO
+========================================================== */
+
+if (avisoConfirmacao) {
+
+    avisoConfirmacao.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                avisoConfirmacao
+            ) {
+
+                avisoConfirmacao
+                    .classList
+                    .remove("aberto");
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   QUINTA → QUARTA
 ========================================================== */
 
 const voltarPresentes =
-    document.getElementById("voltarPresentes");
+    document.getElementById(
+        "voltarPresentes"
+    );
 
 
 if (voltarPresentes) {
@@ -404,7 +584,7 @@ if (voltarPresentes) {
 
 
 /* ==========================================================
-   PRÉ-CARREGAMENTO
+   PRÉ-CARREGAR IMAGENS
 ========================================================== */
 
 const imagens = [
@@ -418,35 +598,45 @@ const imagens = [
 ];
 
 
-imagens.forEach(function(caminho) {
+imagens.forEach(
+    function(caminho) {
 
-    const img = new Image();
+        const imagem =
+            new Image();
 
-    img.src = caminho;
+        imagem.src =
+            caminho;
 
-});
+    }
+);
 
 
 
 /* ==========================================================
-   GARANTIR PRIMEIRA TELA
+   PRIMEIRA TELA
 ========================================================== */
 
-telas.forEach(function(tela, indice) {
+telas.forEach(
+    function(tela, indice) {
 
-    if (!tela) {
-        return;
+        if (!tela) {
+            return;
+        }
+
+
+        if (indice === 0) {
+
+            tela.classList.add(
+                "ativa"
+            );
+
+        } else {
+
+            tela.classList.remove(
+                "ativa"
+            );
+
+        }
+
     }
-
-
-    if (indice === 0) {
-
-        tela.classList.add("ativa");
-
-    } else {
-
-        tela.classList.remove("ativa");
-
-    }
-
-});
+);
