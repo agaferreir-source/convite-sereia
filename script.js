@@ -7,12 +7,11 @@ const MAPS_URL =
 
 const PRESENTES_URL = "Quinta.jpg";
 
-// Vamos colocar depois.
 const RSVP_URL = "";
 
 
 // ============================================
-// TELAS
+// ELEMENTOS
 // ============================================
 
 const telas = [
@@ -26,40 +25,59 @@ const transicao =
   document.getElementById("transicao");
 
 let telaAtual = 0;
+let trocando = false;
 
 
 // ============================================
-// TROCAR DE TELA
+// TROCA DE TELA
 // ============================================
 
 function mudarTela(proximaTela) {
 
-  if (proximaTela === telaAtual) {
+  if (trocando || proximaTela === telaAtual) {
     return;
   }
 
-  // Começa o efeito de mergulho
+  trocando = true;
+
+
+  // Começa a passagem de luz/água
   transicao.classList.add("ativa");
 
 
-  // Pequeno intervalo para o efeito aparecer
+  /*
+    Esperamos a luz passar pelo centro
+    antes de trocar a imagem.
+  */
+
   setTimeout(() => {
 
     telas[telaAtual].classList.remove("ativa");
 
+    telas[telaAtual].classList.remove("entrando");
+
+
     telas[proximaTela].classList.add("ativa");
+
+    telas[proximaTela].classList.add("entrando");
 
     telaAtual = proximaTela;
 
-  }, 450);
+  }, 500);
 
 
-  // Retira o efeito depois da troca
+  /*
+    Retira a camada da transição
+    depois que a nova imagem já entrou.
+  */
+
   setTimeout(() => {
 
     transicao.classList.remove("ativa");
 
-  }, 1050);
+    trocando = false;
+
+  }, 1150);
 
 }
 
@@ -154,19 +172,18 @@ document
   });
 
 
-// ============================================
-// FECHAR CLICANDO FORA DA IMAGEM
-// ============================================
+modalPresentes.addEventListener(
+  "click",
+  (event) => {
 
-modalPresentes.addEventListener("click", (event) => {
+    if (event.target === modalPresentes) {
 
-  if (event.target === modalPresentes) {
+      modalPresentes.classList.remove("aberto");
 
-    modalPresentes.classList.remove("aberto");
+    }
 
   }
-
-});
+);
 
 
 // ============================================
@@ -184,7 +201,6 @@ document
       );
 
       return;
-
     }
 
     window.open(
