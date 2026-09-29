@@ -1,919 +1,317 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #73d9f5;
 }
-
 
 body {
-    background: #07547a;
-    font-family: Georgia, "Times New Roman", serif;
-    color: white;
+  font-family: Arial, sans-serif;
+  touch-action: manipulation;
+}
+
+.convite {
+  width: 100%;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+.tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: scale(1.02);
+
+  transition:
+    opacity 0.8s ease,
+    transform 1s ease,
+    visibility 0.8s ease;
+}
+
+.tela.ativa {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.tela > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  /*
+    Mantém a imagem preenchendo a tela.
+  */
+  object-fit: cover;
+  object-position: center;
 }
 
 
-button,
-a {
-    font-family: inherit;
+/* =================================
+   ÁREA INVISÍVEL DE TOQUE
+   ================================= */
+
+.area-toque {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+  z-index: 20;
 }
 
 
-/* =====================================================
-   CAPA
-===================================================== */
+/* =================================
+   EFEITOS
+   ================================= */
 
-#abertura {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100svh;
-
-    z-index: 100;
-
-    background: #8ed9eb;
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.7s cubic-bezier(.2,.7,.2,1);
+.efeitos {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
 }
 
 
-.imagem-abertura {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-    object-position: center;
-
-    user-select: none;
-}
-
-
-/* =====================================================
-   ÁREA DO LACRE
-===================================================== */
-
-.area-lacre {
-    position: absolute;
-
-    left: 30%;
-    top: 48%;
-
-    width: 40%;
-    height: 20%;
-
-    border: 0;
-    background: transparent;
-
-    z-index: 110;
-
-    cursor: pointer;
-}
-
-
-/* =====================================================
-   CENÁRIO DO MAR
-===================================================== */
-
-.cena-mar {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100svh;
-
-    overflow: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: scale(1.13);
-
-    transition:
-        opacity 1.4s ease,
-        transform 2.3s cubic-bezier(.15,.7,.2,1),
-        visibility 1.4s ease;
-
-    background: #07547a;
-}
-
-
-.cena-mar.ativa {
-    opacity: 1;
-    visibility: visible;
-
-    transform: scale(1);
-}
-
-
-/* =====================================================
-   FUNDO DO MAR
-===================================================== */
-
-.imagem-mar {
-    position: absolute;
-
-    inset: -4%;
-
-    width: 108%;
-    height: 108%;
-
-    object-fit: cover;
-    object-position: center;
-
-    animation:
-        movimentoMar
-        9s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-@keyframes movimentoMar {
-
-    0% {
-        transform:
-            translate(-.5%, 0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate(.5%, -.3%)
-            scale(1.015);
-    }
-
-    100% {
-        transform:
-            translate(-.3%, .4%)
-            scale(1.025);
-    }
-}
-
-
-/* =====================================================
-   LUZ DA ÁGUA
-===================================================== */
-
-.luz-agua {
-    position: absolute;
-
-    top: -20%;
-    left: -30%;
-
-    width: 160%;
-    height: 80%;
-
-    background:
-        linear-gradient(
-            110deg,
-            transparent 15%,
-            rgba(255,255,255,.10) 32%,
-            transparent 45%,
-            rgba(255,255,255,.08) 57%,
-            transparent 72%,
-            rgba(255,255,255,.08) 84%,
-            transparent 95%
-        );
-
-    filter: blur(18px);
-
-    opacity: .5;
-
-    pointer-events: none;
-
-    z-index: 4;
-
-    animation:
-        luzMovimento
-        8s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-@keyframes luzMovimento {
-
-    from {
-        transform:
-            translateX(-5%)
-            rotate(-1deg);
-    }
-
-    to {
-        transform:
-            translateX(5%)
-            rotate(1deg);
-    }
-}
-
-
-/* =====================================================
-   BOLHAS
-===================================================== */
+/* BOLHAS */
 
 .bolha {
-    position: absolute;
+  position: absolute;
 
-    bottom: -80px;
+  width: 18px;
+  height: 18px;
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    border: 2px solid rgba(255,255,255,.72);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            rgba(255,255,255,.95),
-            rgba(255,255,255,.20) 38%,
-            transparent 72%
-        );
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255,255,255,0.9),
+      rgba(255,255,255,0.18) 40%,
+      transparent 70%
+    );
 
-    box-shadow:
-        inset 0 0 10px rgba(255,255,255,.3),
-        0 0 12px rgba(255,255,255,.15);
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.55);
 
+  animation: subirBolha 7s linear infinite;
+}
+
+.b1 {
+  left: 15%;
+  bottom: -30px;
+  animation-delay: 0s;
+}
+
+.b2 {
+  left: 32%;
+  bottom: -60px;
+  width: 11px;
+  height: 11px;
+  animation-delay: 1.5s;
+}
+
+.b3 {
+  left: 68%;
+  bottom: -40px;
+  width: 24px;
+  height: 24px;
+  animation-delay: 2.5s;
+}
+
+.b4 {
+  left: 82%;
+  bottom: -50px;
+  width: 13px;
+  height: 13px;
+  animation-delay: 4s;
+}
+
+.b5 {
+  left: 20%;
+  bottom: -40px;
+  animation-delay: 1s;
+}
+
+.b6 {
+  left: 73%;
+  bottom: -50px;
+  width: 13px;
+  height: 13px;
+  animation-delay: 2s;
+}
+
+.b7 {
+  left: 52%;
+  bottom: -30px;
+  width: 22px;
+  height: 22px;
+  animation-delay: 3s;
+}
+
+@keyframes subirBolha {
+
+  0% {
+    transform: translateY(0) scale(0.7);
     opacity: 0;
+  }
 
-    pointer-events: none;
+  10% {
+    opacity: 0.8;
+  }
 
-    z-index: 20;
+  70% {
+    opacity: 0.7;
+  }
 
-    animation:
-        bolhaSubindo
-        var(--tempo)
-        ease-in-out
-        infinite;
-
-    animation-delay: var(--atraso);
-}
-
-
-.bolha-1 {
-    left: 8%;
-    width: 32px;
-    height: 32px;
-    --tempo: 7s;
-    --atraso: 0s;
-}
-
-
-.bolha-2 {
-    left: 22%;
-    width: 50px;
-    height: 50px;
-    --tempo: 9s;
-    --atraso: 1s;
-}
-
-
-.bolha-3 {
-    left: 37%;
-    width: 25px;
-    height: 25px;
-    --tempo: 6s;
-    --atraso: 2.5s;
-}
-
-
-.bolha-4 {
-    left: 48%;
-    width: 43px;
-    height: 43px;
-    --tempo: 8s;
-    --atraso: .5s;
-}
-
-
-.bolha-5 {
-    left: 61%;
-    width: 32px;
-    height: 32px;
-    --tempo: 7s;
-    --atraso: 3s;
-}
-
-
-.bolha-6 {
-    left: 73%;
-    width: 55px;
-    height: 55px;
-    --tempo: 10s;
-    --atraso: 1.5s;
-}
-
-
-.bolha-7 {
-    left: 84%;
-    width: 38px;
-    height: 38px;
-    --tempo: 7.5s;
-    --atraso: 4s;
-}
-
-
-.bolha-8 {
-    left: 93%;
-    width: 25px;
-    height: 25px;
-    --tempo: 6s;
-    --atraso: 5s;
-}
-
-
-@keyframes bolhaSubindo {
-
-    0% {
-        transform:
-            translate(0, 30px)
-            scale(.6);
-
-        opacity: 0;
-    }
-
-    12% {
-        opacity: .8;
-    }
-
-    35% {
-        transform:
-            translate(20px, -30vh)
-            scale(.9);
-    }
-
-    65% {
-        transform:
-            translate(-15px, -65vh)
-            scale(1);
-    }
-
-    88% {
-        opacity: .5;
-    }
-
-    100% {
-        transform:
-            translate(12px, -115vh)
-            scale(1.1);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   CENAS SOBRE O MESMO FUNDO
-===================================================== */
-
-.conteudo-cena {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding:
-        30px 20px;
-
+  100% {
+    transform: translateY(-115vh) translateX(25px) scale(1.15);
     opacity: 0;
-    visibility: hidden;
-
-    transform:
-        translateY(30px)
-        scale(.98);
-
-    transition:
-        opacity .9s ease,
-        transform 1s cubic-bezier(.2,.7,.2,1),
-        visibility .9s ease;
-
-    z-index: 30;
-
-    overflow-y: auto;
+  }
 }
 
 
-.conteudo-cena.ativa {
+/* =================================
+   BRILHOS
+   ================================= */
 
+.brilho {
+  position: absolute;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  box-shadow:
+    0 0 6px white,
+    0 0 14px rgba(255,255,255,0.8);
+
+  animation: piscar 2.5s ease-in-out infinite;
+}
+
+.brilho1 {
+  left: 25%;
+  top: 35%;
+}
+
+.brilho2 {
+  left: 70%;
+  top: 25%;
+  animation-delay: 0.8s;
+}
+
+.brilho3 {
+  left: 45%;
+  top: 55%;
+  animation-delay: 1.4s;
+}
+
+.brilho4 {
+  left: 22%;
+  top: 40%;
+}
+
+.brilho5 {
+  left: 78%;
+  top: 60%;
+  animation-delay: 1s;
+}
+
+@keyframes piscar {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.6);
+  }
+
+  50% {
     opacity: 1;
-    visibility: visible;
-
-    transform:
-        translateY(0)
-        scale(1);
+    transform: scale(1.5);
+  }
 }
 
 
-/* =====================================================
-   MENINA
-===================================================== */
+/* =================================
+   BOTÕES INVISÍVEIS DA ÚLTIMA TELA
+   ================================= */
 
-.area-menina {
+.botao-invisivel {
+  position: absolute;
 
-    width: min(100%, 430px);
+  background: transparent;
+  border: none;
+  outline: none;
 
-    display: flex;
-    flex-direction: column;
+  cursor: pointer;
 
-    align-items: center;
-
-    text-align: center;
+  z-index: 30;
 }
 
 
-.imagem-menina {
+/*
+  ESTES VALORES SÃO PROVISÓRIOS.
 
-    width: min(82vw, 360px);
+  Depois vamos ajustar exatamente
+  em cima das três áreas da imagem QUARTO.
+*/
 
-    max-height: 52svh;
+.local {
+  left: 5%;
+  top: 35%;
+  width: 90%;
+  height: 15%;
+}
 
-    object-fit: contain;
+.presentes {
+  left: 5%;
+  top: 51%;
+  width: 90%;
+  height: 15%;
+}
 
-    filter:
-        drop-shadow(
-            0 15px 25px
-            rgba(0,0,0,.22)
-        );
-
-    animation:
-        meninaEntrada
-        1.1s
-        ease-out
-        both;
+.rsvp {
+  left: 5%;
+  top: 67%;
+  width: 90%;
+  height: 15%;
 }
 
 
-@keyframes meninaEntrada {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(45px)
-            scale(.9);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-/* =====================================================
-   FALA
-===================================================== */
-
-.fala-menina {
-
-    width: 100%;
-
-    max-height: 27svh;
-
-    overflow-y: auto;
-
-    margin-top: 8px;
-
-    padding: 17px 18px;
-
-    border-radius: 22px;
-
-    background:
-        rgba(255,255,255,.90);
-
-    color: #07547a;
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.18);
-
-    text-align: left;
-}
-
-
-.fala-menina p {
-
-    margin-bottom: 10px;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-
-.fala-menina p:last-child {
-    margin-bottom: 0;
-}
-
-
-/* =====================================================
-   INFORMAÇÕES
-===================================================== */
-
-.conteudo-informacoes,
-.conteudo-presentes,
-.conteudo-confirmacao {
-
-    width: min(100%, 400px);
-
-    text-align: center;
-
-    padding: 25px 20px;
-
-    border-radius: 28px;
-
-    background:
-        rgba(4,73,105,.38);
-
-    border:
-        1px solid rgba(255,255,255,.28);
-
-    backdrop-filter: blur(5px);
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.15);
-}
-
-
-.titulo-pequeno {
-
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    color: rgba(255,255,255,.85);
-}
-
-
-.conteudo-informacoes h1,
-.conteudo-presentes h1,
-.conteudo-confirmacao h1 {
-
-    margin-bottom: 25px;
-
-    font-size: 31px;
-
-    font-weight: normal;
-}
-
-
-/* =====================================================
-   DETALHES
-===================================================== */
-
-.detalhes {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 13px;
-
-    text-align: left;
-}
-
-
-.detalhe {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 12px 14px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.13);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-}
-
-
-.detalhe > span {
-
-    width: 40px;
-    height: 40px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.18);
-
-    font-size: 20px;
-}
-
-
-.detalhe div {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
-}
-
-
-.detalhe small {
-
-    font-size: 9px;
-
-    letter-spacing: 1.5px;
-
-    opacity: .65;
-}
-
-
-.detalhe strong {
-
-    font-size: 14px;
-}
-
-
-.detalhe em {
-
-    font-size: 12px;
-
-    font-style: normal;
-
-    opacity: .75;
-}
-
-
-/* =====================================================
-   BOTÕES
-===================================================== */
-
-.botao {
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-
-    min-height: 48px;
-
-    margin-top: 20px;
-
-    padding: 12px 20px;
-
-    border: 0;
-
-    border-radius: 28px;
-
-    background:
-        rgba(255,255,255,.95);
-
-    color: #07547a;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.15);
-
-    transition:
-        transform .25s ease;
-}
-
-
-.botao:active {
-
-    transform:
-        scale(.96);
-}
-
-
-.botao-transparente {
-
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 10px;
-
-    border: 0;
-
-    background: transparent;
-
-    color: white;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    opacity: .9;
-}
-
-
-/* =====================================================
-   PRESENTES
-===================================================== */
-
-.frase-presente {
-
-    margin-top: -14px;
-
-    margin-bottom: 20px;
-
-    font-size: 14px;
-
-    opacity: .85;
-}
-
-
-.lista-presentes {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 9px;
-}
-
-
-.lista-presentes div {
-
-    min-height: 85px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 3px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.13);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-}
-
-
-.lista-presentes span {
-
-    font-size: 24px;
-}
-
-
-.lista-presentes strong {
-
-    font-size: 13px;
-}
-
-
-.lista-presentes small {
-
-    font-size: 10px;
-
-    opacity: .7;
-}
-
-
-/* =====================================================
-   CONFIRMAÇÃO
-===================================================== */
-
-.emoji-sereia {
-
-    font-size: 50px;
-
-    margin-bottom: 8px;
-
-    animation:
-        flutuar
-        2.5s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes flutuar {
-
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-7px);
-    }
-}
-
-
-/* =====================================================
+/* =================================
    CELULAR
-===================================================== */
+   ================================= */
 
 @media (max-width: 600px) {
 
-    .imagem-menina {
-
-        width: min(78vw, 320px);
-
-        max-height: 46svh;
-    }
-
-
-    .fala-menina {
-
-        max-height: 25svh;
-
-        padding: 15px;
-    }
-
-
-    .fala-menina p {
-
-        font-size: 13px;
-    }
-
-
-    .conteudo-informacoes,
-    .conteudo-presentes,
-    .conteudo-confirmacao {
-
-        padding: 23px 17px;
-
-        border-radius: 25px;
-    }
-
-
-    .conteudo-informacoes h1,
-    .conteudo-presentes h1,
-    .conteudo-confirmacao h1 {
-
-        font-size: 28px;
-    }
-
-}
-
-
-@media (max-height: 700px) {
-
-    .imagem-menina {
-
-        max-height: 39svh;
-    }
-
-
-    .fala-menina {
-
-        max-height: 23svh;
-    }
+  .tela > img {
+    object-position: center;
+  }
 
 }
